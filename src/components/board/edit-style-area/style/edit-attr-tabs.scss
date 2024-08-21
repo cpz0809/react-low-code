@@ -1,0 +1,33 @@
+$edit-attr-tabs-prefix-cls: "edit-attr-tabs";
+
+.#{$edit-attr-tabs-prefix-cls}-container {
+
+  .#{$edit-attr-tabs-prefix-cls}-items {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(31, 56, 88, 0.1);
+
+    .#{$edit-attr-tabs-prefix-cls}-item {
+      position: relative;
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .#{$edit-attr-tabs-prefix-cls}-item-active {
+
+      &:before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #5584ff;
+        content: "";
+      }
+    }
+  }
+}

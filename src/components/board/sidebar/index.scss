@@ -1,0 +1,20 @@
+$drag-prefix-cls: "drag";
+
+.#{$drag-prefix-cls}-container {
+  width: $workspace-left-area-width;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+
+  .#{$drag-prefix-cls}-top {
+    padding-top: 12px;
+
+    span {
+      font-size: 20px;
+      color: $color-text;
+      height: 46px;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+$row-prefix-cls: "group";
+
+.#{$row-prefix-cls}-container {
+  display: flex;
+  flex: 1;
+
+  .#{$row-prefix-cls}-item {
+    border: 1px solid #C4C6CF;
+    cursor: pointer;
+    font-size: 12px;
+    flex: 1;
+    text-align: center;
+    height: 28px;
+    line-height: 26px;
+
+    &:not(:last-child) {
+      border-right: none;
+    }
+
+    &:hover {
+      background-color: #F2F3F7;
+    }
+
+    &-active {
+      background-color: #1677ff;
+      color: #ffffff;
+      border: 0;
+
+      &:hover {
+        background-color: #1677ff;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,7 @@
+$board-prefix-cls: "board";
+
+.#{$board-prefix-cls}-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+}

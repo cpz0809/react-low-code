@@ -1,0 +1,16 @@
+$opacity-slider-prefix-cls: "opacity-slider";
+
+.#{$opacity-slider-prefix-cls}-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .#{$opacity-slider-prefix-cls}-slider {
+    flex: 1;
+  }
+
+  .#{$opacity-slider-prefix-cls}-input {
+    width: 100px;
+    margin-left: 10px;
+  }
+}

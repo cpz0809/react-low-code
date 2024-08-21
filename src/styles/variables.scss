@@ -1,0 +1,16 @@
+// 背景颜色
+$color-background: var(--color-background, #edeff3);
+// 文字颜色
+$color-text: var(--color-text, rgba(0, 0, 0, 0.6));
+// 输入框插件文字颜色
+$input-addon-text-color: var(--input-addon-text-color, #999);
+// 表单元素大字体
+$form-element-large-font-size: var(--form-element-large-font-size, 12px);
+// 工作区左侧区域宽度
+$workspace-left-area-width: var(--workspace-left-area-width, 48px);
+// 左侧区域宽度
+$left-area-width: var(--left-area-width, 48px);
+// 右侧区域宽度
+$right-area-width: var(--right-area-width, 400px);
+// 组件库 窗口
+$dock-pane-width: var(--dock-pane-width, 350px);

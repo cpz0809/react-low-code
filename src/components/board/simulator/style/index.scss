@@ -1,0 +1,112 @@
+$simulator-prefix-cls: 'simulator';
+
+.#{$simulator-prefix-cls}-container {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  .#{$simulator-prefix-cls}-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(31, 56, 88, 0.06);
+
+    .#{$simulator-prefix-cls}-operate {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+
+      .#{$simulator-prefix-cls}-tool {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        overflow: visible;
+        z-index: 1;
+
+        .#{$simulator-prefix-cls}-current-move {
+          position: absolute;
+          border: 1px dashed #197aff;
+        }
+
+        .#{$simulator-prefix-cls}-current-drop-indicator {
+          position: absolute;
+          width: 5px;
+          background-color: #197aff;
+        }
+
+        .#{$simulator-prefix-cls}-current-drop {
+          opacity: 0.3;
+          background-color: #000000;
+        }
+
+        .#{$simulator-prefix-cls}-current-click {
+          position: absolute;
+          border: 2px solid #197aff;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+
+    .#{$simulator-prefix-cls}-render-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      overflow: hidden;
+      font-size: 12px;
+      line-height: 1.2857142;
+
+      .#{$simulator-prefix-cls}-render-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .ant-modal-mask,
+        .ant-modal-wrap,
+        .ant-drawer {
+          position: absolute;
+        }
+      }
+    }
+  }
+}
+
+.#{$simulator-prefix-cls}-current-dropdown {
+  .ant-dropdown-menu {
+    padding: 0;
+
+    .ant-dropdown-menu-item {
+      padding: 2px 12px;
+      background-color: #56595c;
+
+      &:hover {
+        background-color: #333333;
+      }
+    }
+  }
+}
+
+.#{$simulator-prefix-cls}-current-selector-item {
+  color: #ffffff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+}

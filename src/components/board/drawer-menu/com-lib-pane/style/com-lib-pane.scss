@@ -1,0 +1,31 @@
+$com-lib-pane-prefix-cls: 'com-lib-pane';
+
+.#{$com-lib-pane-prefix-cls}-tabs {
+  .ant-tabs-tab {
+    margin: 0 !important;
+    padding: 12px 16px !important;
+  }
+}
+.#{$com-lib-pane-prefix-cls}-collapse {
+  .ant-collapse {
+    background-color: #ffffff;
+
+    .ant-collapse-header {
+      border-bottom: 1px solid #dfdfdf;
+
+      .ant-collapse-header-text {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    .ant-collapse-content-box {
+      padding: 0 !important;
+    }
+  }
+}
+
+.#{$com-lib-pane-prefix-cls}-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

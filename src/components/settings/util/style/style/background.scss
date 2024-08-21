@@ -1,0 +1,68 @@
+$edit-style-font-prefix-cls: "edit-style-background";
+
+.#{$edit-style-font-prefix-cls} {
+
+  .#{$edit-style-font-prefix-cls}-content {
+    .color-picker {
+      margin-left: 50px;
+    }
+  }
+
+  .size-group {
+    display: flex;
+    flex: 1;
+
+    .row-container:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  .position-container {
+    display: flex;
+    align-items: center;
+
+    .position-group {
+      display: grid;
+      grid-template-columns: repeat(3, 34px);
+      grid-gap: 6px;
+      padding-right: 20px;
+
+      .position-item {
+        border: 1px solid #C4C6CF;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #F2F3F7;
+        }
+      }
+    }
+
+    .position-size {
+
+      .input-item {
+        padding-bottom: 10px;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+
+  .input-item {
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 12px;
+      color: #333333;
+      padding-right: 6px;
+    }
+
+    &:first-child {
+      margin-right: 10px;
+    }
+  }
+}

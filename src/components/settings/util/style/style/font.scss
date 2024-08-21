@@ -1,0 +1,76 @@
+$edit-style-font-prefix-cls: "edit-style-font";
+
+.#{$edit-style-font-prefix-cls} {
+
+  .inner-row-container {
+    display: flex;
+
+    .row-item {
+      p {
+        width: 85px;
+      }
+
+      &:first-child {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .row-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding-bottom: 10px;
+
+    p {
+      width: 60px;
+      font-size: 12px;
+      padding-right: 10px;
+      word-break: keep-all;
+    }
+  }
+
+  .alignment-container {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+
+    p {
+      width: 60px;
+      font-size: 12px;
+    }
+
+    .alignment-items {
+      display: flex;
+      flex: 1;
+
+      .alignment-item {
+        border: 1px solid #C4C6CF;
+        cursor: pointer;
+        font-size: 12px;
+        flex: 1;
+        text-align: center;
+        height: 28px;
+        line-height: 26px;
+
+        &:not(:last-child) {
+          border-right: none;
+        }
+
+        &:hover {
+          background-color: #F2F3F7;
+        }
+      }
+    }
+  }
+
+  .opacity-container {
+    display: flex;
+    align-items: center;
+
+    p {
+      width: 60px;
+      font-size: 12px;
+    }
+  }
+}

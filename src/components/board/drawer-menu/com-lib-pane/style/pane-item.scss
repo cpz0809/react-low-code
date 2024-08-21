@@ -1,0 +1,22 @@
+$com-lib-pane-prefix-cls: 'com-lib-pane';
+
+.#{$com-lib-pane-prefix-cls}-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-right: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 14px;
+  height: 114px;
+
+  &-name {
+    font-size: 12px;
+  }
+
+  &-icon {
+    width: 56px;
+    height: 56px;
+  }
+}

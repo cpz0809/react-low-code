@@ -1,0 +1,14 @@
+$row-prefix-cls: "row";
+
+.#{$row-prefix-cls}-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+
+  .label-title {
+    color: #333333;
+    font-size: 12px;
+    padding-right: 10px;
+    width: 70px;
+  }
+}

@@ -1,0 +1,22 @@
+$drag-layer-view-prefix-cls: "drag-layer-view";
+
+.#{$drag-layer-view-prefix-cls}-container {
+  position: absolute;
+  z-index: 99999;
+  pointer-events: none; /* 防止拖动层阻挡鼠标事件 */
+  width: 80px;
+  height: 20px;
+  background-color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 20px;
+  }
+
+  p {
+    font-size: 12px;
+    color: #ffffff;
+  }
+}
