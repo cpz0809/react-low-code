@@ -1,30 +1,13 @@
-# React + TypeScript + Vite
+### 低代码平台
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### 技术栈: React + TypeScript + Vite + Redux + ReduxToolkit
 
-Currently, two official plugins are available:
+&emsp;&emsp;拖拽功能主要依靠 react-dnd 实现
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+&emsp;&emsp;项目仿照阿里低代码lowcode-engine平台,主要目的为了更好的学习React也可以给要做低代码平台的同学提供一些思路,功能基本上一比一还原
 
-## Expanding the ESLint configuration
+目前项目还有不完善的地方:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- 细节功能未完成
+- 部分复杂组件存在Bug
+- 性能还未优化
