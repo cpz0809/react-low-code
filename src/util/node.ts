@@ -2,7 +2,10 @@
  * 节点相关操作
  */
 import React from 'react'
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import {
+  PaneItemType,
+  PaneItemTypes
+} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
 /**
  * 根据当前e.target 找到对应节点上的uuid
@@ -54,7 +57,12 @@ interface FilterFromDomRes {
   node: HTMLElement
 }
 
-// 按uuid 查找对应节点
+/**
+ * 按uuid 查找对应节点
+ * @param uuid id
+ * @param nodes 节点树
+ * @returns 节点
+ */
 export const filterFromDom = (
   uuid: string,
   nodes: NodeListOf<ChildNode>
@@ -77,22 +85,6 @@ export const filterFromDom = (
   return null
 }
 
-// 插入节点
-export const insertNode = (
-  target: PaneItemType,
-  parentId: string | null,
-  arr: PaneItemType[]
-) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].uuid === parentId) {
-      arr[i].children.push(target)
-      return
-    }
-    if (arr[i].children.length > 0) {
-      insertNode(target, parentId, arr[i].children)
-    }
-  }
-}
 // 删除节点
 export const removeNode = (uuid: string, arr: PaneItemType[]) => {
   for (let i = 0; i < arr.length; i++) {
@@ -105,23 +97,14 @@ export const removeNode = (uuid: string, arr: PaneItemType[]) => {
     }
   }
 }
-// 更新样式
-export const updateNodeStyle = (
-  uuid: string,
-  style: React.CSSProperties,
-  arr: PaneItemType[]
-) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].uuid === uuid) {
-      arr[i].style = style
-      return
-    }
-    if (arr[i].children.length > 0) {
-      updateNodeStyle(uuid, style, arr[i].children)
-    }
-  }
-}
 
+/**
+ * 更新组件数据
+ * @param uuid 组件id
+ * @param arr 数据
+ * @param callback 需要执行的函数
+ * @returns
+ */
 export const updateNode = (
   uuid: string,
   arr: PaneItemType[],
@@ -137,7 +120,14 @@ export const updateNode = (
     }
   }
 }
-// 交换节点
+
+/**
+ * 交换节点位置
+ * @param tree 树
+ * @param oldNode 旧节点
+ * @param newNode 新节点
+ * @returns
+ */
 export const swapNodes = (
   tree: PaneItemType[],
   oldNode: PaneItemType,
@@ -153,62 +143,33 @@ export const swapNodes = (
   } else {
     differentNode()
   }
-  // const oldParent = findNode(oldNode.parentUuid, tree)
-  // const newParent = findNode(newNode.parentUuid, tree)
-  // if (!oldParent && !newParent) return
-  // const oldIndex = oldParent?.children.findIndex(
-  //   (item) => item.uuid === oldNode.uuid
-  // ) as number
-  // const newIndex = newParent?.children.findIndex(
-  //   (item) => item.uuid === newNode.uuid
-  // ) as number
-  // if (oldIndex === -1 || newIndex === -1) return
-  // // 相同节点 直接交换位置
-  // if (oldParent?.uuid === newParent?.uuid) {
-  //   sameNode(oldIndex, newIndex, tree)
-  // } else {
-  //   differentNode()
-  // }
 
   // 相同父节点交换位置
   function sameNode(oldIndex: number, newIndex: number, arr: PaneItemType[]) {
     const temp = arr[oldIndex]
     arr[oldIndex] = arr[newIndex]
     arr[newIndex] = temp
-    // for (let i = 0; i < arr.length; i++) {
-    //   const node = arr[i]
-    //   if (node.uuid === oldParent?.uuid && node.uuid === newParent?.uuid) {
-    //     const children = node.children
-    //     const temp = children[oldIndex]
-    //     children[oldIndex] = children[newIndex]
-    //     children[newIndex] = temp
-    //     break
-    //   }
-    //   if (node.children.length > 0) {
-    //     sameNode(oldIndex, newIndex, node.children)
-    //   }
-    // }
   }
 
   // 不同父节点
   function differentNode() {}
 }
-// 查找节点
-export const findNode = (uuid: string, arr: PaneItemType[]) => {
-  for (let i = 0; i < arr.length; i++) {
-    const node = arr[i]
-    if (uuid === node.uuid) return node
-    if (node.children.length > 0) {
-      const res = findNode(uuid, node.children) as PaneItemType
-      if (res) return res
-    }
-  }
-  return null
-}
 
+/**
+ * 将组件数据转为树结构
+ * @param array 组件数据
+ * @returns 组件树
+ */
 export const arrayToTree = (array: PaneItemType[]): PaneItemType[] => {
   const tree: PaneItemType[] = []
   const map: any = {}
+
+  const rootNode = array.find((item) => item.type === PaneItemTypes.Main)
+
+  if (!rootNode) return []
+
+  map[rootNode.uuid] = { ...rootNode, children: [] }
+
   array.forEach((item) => {
     if (!map[item.uuid]) {
       map[item.uuid] = { ...item, children: [] }
@@ -223,5 +184,6 @@ export const arrayToTree = (array: PaneItemType[]): PaneItemType[] => {
       map[item.parentUuid].children.push(node)
     }
   })
+
   return tree
 }

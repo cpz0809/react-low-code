@@ -24,8 +24,8 @@ export interface InsertProps {
 export type CurrentDragKeyType = 'current' | 'target' | 'offset'
 
 export interface OffsetProps {
-  x: number
-  y: number
+  left: number
+  top: number
 }
 
 export type CurrentDragType = {

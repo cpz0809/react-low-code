@@ -52,7 +52,7 @@ export const dragSplice = createSlice({
     // 插入组件
     insert(state, action: PayloadAction<InsertProps>) {
       const { index, component } = action.payload
-      if (index) {
+      if (typeof index === 'number' && index !== undefined) {
         state.itemList.splice(index, 0, component)
       } else {
         state.itemList.push(component)

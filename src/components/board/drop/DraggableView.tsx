@@ -1,4 +1,4 @@
-import { useDrag, useDrop } from 'react-dnd'
+import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd'
 import React, { cloneElement, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -18,34 +18,31 @@ import {
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { useHistory } from '@/hooks/use-history.ts'
 import { HistoryEnum } from '@/store/types/history'
-import { CurrentDragType } from '@/store/types/drag'
+import { CurrentDragType, OffsetProps } from '@/store/types/drag'
 import ViewProvider from './ViewProvider'
+import { useComponentDrag } from '@/hooks/use-component-drag'
+import { DraggableViewProps } from './type'
+import { CurrentDropDirection } from '../simulator/type'
+import { isDomBlock } from '@/util/is'
 
 const DraggableView = ({
   item,
   children,
   isRenderChildren = true
-}: {
-  item: PaneItemType
-  children: React.FunctionComponentElement<{ componentid: string }>
-  isRenderChildren?: boolean
-}) => {
+}: DraggableViewProps) => {
   const dispatch = useDispatch()
   const { record } = useHistory()
+  const { computedAttr, getCurrentDom } = useComponentDrag()
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
   const ref = useRef(null)
-
   const changePaneItemObj = useRef<CurrentDragType | null>(null)
-
   const [, drag, dragPreview] = useDrag(() => ({
     type: item.type,
     item: {
       ...item,
       operate: HistoryEnum.EDIT
     },
-    canDrag: () => {
-      return item.type !== PaneItemTypes.Main
-    },
+    canDrag: () => item.type !== PaneItemTypes.Main,
     end: () => {
       dispatch(setCurrentDrag(null))
     },
@@ -56,34 +53,76 @@ const DraggableView = ({
 
   const [, drop] = useDrop(() => ({
     accept: Object.keys(PaneItemTypes),
-    drop: (data: PaneItemType) => {
+    drop: (data: PaneItemType, monitor) => {
       if (!data.uuid) return
       const obj = { ...data, parentUuid: item.uuid }
-      placeComponent(obj)
+      placeComponent(obj, monitor)
+      // 如果是新增就记录新增状态 反之记录移动位置状态
       data.operate === HistoryEnum.ADD
         ? record(obj)
         : record(changePaneItemObj.current)
     },
     collect(monitor) {
       return {
-        isOverCurrent: monitor.isOver({ shallow: true })
+        isOverCurrent: monitor.isOver({ shallow: true }),
+        offset: monitor.getClientOffset()
       }
     },
     hover(hoverItem, monitor) {
       const obj = {
         current: hoverItem,
         target: item,
-        offset: monitor.getClientOffset() || undefined
+        offset: getOffset(monitor)
       }
       changePaneItemObj.current = obj
-      dispatch(setCurrentDrag(obj))
+      dispatch(setCurrentDrag({ ...obj }))
     }
   }))
   // 放置组件
-  const placeComponent = (data: PaneItemType) => {
+  const placeComponent = (
+    data: PaneItemType,
+    monitor: DropTargetMonitor<PaneItemType, unknown>
+  ) => {
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
-      dispatch(insert({ component: data }))
+      const didDrop = monitor.didDrop()
+      // 是否放置在嵌套组件上
+      if (didDrop) return
+      // 如果是容器组件
+      if (item.type === PaneItemTypes.Main) {
+        dispatch(insert({ component: data }))
+      } else {
+        // 如果是普通元素
+        // 使用鼠标指针触摸的组件parentUuid
+        data.parentUuid = item.parentUuid
+        // 获取追加到之前还是之后
+        const { attr } = computedAttr(data, item, getOffset(monitor))
+        const index = itemList.findIndex(
+          (component) => component.uuid === item.uuid
+        )
+        // 追加到之前
+        if (attr.direction === CurrentDropDirection.LEFT) {
+          dispatch(insert({ component: data, index }))
+        } else if (attr.direction === CurrentDropDirection.RIGHT) {
+          // 追加到之后 需要判断当前元素后面还有没有元素
+          const currentRoLastEl = itemList[index]
+          if (currentRoLastEl) {
+            // 如果还有元素 判断是不是块级元素
+            const element = getCurrentDom(currentRoLastEl)
+            if (!element) return
+            // 判断是不是块级元素
+            if (isDomBlock(element.node)) {
+              dispatch(insert({ component: data }))
+            } else {
+              // 不是块级元素 直接追加到当前行 当前元素后
+              dispatch(insert({ component: data, index: index + 1 }))
+            }
+          } else {
+            // 没有元素直接添加
+            dispatch(insert({ component: data }))
+          }
+        }
+      }
     } else if (data.operate === HistoryEnum.EDIT) {
       // 修改组件位置
       changePaneItemPosition()
@@ -104,7 +143,13 @@ const DraggableView = ({
     )
     dispatch(setCurrentDrag(null))
   }
-
+  const getOffset = (
+    monitor: DropTargetMonitor<PaneItemType, unknown>
+  ): OffsetProps => {
+    const obj = { x: 0, y: 0 }
+    const { x: left, y: top } = monitor.getClientOffset() || obj
+    return { left, top }
+  }
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if ('onMouseMove' in children.props) {
       ;(children.props as any).onMouseMove(e)

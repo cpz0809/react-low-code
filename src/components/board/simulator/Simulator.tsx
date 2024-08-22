@@ -2,7 +2,7 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import './style/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   insert,
   remove,
@@ -11,10 +11,9 @@ import {
 } from '@/store/modules/drag.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import { mainCof } from '@/components/compt/main/config.ts'
-import { arrayToTree, filterFromDom } from '@/util/node.ts'
+import { arrayToTree } from '@/util/node.ts'
 import { useHistory } from '@/hooks/use-history.ts'
 import { SelectEquipEnum } from '@/components/header/types.ts'
-import { computedOffset } from '@/components/board/simulator/computedOffset'
 import { useBoardWidth } from '@/hooks/use-board-width.ts'
 import Actions from '@/components/board/simulator/Actions'
 import {
@@ -24,6 +23,7 @@ import {
 import { useThrottleFn } from 'ahooks'
 import { CurrentBaseAttr, CurrentClickAttr, CurrentDrop } from './type'
 import ViewProvider from '../drop/ViewProvider'
+import { useComponentDrag } from '@/hooks/use-component-drag'
 
 const Simulator = () => {
   const prefix = getPrefixCls('simulator')
@@ -36,15 +36,22 @@ const Simulator = () => {
   )
   const { currentStep } = useSelector((state: RootState) => state.historySlice)
   const { restore, revoke } = useHistory()
+  // const simulatorContentRef = useRef<HTMLDivElement>(null)
+  const {
+    boardMargins,
+    computedAttr,
+    treeRoot: simulatorContentRef,
+    getCurrentDom
+  } = useComponentDrag()
   // 模拟器渲染节点
-  const simulatorContentRef = useRef<HTMLDivElement>(null)
+
   // 画布内容边距
-  const [boardMargins, setBoardMargins] = useState<CurrentBaseAttr>({
-    width: 0,
-    height: 0,
-    left: 0,
-    top: 0
-  })
+  // const [boardMargins, setBoardMargins] = useState<CurrentBaseAttr>({
+  //   width: 0,
+  //   height: 0,
+  //   left: 0,
+  //   top: 0
+  // })
   // 当前移动时选择的画布属性
   const [currentMoveAttr, setCurrentMoveAttr] =
     useState<CurrentBaseAttr | null>(null)
@@ -57,13 +64,9 @@ const Simulator = () => {
   const [pasteboard, setPasteboard] = useState<PaneItemType | null>(null)
   // 初始化画布
   const { initBoardConfig, findWidthByDevice } = useBoardWidth()
-  const latestItemList = useRef(itemList)
-  const { run: FindDropDomThrottleFn } = useThrottleFn(() => findDropDom(), {
+  const { run: findDropDomThrottleFn } = useThrottleFn(() => findDropDom(), {
     wait: 300
   })
-  useEffect(() => {
-    latestItemList.current = itemList
-  }, [itemList])
 
   // 画布初始化
   useEffect(() => {
@@ -73,11 +76,11 @@ const Simulator = () => {
     initBoardConfig()
   }, [])
 
-  useEffect(() => {
-    setBoardMargins(
-      (simulatorContentRef.current as HTMLElement).getBoundingClientRect()
-    )
-  }, [boardWidth])
+  // useEffect(() => {
+  //   setBoardMargins(
+  //     (simulatorContentRef.current as HTMLElement).getBoundingClientRect()
+  //   )
+  // }, [boardWidth])
   // 添加键盘事件
   useEffect(() => {
     window.addEventListener('keydown', handleKeyboardEvent)
@@ -106,19 +109,9 @@ const Simulator = () => {
   useEffect(() => findMoveDom(), [currentMove?.uuid])
   useEffect(() => findClickDom(), [currentClick?.uuid, currentClick?.style])
   useEffect(
-    () => FindDropDomThrottleFn(),
+    () => findDropDomThrottleFn(),
     [currentDrag?.current?.uuid, currentDrag?.target?.uuid, currentDrag?.offset]
   )
-
-  const getCurrentDom = (current: PaneItemType | null) => {
-    if (current && simulatorContentRef.current?.childNodes) {
-      return filterFromDom(
-        current.uuid,
-        simulatorContentRef.current?.childNodes
-      )
-    }
-    return null
-  }
 
   const findMoveDom = () => {
     const dom = getCurrentDom(currentMove)
@@ -141,36 +134,14 @@ const Simulator = () => {
       setCurrentDrop(null)
       return
     }
-    const currentDom = getCurrentDom(currentDrag.current)
-    const targetDom = getCurrentDom(currentDrag.target)
-    // 如果currentDom为null说明并不是交换位置
-    if (!currentDom && targetDom) {
-      const { x, y } = currentDrag.offset
-      const temp = {
-        x,
-        y,
-        width: targetDom.attr.width,
-        height: targetDom.attr.height,
-        left: targetDom.attr.left,
-        top: targetDom.attr.top,
-        right: targetDom.attr.right
-      } as DOMRect
-      const attr = computedOffset(temp, targetDom.attr, boardMargins)
-      setCurrentDrop({
-        target: { ...attr },
-        original: setBaseDefaultAttr(currentDrag.target)
-      })
-      return
-    }
-    // 交换位置
-    if (currentDom && targetDom) {
-      const attr = computedOffset(currentDom.attr, targetDom.attr, boardMargins)
-      resetMoveAndClick()
-      setCurrentDrop({
-        target: { ...attr },
-        original: setBaseDefaultAttr(currentDom.attr)
-      })
-    }
+    const { current, target, offset } = currentDrag
+    const { attr, original } = computedAttr(current, target, offset)
+
+    setCurrentDrop({
+      target: { ...attr },
+      original: setBaseDefaultAttr(original)
+    })
+    resetMoveAndClick()
   }
   // 设置基础属性
   const setBaseDefaultAttr = (attr: DOMRect) => {
