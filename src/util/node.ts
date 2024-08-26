@@ -1,11 +1,10 @@
-/**
- * 节点相关操作
- */
 import React from 'react'
 import {
+  CategoryEnum,
   PaneItemType,
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { CurrentDropDirection } from '@/components/board/simulator/type'
 
 /**
  * 根据当前e.target 找到对应节点上的uuid
@@ -131,28 +130,46 @@ export const updateNode = (
 export const swapNodes = (
   tree: PaneItemType[],
   oldNode: PaneItemType,
-  newNode: PaneItemType
+  newNode: PaneItemType,
+  direction: CurrentDropDirection
 ) => {
-  if (!oldNode.parentUuid || !newNode.parentUuid) return
   const oldIndex = tree.findIndex((item) => item.uuid === oldNode.uuid)
   const newIndex = tree.findIndex((item) => item.uuid === newNode.uuid)
-  if (oldIndex === -1 || newIndex === -1) return
-  // 同一个父节点 直接交换位置 并且交换index
+  // 从画布移动到容器中
+  if (newNode.categoryType === CategoryEnum.container) {
+    const temp = { ...oldNode }
+    if (oldNode.parentUuid !== newNode.uuid) {
+      temp.parentUuid = newNode.uuid
+    }
+    tree.splice(oldIndex, 1)
+    tree.push(temp)
+    return
+  }
+  // 如果parentUuid不一致
+  if (oldNode.parentUuid !== newNode.parentUuid) {
+    const temp = { ...oldNode }
+    temp.parentUuid = newNode.parentUuid
+    tree.splice(oldIndex, 1)
+    tree.push(temp)
+    return
+  }
+  // 同一个父节点 直接交换位置
   if (oldNode.parentUuid === newNode.parentUuid) {
-    sameNode(oldIndex, newIndex, tree)
-  } else {
-    differentNode()
+    if (direction === CurrentDropDirection.LEFT) {
+      tree.splice(newIndex, 0, oldNode)
+    } else if (direction === CurrentDropDirection.RIGHT) {
+      tree.splice(newIndex + 1, 0, oldNode)
+    }
+    // 获取移动后的位置
+    const changeIndex = tree.findIndex((item) => item.uuid === oldNode.uuid)
+    if (changeIndex < oldIndex) {
+      // 前移
+      tree.splice(oldIndex + 1, 1)
+    } else {
+      // 后移
+      tree.splice(oldIndex, 1)
+    }
   }
-
-  // 相同父节点交换位置
-  function sameNode(oldIndex: number, newIndex: number, arr: PaneItemType[]) {
-    const temp = arr[oldIndex]
-    arr[oldIndex] = arr[newIndex]
-    arr[newIndex] = temp
-  }
-
-  // 不同父节点
-  function differentNode() {}
 }
 
 /**

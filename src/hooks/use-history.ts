@@ -9,11 +9,15 @@ import {
   insert,
   remove,
   setCurrentClick,
-  update
+  updatePosition
 } from '@/store/modules/drag.ts'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { CurrentDragType } from '@/store/types/drag'
-import { HistoryEnum, HistoryOperateTypeEnum, HistorySingleType } from '@/store/types/history'
+import {
+  HistoryEnum,
+  HistoryOperateTypeEnum,
+  HistorySingleType
+} from '@/store/types/history'
 
 export const useHistory = () => {
   const dispatch = useDispatch()
@@ -72,7 +76,7 @@ export const useHistory = () => {
     } else if (isMove(current)) {
       // 撤销移动组件
       dispatch(
-        update({
+        updatePosition({
           current: current.newComponent,
           target: current.oldComponent
         })
@@ -89,12 +93,12 @@ export const useHistory = () => {
     if (isComponent(current)) {
       // 恢复为添加组件
       if (current.newComponent.parentUuid) {
-        dispatch(insert(current.newComponent))
+        dispatch(insert({ component: current.newComponent }))
         dispatch(setCurrentClick(null))
       }
     } else if (isMove(current)) {
       dispatch(
-        update({
+        updatePosition({
           current: current.oldComponent,
           target: current.newComponent
         })

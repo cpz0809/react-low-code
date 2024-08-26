@@ -32,7 +32,6 @@ const PaneItem = ({ data }: { data: PaneItemType }) => {
   }))
 
   const handleDrag = () => {
-    // dispatch(dragItemView(generatePaneData() as PaneItemType))
     if (!isComLibPaneLock) {
       dispatch(setPaneVisible())
     }

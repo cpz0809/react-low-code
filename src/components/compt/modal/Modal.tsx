@@ -5,8 +5,9 @@ import DragTips from '@/components/compt/public/drag-tips/DragTips.tsx'
 import DraggableView from '@/components/board/drop/DraggableView'
 
 const Modal = ({ item }: { item: PaneItemType }) => {
+
   const containerDom = document.documentElement.querySelector(
-    '.drop-simulator-content'
+    '.simulator-render-content'
   )
 
   const [isModalOpen, setIsModalOpen] = useState(false)

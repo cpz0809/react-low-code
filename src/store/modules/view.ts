@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { OptionDeviceProps, ViewStateType } from '../types/view/'
+import { OptionDeviceProps, ViewStateType } from '../types/view'
 
 const initialState: ViewStateType = {
   // 画布大小

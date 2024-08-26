@@ -6,7 +6,7 @@ import {
   setCurrentClick,
   setCurrentDrag,
   setCurrentMove,
-  update
+  updatePosition
 } from '@/store/modules/drag.ts'
 import { RootState } from '@/store'
 import { getEmptyImage } from 'react-dnd-html5-backend'
@@ -23,7 +23,6 @@ import ViewProvider from './ViewProvider'
 import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/type'
-import { isDomBlock } from '@/util/is'
 
 const DraggableView = ({
   item,
@@ -51,45 +50,52 @@ const DraggableView = ({
     })
   }))
 
-  const [, drop] = useDrop(() => ({
-    accept: Object.keys(PaneItemTypes),
-    drop: (data: PaneItemType, monitor) => {
-      if (!data.uuid) return
-      const obj = { ...data, parentUuid: item.uuid }
-      placeComponent(obj, monitor)
-      // 如果是新增就记录新增状态 反之记录移动位置状态
-      data.operate === HistoryEnum.ADD
-        ? record(obj)
-        : record(changePaneItemObj.current)
-    },
-    collect(monitor) {
-      return {
-        isOverCurrent: monitor.isOver({ shallow: true }),
-        offset: monitor.getClientOffset()
+  const [, drop] = useDrop(
+    () => ({
+      accept: Object.keys(PaneItemTypes),
+      drop: (data: PaneItemType, monitor) => {
+        if (!data.uuid) return
+        const obj = { ...data, parentUuid: item.uuid }
+        placeComponent(obj, monitor)
+        // 如果是新增就记录新增状态 反之记录移动位置状态
+        data.operate === HistoryEnum.ADD
+          ? record(obj)
+          : record(changePaneItemObj.current)
+      },
+      collect(monitor) {
+        return {
+          isOverCurrent: monitor.isOver({ shallow: true }),
+          offset: monitor.getClientOffset()
+        }
+      },
+      hover(hoverItem, monitor) {
+        const obj = {
+          current: hoverItem,
+          target: item,
+          offset: getOffset(monitor)
+        }
+        changePaneItemObj.current = obj
+        dispatch(setCurrentDrag({ ...obj }))
       }
-    },
-    hover(hoverItem, monitor) {
-      const obj = {
-        current: hoverItem,
-        target: item,
-        offset: getOffset(monitor)
-      }
-      changePaneItemObj.current = obj
-      dispatch(setCurrentDrag({ ...obj }))
-    }
-  }))
+    }),
+    [itemList]
+  )
   // 放置组件
   const placeComponent = (
     data: PaneItemType,
     monitor: DropTargetMonitor<PaneItemType, unknown>
   ) => {
+    const didDrop = monitor.didDrop()
+    // 是否放置在嵌套组件上
+    if (didDrop) return
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
-      const didDrop = monitor.didDrop()
-      // 是否放置在嵌套组件上
-      if (didDrop) return
       // 如果是容器组件
-      if (item.type === PaneItemTypes.Main) {
+      if (item.categoryType === CategoryEnum.container) {
+        // 如果容器组件不是默认的需要重新赋值
+        if (item.type !== PaneItemTypes.Main) {
+          data.parentUuid = item.uuid
+        }
         dispatch(insert({ component: data }))
       } else {
         // 如果是普通元素
@@ -105,18 +111,12 @@ const DraggableView = ({
           dispatch(insert({ component: data, index }))
         } else if (attr.direction === CurrentDropDirection.RIGHT) {
           // 追加到之后 需要判断当前元素后面还有没有元素
-          const currentRoLastEl = itemList[index]
+          const currentRoLastEl = itemList[index + 1]
           if (currentRoLastEl) {
-            // 如果还有元素 判断是不是块级元素
+            // 如果还有元素
             const element = getCurrentDom(currentRoLastEl)
             if (!element) return
-            // 判断是不是块级元素
-            if (isDomBlock(element.node)) {
-              dispatch(insert({ component: data }))
-            } else {
-              // 不是块级元素 直接追加到当前行 当前元素后
-              dispatch(insert({ component: data, index: index + 1 }))
-            }
+            dispatch(insert({ component: data, index: index + 1 }))
           } else {
             // 没有元素直接添加
             dispatch(insert({ component: data }))
@@ -125,20 +125,21 @@ const DraggableView = ({
       }
     } else if (data.operate === HistoryEnum.EDIT) {
       // 修改组件位置
-      changePaneItemPosition()
+      changePaneItemPosition(monitor)
     }
   }
   // 交换组件位置
-  const changePaneItemPosition = () => {
+  const changePaneItemPosition = (
+    monitor: DropTargetMonitor<PaneItemType, unknown>
+  ) => {
     if (!changePaneItemObj.current) return
     const { current, target } = changePaneItemObj.current
-    if (!current || !target) return
-    if (current.uuid === target.uuid) return
+    const { attr } = computedAttr(current, target, getOffset(monitor))
     dispatch(
-      update({
+      updatePosition({
         current,
         target,
-        offset: null
+        direction: attr.direction
       })
     )
     dispatch(setCurrentDrag(null))
@@ -151,12 +152,14 @@ const DraggableView = ({
     return { left, top }
   }
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
     if ('onMouseMove' in children.props) {
       ;(children.props as any).onMouseMove(e)
     }
     dispatch(setCurrentMove(getEventTargetDomUuid(e, itemList)))
   }
   const handleMouseOut = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
     if ('onMouseOut' in children.props) {
       ;(children.props as any).onMouseOut(e)
     }
@@ -185,12 +188,14 @@ const DraggableView = ({
       onClick: handleClick,
       ...item.attr
     }
-    if (isRenderChildren && item.categoryType === CategoryEnum.container)
+    if (isRenderChildren) {
       return cloneElement(
         children,
         { ...props, style: { ...item.style } },
         ...item.children.map((com) => ViewProvider(com))
       )
+    }
+
     return cloneElement(children, props)
   }
 

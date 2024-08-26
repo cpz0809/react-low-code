@@ -1,3 +1,5 @@
+import { PaneItemType } from '../drawer-menu/com-lib-pane/Type'
+
 // 基础属性类型
 export interface CurrentBaseAttr {
   width: number

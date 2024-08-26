@@ -8,6 +8,7 @@ import {
   CurrentDragType,
   InsertProps,
   UpdateParams,
+  UpdatePositionProps,
   ViewStateType
 } from '../types/drag'
 //
@@ -58,10 +59,10 @@ export const dragSplice = createSlice({
         state.itemList.push(component)
       }
     },
-    // 更新组件
-    update(state, action: PayloadAction<CurrentDragType>) {
-      const { current, target } = action.payload
-      swapNodes(state.itemList, current, target)
+    // 更新组件位置
+    updatePosition(state, action: PayloadAction<UpdatePositionProps>) {
+      const { current, target, direction } = action.payload
+      swapNodes(state.itemList, current, target, direction)
     },
     // 删除组件
     remove(state, action: PayloadAction<string>) {
@@ -99,7 +100,7 @@ export const {
   setCurrentClick,
   setCurrentDrag,
   insert,
-  update,
+  updatePosition,
   remove,
   updateParams,
   updateCurrentClickStyle,

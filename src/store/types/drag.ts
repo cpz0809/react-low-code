@@ -2,6 +2,7 @@ import {
   PaneItemEditKey,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { CurrentDropDirection } from '@/components/board/simulator/type'
 
 export interface ViewStateType {
   itemList: PaneItemType[]
@@ -21,17 +22,23 @@ export interface InsertProps {
   index?: number
 }
 
-export type CurrentDragKeyType = 'current' | 'target' | 'offset'
+export type CurrentDragKeyType = 'current' | 'target'
 
 export interface OffsetProps {
   left: number
   top: number
 }
 
-export type CurrentDragType = {
-  [key in CurrentDragKeyType]: any
-} & {
+export interface CurrentDragType {
   current: PaneItemType
   target: PaneItemType
-  offset?: OffsetProps | null
+  offset: OffsetProps
+}
+
+export type UpdatePositionProps = {
+  [key in CurrentDragKeyType]: any
+} & {
+  current?: PaneItemType | null
+  target: PaneItemType
+  direction: CurrentDropDirection
 }

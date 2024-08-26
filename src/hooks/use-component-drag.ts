@@ -57,23 +57,15 @@ export const useComponentDrag = () => {
     const targetDom = getCurrentDom(target)
 
     if (!currentDom && targetDom) {
-      const { left, top } = offset
-      const temp = {
-        left,
-        top,
-        width: targetDom.attr.width,
-        height: targetDom.attr.height
-      } as DOMRect
-
       return {
-        attr: computedOffset(temp, targetDom.attr, boardMargins),
+        attr: computedOffset(targetDom.attr, boardMargins, offset),
         original: target.attr
       }
     }
 
     if (currentDom && targetDom) {
       return {
-        attr: computedOffset(currentDom.attr, targetDom.attr, boardMargins),
+        attr: computedOffset(targetDom.attr, boardMargins, offset),
         original: currentDom.attr
       }
     }

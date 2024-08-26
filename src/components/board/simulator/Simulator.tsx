@@ -86,6 +86,7 @@ const Simulator = () => {
     window.addEventListener('keydown', handleKeyboardEvent)
     return () => window.removeEventListener('keydown', handleKeyboardEvent)
   }, [currentClick, currentClickAttr, pasteboard, currentStep])
+
   // 处理键盘事件
   const handleKeyboardEvent = (e: KeyboardEvent) => {
     if (currentClick && currentClickAttr) {
@@ -164,12 +165,7 @@ const Simulator = () => {
     const oldX = x - boardMargins.left
     return isComLibPaneLock ? 0 : oldX
   }
-  // 暂时处理清理画布之后留下的选中框
-  useEffect(() => {
-    if (!currentClick) {
-      setCurrentClickAttr(null)
-    }
-  }, [currentClick?.uuid])
+
   // 复制元素
   const handleCopy = (e: React.MouseEvent<HTMLElement>) => {
     if (!currentClick) return
