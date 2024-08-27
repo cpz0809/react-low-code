@@ -1,6 +1,7 @@
 import Row from '@/components/settings/util/row/Row.tsx'
 import { Input } from 'antd'
 import { useAttrCollect } from '@/hooks/use-attr-collect.ts'
+import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 
 enum ImageAttrEnum {
   SRC = 'src',
@@ -8,7 +9,7 @@ enum ImageAttrEnum {
   ALT = 'alt'
 }
 
-const ImageAttr = () => {
+const ImageAttr = ({ data }: { data: PaneItemType | undefined }) => {
   const { collect } = useAttrCollect()
   return (
     <div className="edit-custom-attr-content">

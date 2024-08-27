@@ -5,19 +5,26 @@ import {
   PaneItemType,
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import Modal from '@/components/settings/modal/Modal.tsx'
+import Modal from './modal/Modal.tsx'
+import Title from './title/Title.tsx'
+import { Props } from './util/type'
+
+const componentMap: Record<string, React.ComponentType<Props>> = {
+  [PaneItemTypes.Image]: Image,
+  [PaneItemTypes.Title]: Title,
+  [PaneItemTypes.Main]: Main,
+  [PaneItemTypes.Modal]: Modal
+}
 
 export class EditViewProvider {
-  static of(item: PaneItemType, type: EditableTypeItem) {
-    switch (item.type) {
-      case PaneItemTypes.Image:
-        return <Image type={type} />
-      case PaneItemTypes.Main:
-        return <Main type={type} />
-      case PaneItemTypes.Modal:
-        return <Modal type={type} />
-      default:
-        return
+  static of(
+    item: PaneItemType,
+    type: EditableTypeItem
+  ): React.ReactElement | null {
+    const Component = componentMap[item.type]
+    if (!Component) {
+      return <div>Unknown PaneItemType: {item.type}</div>
     }
+    return <Component type={type} data={item} />
   }
 }

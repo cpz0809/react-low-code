@@ -1,4 +1,1 @@
-export const getPrefixCls = (componentName: string): string => {
-  return componentName
-}
-
+export const getPrefixCls = (componentName: string): string => componentName

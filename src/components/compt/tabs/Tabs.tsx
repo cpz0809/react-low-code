@@ -24,7 +24,9 @@ const Tabs = ({ item }: { item: PaneItemType }) => {
 
   return (
     <DraggableView item={item}>
-      <AntTabs items={items} />
+      <div>
+        <AntTabs items={items} />
+      </div>
     </DraggableView>
   )
 }

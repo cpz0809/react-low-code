@@ -33,14 +33,20 @@ const exquisite: GroupPaneType = {
       svg: TitleSvg,
       type: PaneItemTypes.Title,
       editableType: ['attr', 'style', 'event', 'senior'],
-      ...defaultAttr
+      ...defaultAttr,
+      attr: {
+        children: '这是标题组件'
+      }
     },
     {
       name: '正文',
       svg: TextSvg,
       type: PaneItemTypes.Text,
       editableType: ['attr', 'style', 'event', 'senior'],
-      ...defaultAttr
+      ...defaultAttr,
+      attr: {
+        children: '这是正文组件'
+      }
     }
   ]
 }

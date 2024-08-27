@@ -187,7 +187,7 @@ const DraggableView = ({
       onMouseMove: handleMouseMove,
       onMouseOut: handleMouseOut,
       onClick: handleClick,
-      ...item.attr
+      ...item.style
     }
     if (isRenderChildren) {
       return cloneElement(

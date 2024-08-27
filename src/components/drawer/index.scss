@@ -1,4 +1,4 @@
-$drawer-prefix-cls: "drawer";
+$drawer-prefix-cls: 'drawer';
 
 .#{$drawer-prefix-cls}-fix {
   position: relative;
@@ -17,7 +17,7 @@ $drawer-prefix-cls: "drawer";
   height: 100%;
   background-color: #ffffff;
   box-shadow: 4px 6px 6px 0 rgba(31, 56, 88, 0.06);
-  z-index: 9999;
+  z-index: 10000;
 
   .#{$drawer-prefix-cls}-content {
     width: 100%;
@@ -32,7 +32,6 @@ $drawer-prefix-cls: "drawer";
     }
 
     .#{$drawer-prefix-cls}-body {
-
     }
 
     .#{$drawer-prefix-cls}-btn {

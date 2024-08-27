@@ -35,7 +35,6 @@ export class BaseDraggableViewProvider {
     if (!Component) {
       return <div>Unknown PaneItemType: {item.type}</div>
     }
-
     return <Component item={item} />
   }
 }

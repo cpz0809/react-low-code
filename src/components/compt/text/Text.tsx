@@ -4,7 +4,7 @@ import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.t
 const Text = ({ item }: { item: PaneItemType }) => {
   return (
     <DraggableView item={item}>
-      <span>这是正文组件</span>
+      <span>{item.attr.children}</span>
     </DraggableView>
   )
 }
