@@ -1,0 +1,24 @@
+$simulator-prefix-cls: 'simulator';
+
+.#{$simulator-prefix-cls}-render-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.2857142;
+
+  .#{$simulator-prefix-cls}-render-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .ant-modal-mask,
+    .ant-modal-wrap,
+    .ant-drawer {
+      position: absolute;
+    }
+  }
+}
