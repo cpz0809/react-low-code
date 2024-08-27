@@ -15,7 +15,6 @@ const DragLayerView = () => {
   const { isDragging, currentOffset, capturedItem }: DragLayerType =
     useDragLayer((monitor) => ({
       isDragging: monitor.isDragging(),
-      // initialOffset: monitor.getInitialSourceClientOffset(),
       currentOffset: monitor.getSourceClientOffset(),
       capturedItem: monitor.getItem()
     }))

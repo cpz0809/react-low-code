@@ -16,7 +16,6 @@ export const mainCof: PaneItemType = {
   uuid: '',
   parentUuid: null,
   operate: HistoryEnum.ADD,
-  index: 0,
   editableType: ['attr', 'style'],
   attr: {},
   hidden: false,

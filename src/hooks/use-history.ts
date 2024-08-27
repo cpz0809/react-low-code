@@ -18,6 +18,7 @@ import {
   HistoryOperateTypeEnum,
   HistorySingleType
 } from '@/store/types/history'
+import { CurrentDropDirection } from '@/components/board/simulator/type'
 
 export const useHistory = () => {
   const dispatch = useDispatch()
@@ -78,7 +79,8 @@ export const useHistory = () => {
       dispatch(
         updatePosition({
           current: current.newComponent,
-          target: current.oldComponent
+          target: current.oldComponent,
+          direction: CurrentDropDirection.RIGHT
         })
       )
     }
@@ -100,7 +102,8 @@ export const useHistory = () => {
       dispatch(
         updatePosition({
           current: current.oldComponent,
-          target: current.newComponent
+          target: current.newComponent,
+          direction: CurrentDropDirection.RIGHT
         })
       )
     }

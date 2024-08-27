@@ -5,7 +5,8 @@ import {
   Modal,
   Drawer,
   Tabs,
-  Box
+  Box,
+  Button
 } from '../../compt/index.ts'
 import Main from '@/components/compt/main/Main.tsx'
 import {
@@ -13,27 +14,28 @@ import {
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
+const componentMap: Record<
+  string,
+  React.ComponentType<{ item: PaneItemType }>
+> = {
+  [PaneItemTypes.Image]: Image,
+  [PaneItemTypes.Title]: Title,
+  [PaneItemTypes.Text]: Text,
+  [PaneItemTypes.Main]: Main,
+  [PaneItemTypes.Modal]: Modal,
+  [PaneItemTypes.Drawer]: Drawer,
+  [PaneItemTypes.Tabs]: Tabs,
+  [PaneItemTypes.Box]: Box,
+  [PaneItemTypes.Button]: Button
+}
+
 export class BaseDraggableViewProvider {
-  static of(item: PaneItemType) {
-    switch (item.type) {
-      case PaneItemTypes.Image:
-        return <Image item={item} />
-      case PaneItemTypes.Title:
-        return <Title item={item} />
-      case PaneItemTypes.Text:
-        return <Text item={item} />
-      case PaneItemTypes.Main:
-        return <Main item={item} />
-      case PaneItemTypes.Modal:
-        return <Modal item={item} />
-      case PaneItemTypes.Drawer:
-        return <Drawer item={item} />
-      case PaneItemTypes.Tabs:
-        return <Tabs item={item} />
-      case PaneItemTypes.Box:
-        return <Box item={item} />
-      default:
-        return <div>{item.type}</div>
+  static of(item: PaneItemType): React.ReactElement | null {
+    const Component = componentMap[item.type]
+    if (!Component) {
+      return <div>Unknown PaneItemType: {item.type}</div>
     }
+
+    return <Component item={item} />
   }
 }

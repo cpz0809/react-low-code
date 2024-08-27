@@ -34,14 +34,19 @@ export const useComponentDrag = () => {
     useState<CurrentBaseAttr>(defaultBoardAttr)
 
   useEffect(() => {
-    const dom = document.querySelector('.simulator-render-content')
-    setBoardMargins((dom as HTMLElement).getBoundingClientRect())
+    if (!treeRoot.current) return
+    setBoardMargins((treeRoot.current as HTMLElement).getBoundingClientRect())
   }, [boardWidth, treeRoot])
 
   const getCurrentDom = (current: PaneItemType | null) => {
-    const dom = document.querySelector('.simulator-render-content')
-    if (current && dom?.childNodes) {
-      return filterFromDom(current.uuid, dom?.childNodes)
+    if (current) {
+      if (treeRoot.current?.childNodes) {
+        return filterFromDom(current.uuid, treeRoot.current?.childNodes)
+      } else {
+        const dom = document.querySelector('.simulator-render-content')
+        if (!dom) return null
+        return filterFromDom(current.uuid, dom.childNodes)
+      }
     }
     return null
   }

@@ -12,7 +12,6 @@ const defaultAttr = {
   children: [],
   parentUuid: null,
   operate: null,
-  index: 0,
   attr: {},
   hidden: false,
   categoryType: CategoryEnum.default
@@ -56,22 +55,33 @@ const layoutContainer: GroupPaneType = {
       editableType: ['attr', 'style', 'senior', 'event'],
       ...defaultAttr,
       attr: {
-        title: '弹窗'
-      }
+        title: '弹窗',
+        open: true
+      },
+      categoryType: CategoryEnum.container
+      // additional: {
+      //   [PaneItemTypes.Button]: { ...buttonConfig }
+      // }
     },
     {
       name: '高级抽屉',
       svg: DrawerSvg,
       type: PaneItemTypes.Drawer,
       editableType: ['attr', 'style', 'senior'],
-      ...defaultAttr
+      ...defaultAttr,
+      categoryType: CategoryEnum.container,
+      attr: {
+        title: '抽屉',
+        open: true
+      }
     },
     {
       name: '选项卡',
       svg: TabsSvg,
       type: PaneItemTypes.Tabs,
       editableType: ['attr', 'style', 'senior'],
-      ...defaultAttr
+      ...defaultAttr,
+      categoryType: CategoryEnum.container
     }
   ]
 }

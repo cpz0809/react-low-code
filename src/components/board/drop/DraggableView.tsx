@@ -152,21 +152,22 @@ const DraggableView = ({
     return { left, top }
   }
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
     if ('onMouseMove' in children.props) {
       ;(children.props as any).onMouseMove(e)
     }
     dispatch(setCurrentMove(getEventTargetDomUuid(e, itemList)))
+    e.stopPropagation()
   }
   const handleMouseOut = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
     if ('onMouseOut' in children.props) {
       ;(children.props as any).onMouseOut(e)
     }
     dispatch(setCurrentMove(null))
+    e.stopPropagation()
   }
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
     if ('onClick' in children.props) {
       ;(children.props as any).onClick(e)
     }
