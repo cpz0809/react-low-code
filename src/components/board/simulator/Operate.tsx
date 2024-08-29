@@ -53,27 +53,37 @@ const Operate = forwardRef((_props, ref) => {
     // 初始化设置画布大小
     initBoardConfig()
   }, [])
+  let observer: ResizeObserver
   // 处理画布移动选中和点击选中模拟器
-  useEffect(() => findMoveDom(), [currentMove?.uuid])
-  useEffect(() => findClickDom(), [currentClick?.uuid, currentClick?.style])
-  useEffect(
-    () => findDropDomThrottleFn(),
-    [currentDrag?.current?.uuid, currentDrag?.target?.uuid, currentDrag?.offset]
-  )
+  useEffect(() => findMoveDom(), [currentMove])
+  useEffect(() => {
+    findClickDom()
+    return () => {
+      if (observer) observer.disconnect()
+    }
+  }, [currentClick])
+  useEffect(() => findDropDomThrottleFn(), [currentDrag])
+
   const findMoveDom = () => {
     const dom = getCurrentDom(currentMove)
     if (dom) {
       setCurrentMoveAttr(setBaseDefaultAttr(dom.attr))
     }
   }
+
   const findClickDom = () => {
     const dom = getCurrentDom(currentClick)
     if (dom) {
-      setCurrentClickAttr({
-        ...setBaseDefaultAttr(dom.attr),
-        isSelected: true,
-        node: dom.node
+      observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          setCurrentClickAttr({
+            ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
+            isSelected: true,
+            node: dom.node
+          })
+        }
       })
+      observer.observe(dom.node)
     }
   }
   const findDropDom = () => {
