@@ -1,8 +1,9 @@
 import DraggableView from '@/components/board/drop/DraggableView'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { useEffect } from 'react'
+import { TextNodeAttrType } from '@/components/settings/text/type'
 
-const Text = ({ item }: { item: PaneItemType }) => {
+const Text = ({ item }: { item: PaneItemType<TextNodeAttrType> }) => {
   useEffect(() => {
     if (item.attr) {
       renderChildren()
