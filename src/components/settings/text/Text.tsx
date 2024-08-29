@@ -1,8 +1,9 @@
-import { Props } from 'ahooks/lib/useControllableValue'
 import TextAttr from './TestAttr'
 import Style from '../util/style/Style'
-const Text = ({ type, data }: Props) => {
-  if (type === 'attr') {
+import { Props } from '../util/type'
+import { TextNodeAttrType } from './type'
+const Text = ({ type, data }: Props<TextNodeAttrType>) => {
+  if (type === 'attr' && data) {
     return <TextAttr data={data} />
   } else if (type === 'style') {
     return <Style />

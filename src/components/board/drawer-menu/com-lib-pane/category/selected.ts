@@ -60,14 +60,11 @@ const layoutContainer: GroupPaneType = {
       type: PaneItemTypes.Modal,
       editableType: ['attr', 'style', 'senior', 'event'],
       ...defaultAttr,
+      categoryType: CategoryEnum.container,
       attr: {
         title: '弹窗',
         open: true
-      },
-      categoryType: CategoryEnum.container
-      // additional: {
-      //   [PaneItemTypes.Button]: { ...buttonConfig }
-      // }
+      }
     },
     {
       name: '高级抽屉',
@@ -87,7 +84,16 @@ const layoutContainer: GroupPaneType = {
       type: PaneItemTypes.Tabs,
       editableType: ['attr', 'style', 'senior'],
       ...defaultAttr,
-      categoryType: CategoryEnum.container
+      categoryType: CategoryEnum.container,
+      attr: {
+        children: [
+          { label: '标签项1', children: null },
+          { label: '标签项2', children: null }
+        ],
+        activeKey: 0,
+        type: 'line',
+        size: 'middle'
+      }
     }
   ]
 }

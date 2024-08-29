@@ -30,8 +30,16 @@ export type EditableTypeItem = 'attr' | 'style' | 'event' | 'senior'
 export type PaneItemEditKey = 'name' | 'style' | 'attr' | 'hidden'
 
 // 单个元素类型
-export type PaneItemType = {
-  [key in PaneItemEditKey]: any
+export type PaneItemType<T = { [key: string]: any }> = {
+  [key in PaneItemEditKey]: key extends 'name'
+    ? string
+    : key extends 'style'
+      ? React.CSSProperties
+      : key extends 'attr'
+        ? T
+        : key extends 'hidden'
+          ? boolean
+          : never
 } & {
   // id
   uuid: string
@@ -52,15 +60,9 @@ export type PaneItemType = {
   // 可编辑属性tab标签
   editableType: EditableTypeItem[]
   // 属性
-  attr: { [key: string]: any }
+  attr: T
   // 是否显示
   hidden: boolean
   // 元素类型
   categoryType: CategoryEnum
-  // 附加组件
-  // additional?: AdditionalType
 }
-
-type AdditionalType = {
-  [key in string]: PaneItemType
-} & Partial<Record<PaneItemTypes, PaneItemType>>

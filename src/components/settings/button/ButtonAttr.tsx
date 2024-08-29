@@ -4,6 +4,7 @@ import { Input, Switch } from 'antd'
 import Row from '../util/row/Row'
 import Group from '../util/group/Group'
 import { buttonAttrSize, buttonAttrType } from './attr'
+import { ButtonAttrType } from './type'
 enum ButtonAttrEnum {
   Children = 'children',
   Type = 'type',
@@ -12,9 +13,10 @@ enum ButtonAttrEnum {
   Disabled = 'disabled'
 }
 
-const ButtonAttr = ({ data }: { data: PaneItemType | undefined }) => {
+const ButtonAttr = ({ data }: { data: PaneItemType<ButtonAttrType> }) => {
   const { collect } = useAttrCollect()
-  const { children, loading, disabled } = data?.attr
+  const { children, loading, disabled } = data.attr
+
   return (
     <div className="edit-custom-attr-content">
       <Row title="按钮内容">

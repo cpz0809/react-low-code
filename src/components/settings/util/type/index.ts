@@ -3,9 +3,9 @@ import {
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
-export interface Props {
+export interface Props<T = { [key: string]: any }> {
   type: EditableTypeItem
-  data?: PaneItemType
+  data?: PaneItemType<T>
 }
 
 export interface SingleStyleType {

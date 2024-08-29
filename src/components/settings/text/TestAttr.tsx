@@ -1,8 +1,10 @@
-import TextArea from 'antd/es/input/TextArea'
 import Row from '../util/row/Row'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
-import { Switch } from 'antd'
+import { Switch, Input } from 'antd'
+import { TextNodeAttrType } from './type'
+
+const { TextArea } = Input
 
 enum TextAttrEnum {
   Children = 'children',
@@ -13,8 +15,8 @@ enum TextAttrEnum {
   IsStrong = 'isStrong'
 }
 
-const TitleAttr = ({ data }: { data: PaneItemType | undefined }) => {
-  const { children, isMark, isCode, isDel, isU, isStrong } = data?.attr
+const TitleAttr = ({ data }: { data: PaneItemType<TextNodeAttrType> }) => {
+  const { children, isMark, isCode, isDel, isU, isStrong } = data.attr
   const { collect } = useAttrCollect()
   return (
     <div className="edit-custom-attr-content">
