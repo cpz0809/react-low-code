@@ -35,20 +35,24 @@ const DraggableView = ({
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
   const ref = useRef(null)
   const changePaneItemObj = useRef<CurrentDragType | null>(null)
-  const [, drag, dragPreview] = useDrag(() => ({
-    type: item.type,
-    item: {
-      ...item,
-      operate: HistoryEnum.EDIT
-    },
-    canDrag: () => item.type !== PaneItemTypes.Main,
-    end: () => {
-      dispatch(setCurrentDrag(null))
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging()
-    })
-  }))
+
+  const [, drag, dragPreview] = useDrag(
+    () => ({
+      type: item.type,
+      item: {
+        ...item,
+        operate: HistoryEnum.EDIT
+      },
+      canDrag: () => item.type !== PaneItemTypes.Main,
+      end: () => {
+        dispatch(setCurrentDrag(null))
+      },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging()
+      })
+    }),
+    [itemList]
+  )
 
   const [, drop] = useDrop(
     () => ({
@@ -167,7 +171,6 @@ const DraggableView = ({
   }
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
     if ('onClick' in children.props) {
       ;(children.props as any).onClick(e)
     }
@@ -187,12 +190,13 @@ const DraggableView = ({
       onMouseMove: handleMouseMove,
       onMouseOut: handleMouseOut,
       onClick: handleClick,
-      ...item.style
+      style: { ...item.style }
     }
+
     if (isRenderChildren) {
       return cloneElement(
         children,
-        { ...props, style: { ...item.style } },
+        { ...props },
         ...item.children.map((com) => ViewProvider(com))
       )
     }
