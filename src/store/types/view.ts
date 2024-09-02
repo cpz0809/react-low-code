@@ -10,5 +10,7 @@ export interface ViewStateType {
   isComLibPaneLock: boolean
   paneVisible: boolean
   outlineTreeVisible: boolean
+  apiVisible: boolean
+  variableVisible: boolean
   optionsDevice: OptionDeviceProps[]
 }

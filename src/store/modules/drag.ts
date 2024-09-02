@@ -74,7 +74,7 @@ export const dragSplice = createSlice({
       updateNode(
         uuid,
         state.itemList,
-        (item: PaneItemType) => (item[key] = params)
+        (item: PaneItemType) => ((item[key] as any) = params)
       )
     },
     // 更新当前点击组件样式

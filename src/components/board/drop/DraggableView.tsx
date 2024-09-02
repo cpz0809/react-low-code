@@ -24,11 +24,7 @@ import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/type'
 
-const DraggableView = ({
-  item,
-  children,
-  isRenderChildren = true
-}: DraggableViewProps) => {
+const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   const dispatch = useDispatch()
   const { record } = useHistory()
   const { computedAttr, getCurrentDom } = useComponentDrag()
@@ -90,10 +86,13 @@ const DraggableView = ({
     monitor: DropTargetMonitor<PaneItemType, unknown>
   ) => {
     const didDrop = monitor.didDrop()
-    // 是否放置在嵌套组件上
     if (didDrop) return
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
+      if (place) {
+        dispatch(insert({ component: place(data) }))
+        return
+      }
       // 如果是容器组件
       if (item.categoryType === CategoryEnum.container) {
         // 如果容器组件不是默认的需要重新赋值
@@ -138,6 +137,7 @@ const DraggableView = ({
   ) => {
     if (!changePaneItemObj.current) return
     const { current, target } = changePaneItemObj.current
+    if (current.uuid === target.uuid) return
     const { attr } = computedAttr(current, target, getOffset(monitor))
     dispatch(
       updatePosition({
@@ -193,15 +193,11 @@ const DraggableView = ({
       style: { ...item.style }
     }
 
-    if (isRenderChildren) {
-      return cloneElement(
-        children,
-        { ...props },
-        ...item.children.map((com) => ViewProvider(com))
-      )
-    }
-
-    return cloneElement(children, props)
+    return cloneElement(
+      children,
+      { ...props },
+      ...item.children.map((com: any) => ViewProvider(com))
+    )
   }
 
   return render()

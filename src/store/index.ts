@@ -2,14 +2,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import viewSplice from './modules/view.ts'
 import dragSplice from './modules/drag.ts'
 import historySlice from './modules/history.ts'
-import StateSplice from './modules/state.ts'
-
+import stateSplice from './modules/state.ts'
+import apiSlice from './modules/api.ts'
 export const store = configureStore({
   reducer: {
     viewSplice,
     dragSplice,
     historySlice,
-    StateSplice
+    stateSplice,
+    apiSlice
   }
 })
 

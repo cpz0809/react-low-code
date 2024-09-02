@@ -71,6 +71,7 @@ const Drawer = ({
     const notLockWidth =
       domWidth - (editStyleAreaWidth + sidebarWidth + boardPd)
     if (boardWidth === MOBILEDEFAULTSIZE) return boardWidth
+
     return isComLibPaneLock ? lockWidth : notLockWidth
   }
 

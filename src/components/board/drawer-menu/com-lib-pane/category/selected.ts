@@ -90,7 +90,7 @@ const layoutContainer: GroupPaneType = {
           { label: '标签项1', children: null },
           { label: '标签项2', children: null }
         ],
-        activeKey: 0,
+        activeKey: '0',
         type: 'line',
         size: 'middle'
       }

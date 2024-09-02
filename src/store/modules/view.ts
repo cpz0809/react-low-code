@@ -8,8 +8,12 @@ const initialState: ViewStateType = {
   isComLibPaneLock: false,
   // 组件库网格是否显示
   paneVisible: false,
-  // 大纲树
+  // 大纲树是否显示
   outlineTreeVisible: false,
+  // 页面接口是否显示
+  apiVisible: false,
+  // 页面变量是否显示
+  variableVisible: false,
   // 可选设备大小
   optionsDevice: []
 }
@@ -34,6 +38,14 @@ const viewSplice = createSlice({
     setOutlineTreeVisible(state) {
       state.outlineTreeVisible = !state.outlineTreeVisible
     },
+    // 设置页面接口是否显示
+    setApiVisible(state) {
+      state.apiVisible = !state.apiVisible
+    },
+    // 设置页面变量是否显示
+    setVariableVisible(state) {
+      state.variableVisible = !state.variableVisible
+    },
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
       state.optionsDevice = action.payload
@@ -46,6 +58,8 @@ export const {
   setComLibPaneLockStatus,
   setPaneVisible,
   setOutlineTreeVisible,
+  setApiVisible,
+  setVariableVisible,
   setOptionsDevice
 } = viewSplice.actions
 export default viewSplice.reducer

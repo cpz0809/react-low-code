@@ -18,3 +18,8 @@ export const isDomBlock = (element: Element) => {
   const elStyle = window.getComputedStyle(element).display
   return styles.some((item) => item === elStyle)
 }
+
+const opt = Object.prototype.toString
+export const isArray = (obj: any) => {
+  return opt.call(obj) === '[object Array]'
+}

@@ -1,6 +1,6 @@
 import ImageDefault from '@/assets/svg/image-default.svg'
-import DraggableView from '@/components/board/drop/DraggableView'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import DraggableView from '@/components/board/drop/DraggableView'
 
 const Image = ({ item }: { item: PaneItemType }) => {
   return (

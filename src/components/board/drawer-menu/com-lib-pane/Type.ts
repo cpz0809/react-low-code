@@ -27,7 +27,7 @@ export interface GroupPaneType {
 
 export type EditableTypeItem = 'attr' | 'style' | 'event' | 'senior'
 
-export type PaneItemEditKey = 'name' | 'style' | 'attr' | 'hidden'
+export type PaneItemEditKey = 'name' | 'style' | 'attr' | 'hidden' | 'children'
 
 // 单个元素类型
 export type PaneItemType<T = { [key: string]: any }> = {
@@ -39,7 +39,9 @@ export type PaneItemType<T = { [key: string]: any }> = {
         ? T
         : key extends 'hidden'
           ? boolean
-          : never
+          : key extends 'children'
+            ? any
+            : any
 } & {
   // id
   uuid: string
@@ -52,7 +54,7 @@ export type PaneItemType<T = { [key: string]: any }> = {
   // 样式
   style: React.CSSProperties
   // 子组件
-  children: PaneItemType[]
+  children: any
   // 父元素id
   parentUuid: string | null
   // 操作类型

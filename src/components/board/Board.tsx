@@ -8,6 +8,7 @@ import EditStyleArea from './edit-style-area/EditStyleArea.tsx'
 import DragLayerView from './drag-layer-view/DragLayerView.tsx'
 import ComLibPane from '@/components/board/drawer-menu/com-lib-pane/ComLibPane.tsx'
 import OutlineTree from '@/components/board/drawer-menu/outline-tree/OutlineTree.tsx'
+import ApiManage from './drawer-menu/api-manage/ApiManage.tsx'
 
 const Board = () => {
   const prefix = getPrefixCls('board')
@@ -15,9 +16,15 @@ const Board = () => {
     <div className={`${prefix}-container`}>
       <Sidebar />
       <DndProvider backend={HTML5Backend}>
+        {/* 组件库 */}
         <ComLibPane />
+        {/* 大纲 */}
         <OutlineTree />
+        {/* 页面接口 */}
+        <ApiManage />
+        {/* 模拟器 */}
         <Simulator />
+        {/* 拖动试图组件 */}
         <DragLayerView />
       </DndProvider>
       <EditStyleArea />

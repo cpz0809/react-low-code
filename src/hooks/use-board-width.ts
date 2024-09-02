@@ -13,12 +13,24 @@ const BOAEDPADDING = 16 * 2
 export const MOBILEDEFAULTSIZE = 375
 export const useBoardWidth = () => {
   const dispatch = useDispatch()
-  const { optionsDevice, isComLibPaneLock, paneVisible, outlineTreeVisible } =
-    useSelector((state: RootState) => state.viewSplice)
+  const {
+    optionsDevice,
+    isComLibPaneLock,
+    paneVisible,
+    outlineTreeVisible,
+    apiVisible,
+    variableVisible
+  } = useSelector((state: RootState) => state.viewSplice)
 
   useEffect(() => {
     initBoardConfig()
-  }, [isComLibPaneLock, paneVisible, outlineTreeVisible])
+  }, [
+    isComLibPaneLock,
+    paneVisible,
+    outlineTreeVisible,
+    apiVisible,
+    variableVisible
+  ])
   const initBoardConfig = () => {
     initBoardWidth()
     initOptions()
@@ -38,7 +50,10 @@ export const useBoardWidth = () => {
 
   const computedBigSize = () => {
     const doc = document.documentElement.getBoundingClientRect()
-    if (isComLibPaneLock && (paneVisible || outlineTreeVisible))
+    if (
+      isComLibPaneLock &&
+      (paneVisible || outlineTreeVisible || apiVisible || variableVisible)
+    )
       return doc.width - LEFTSIDEBARSIZE - RIGHTSIDEBARSIZE - BOAEDPADDING - 350
     return doc.width - LEFTSIDEBARSIZE - RIGHTSIDEBARSIZE - BOAEDPADDING
   }

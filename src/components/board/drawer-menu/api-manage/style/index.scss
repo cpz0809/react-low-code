@@ -1,0 +1,40 @@
+$api-manage-prefix-cls: 'api-manage';
+
+.#{$api-manage-prefix-cls} {
+  padding: 0 12px;
+
+  .#{$api-manage-prefix-cls}-head {
+    padding-bottom: 10px;
+  }
+
+  .#{$api-manage-prefix-cls}-body {
+    .#{$api-manage-prefix-cls}-card {
+      border: 1px solid rgba(31, 56, 88, 0.1);
+      border-radius: 3px;
+      padding: 8px;
+      margin-bottom: 6px;
+      .#{$api-manage-prefix-cls}-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+
+        .#{$api-manage-prefix-cls}-card-head-left {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 12px;
+          font-weight: 700;
+          color: rgba(0, 0, 0, 0.6);
+        }
+        .#{$api-manage-prefix-cls}-card-head-right {
+          color: #8f9bb3 !important;
+
+          .ant-space-item {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

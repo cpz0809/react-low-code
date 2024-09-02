@@ -11,6 +11,7 @@ const Simulator = () => {
   const { boardWidth } = useSelector((state: RootState) => state.viewSplice)
 
   const SimulatorRef = useRef(null)
+
   return (
     <div className={`${prefix}-container`}>
       <div className={`${prefix}-content`} style={{ width: boardWidth }}>

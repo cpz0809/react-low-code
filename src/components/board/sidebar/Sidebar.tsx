@@ -1,9 +1,19 @@
 import './index.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { BarsOutlined, ProductOutlined } from '@ant-design/icons'
+import {
+  BarsOutlined,
+  DatabaseOutlined,
+  GlobalOutlined,
+  ProductOutlined
+} from '@ant-design/icons'
 import { Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
-import { setOutlineTreeVisible, setPaneVisible } from '@/store/modules/view.ts'
+import {
+  setApiVisible,
+  setOutlineTreeVisible,
+  setPaneVisible,
+  setVariableVisible
+} from '@/store/modules/view.ts'
 
 const Sidebar = () => {
   const prefix = getPrefixCls('drag')
@@ -25,6 +35,16 @@ const Sidebar = () => {
           <div onClick={() => dispatch(setPaneVisible())}>
             <Tooltip title="组件库" placement="right" align={align}>
               <ProductOutlined />
+            </Tooltip>
+          </div>
+          <div onClick={() => dispatch(setApiVisible())}>
+            <Tooltip title="页面接口" placement="right" align={align}>
+              <GlobalOutlined />
+            </Tooltip>
+          </div>
+          <div onClick={() => dispatch(setVariableVisible())}>
+            <Tooltip title="页面变量" placement="right" align={align}>
+              <DatabaseOutlined />
             </Tooltip>
           </div>
         </div>
