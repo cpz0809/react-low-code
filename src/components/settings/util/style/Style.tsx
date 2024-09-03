@@ -48,7 +48,7 @@ const Style = () => {
         <div className={`${prefixCls}-code-edit-region`}>
           <EditorCode />
         </div>
-        <div className={`${prefixCls}-collapse>`}>
+        <div className={`${prefixCls}-collapse`}>
           <Collapse size="small" items={items} />
         </div>
       </div>

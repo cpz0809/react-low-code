@@ -1,31 +1,49 @@
 import MonacoEditor, { loader } from '@monaco-editor/react'
 import * as monaco from 'monaco-editor'
-import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
-import JsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
-import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
-import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
-import TsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
+import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
+import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
+import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
+import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
+import { useState } from 'react'
 
 self.MonacoEnvironment = {
-  getWorker(_: any, label: any) {
+  getWorker(_, label) {
     if (label === 'json') {
-      return new JsonWorker()
+      return new jsonWorker()
     }
     if (label === 'css' || label === 'scss' || label === 'less') {
-      return new CssWorker()
+      return new cssWorker()
     }
     if (label === 'html' || label === 'handlebars' || label === 'razor') {
-      return new HtmlWorker()
+      return new htmlWorker()
     }
     if (label === 'typescript' || label === 'javascript') {
-      return new TsWorker()
+      return new tsWorker()
     }
-    return new EditorWorker()
+    return new editorWorker()
   }
 }
+
 loader.config({ monaco })
 
 const EditorCode = () => {
-  return <MonacoEditor theme="vs" language="css" />
+  const [editorValue, setEditorValue] = useState(`#main{\n}`)
+
+  const handleEditorChange = (e: string | undefined) => {
+    if (!e) return
+    setEditorValue(e)
+  }
+  return (
+    <MonacoEditor
+      theme="vs"
+      language="css"
+      value={editorValue}
+      options={{
+        tabSize: 2
+      }}
+      onChange={handleEditorChange}
+    />
+  )
 }
 export default EditorCode

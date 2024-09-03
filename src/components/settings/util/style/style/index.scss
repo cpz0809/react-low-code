@@ -1,6 +1,7 @@
-$edit-style-field-prefix-cls: "edit-style-field";
+$edit-style-field-prefix-cls: 'edit-style-field';
 
 .#{$edit-style-field-prefix-cls} {
+  height: 100%;
   .#{$edit-style-field-prefix-cls}-header {
     display: flex;
     justify-content: space-between;
@@ -17,6 +18,9 @@ $edit-style-field-prefix-cls: "edit-style-field";
 
   .#{$edit-style-field-prefix-cls}-body {
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 32px);
 
     .#{$edit-style-field-prefix-cls}-code-edit-region {
       width: 100%;
@@ -26,7 +30,8 @@ $edit-style-field-prefix-cls: "edit-style-field";
     }
 
     .#{$edit-style-field-prefix-cls}-collapse {
+      overflow-y: auto;
+      flex: 1;
     }
   }
-
 }

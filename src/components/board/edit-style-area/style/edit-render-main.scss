@@ -1,4 +1,4 @@
-$edit-render-main-prefix-cls: "edit-render-main";
+$edit-render-main-prefix-cls: 'edit-render-main';
 
 .#{$edit-render-main-prefix-cls} {
   position: absolute;
@@ -7,5 +7,4 @@ $edit-render-main-prefix-cls: "edit-render-main";
   bottom: 0;
   left: 0;
   right: 0;
-  overflow-y: auto;
 }
