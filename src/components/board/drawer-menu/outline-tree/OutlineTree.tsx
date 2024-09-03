@@ -1,5 +1,5 @@
 import './style/index.scss'
-import Drawer from '@/components/drawer/Drawer.tsx'
+import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOutlineTreeVisible } from '@/store/modules/view.ts'
 import { RootState } from '@/store'

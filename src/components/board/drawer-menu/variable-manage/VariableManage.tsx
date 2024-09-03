@@ -1,5 +1,5 @@
 import './style/index.scss'
-import Drawer from '@/components/drawer/Drawer'
+import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { RootState } from '@/store'
 import { setVariableVisible } from '@/store/modules/view'
 import { StateSingleProps } from '@/store/types/state'

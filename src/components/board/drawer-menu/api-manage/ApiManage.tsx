@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import './style/index.scss'
-import Drawer from '@/components/drawer/Drawer.tsx'
+import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { RootState } from '@/store'
 import { setApiVisible } from '@/store/modules/view'
 import { getPrefixCls } from '@/util/global-config'
