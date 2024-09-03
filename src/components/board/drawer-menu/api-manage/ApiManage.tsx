@@ -8,6 +8,7 @@ import {
   Button,
   Form,
   Input,
+  message,
   Modal,
   Radio,
   RadioChangeEvent,
@@ -17,11 +18,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { FieldTypeKey } from './type'
 import { isArray } from '@/util/is'
-import { addApi, deleteApi, editApi } from '@/store/modules/api'
+import { addOrEditApi, deleteApi } from '@/store/modules/api'
 import { ApiSingleProps } from '@/store/types/api'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const defaultForm: ApiSingleProps = {
+  code: null,
   name: '',
   type: 'get',
   url: '',
@@ -34,6 +36,7 @@ const ApiManage = () => {
   const dispatch = useDispatch()
   const { apiVisible } = useSelector((state: RootState) => state.viewSplice)
   const { apiData } = useSelector((state: RootState) => state.apiSlice)
+  const [messageApi, contextHolder] = message.useMessage()
   const paramsFormRef = useRef(null)
 
   const [form, setForm] = useState<ApiSingleProps>(defaultForm)
@@ -87,10 +90,8 @@ const ApiManage = () => {
   }
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
-    const index = apiData.findIndex((item) => item.name === form.name)
-    index !== -1
-      ? dispatch(editApi({ index, params: form }))
-      : dispatch(addApi(form))
+    dispatch(addOrEditApi(form))
+    messageApi.success('添加成功')
     setVisible(false)
     resetForm()
   }
@@ -125,7 +126,7 @@ const ApiManage = () => {
                     <Space>
                       <EditOutlined onClick={() => handleEditForm(item.name)} />
                       <DeleteOutlined
-                        onClick={() => dispatch(deleteApi(item.name))}
+                        onClick={() => dispatch(deleteApi(item.code))}
                       />
                     </Space>
                   </div>
@@ -162,6 +163,7 @@ const ApiManage = () => {
             initialValue={form.name}
           >
             <Input
+              placeholder="请输入接口名称"
               value={form.name}
               onChange={(e) => changeForm('name', e.target.value)}
             />
@@ -191,6 +193,7 @@ const ApiManage = () => {
             initialValue={form.url}
           >
             <Input
+              placeholder="请输入接口地址"
               value={form.url}
               onChange={(e) => changeForm('url', e.target.value)}
             />
@@ -225,6 +228,7 @@ const ApiManage = () => {
           </Form.Item>
         </Form>
       </Modal>
+      {contextHolder}
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ApiSingleProps, ApiStateType, EditApiProps } from '../types/api'
+import { ApiSingleProps, ApiStateType } from '../types/api'
+import { v4 as uuid } from 'uuid'
 
 const initialState: ApiStateType = {
   apiData: []
@@ -9,16 +10,22 @@ const apiSlice = createSlice({
   name: 'api',
   initialState,
   reducers: {
-    addApi(state, action: PayloadAction<ApiSingleProps>) {
-      state.apiData.push(action.payload)
+    addOrEditApi(state, action: PayloadAction<ApiSingleProps>) {
+      const data = action.payload
+      if (!data.code) {
+        state.apiData.push({ ...data, code: uuid() })
+      } else {
+        const index = state.apiData.findIndex(
+          (item) => item.code === action.payload.code
+        )
+        if (index === -1) return
+        state.apiData[index] = data
+      }
     },
-    editApi(state, action: PayloadAction<EditApiProps>) {
-      const { index, params } = action.payload
-      state.apiData[index] = params
-    },
-    deleteApi(state, action: PayloadAction<string>) {
+    deleteApi(state, action: PayloadAction<string | null>) {
+      if (!action.payload) return
       const index = state.apiData.findIndex(
-        (item) => item.name === action.payload
+        (item) => item.code === action.payload
       )
       if (index !== -1) {
         state.apiData.splice(index, 1)
@@ -27,5 +34,5 @@ const apiSlice = createSlice({
   }
 })
 
-export const { addApi, editApi,deleteApi } = apiSlice.actions
+export const { addOrEditApi, deleteApi } = apiSlice.actions
 export default apiSlice.reducer
