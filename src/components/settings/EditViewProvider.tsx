@@ -7,11 +7,12 @@ import {
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import Modal from './modal/Modal.tsx'
 import Title from './title/Title.tsx'
-import { Props } from './_components/type/index.ts'
 import Text from './text/Text.tsx'
 import Button from './button/Button.tsx'
+import Style from './_components/style/Style.tsx'
+import Senior from './_components/senior/Senior.tsx'
 
-const componentMap: Record<string, React.ComponentType<Props>> = {
+const componentMap: { [key: string]: any } = {
   [PaneItemTypes.Image]: Image,
   [PaneItemTypes.Title]: Title,
   [PaneItemTypes.Main]: Main,
@@ -25,10 +26,9 @@ export class EditViewProvider {
     item: PaneItemType,
     type: EditableTypeItem
   ): React.ReactElement | null {
+    if (type === 'style') return <Style />
+    if (type === 'senior') return <Senior />
     const Component = componentMap[item.type]
-    if (!Component) {
-      return <div>Unknown PaneItemType: {item.type}</div>
-    }
-    return <Component type={type} data={item} />
+    return Component.of(item, type)
   }
 }

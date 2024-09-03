@@ -1,15 +1,18 @@
-import { Props } from '../_components/type/index.ts'
-import Style from '../_components/style/Style.tsx'
 import TitleAttr from './TitleAttr.tsx'
 import { TextNodeAttrType } from '../text/type'
+import {
+  EditableTypeItem,
+  PaneItemType
+} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
-const Title = ({ type, data }: Props<TextNodeAttrType>) => {
-  if (type === 'attr' && data) {
-    return <TitleAttr data={data} />
-  } else if (type === 'style') {
-    return <Style />
+class Title {
+  static of(data: PaneItemType<TextNodeAttrType>, type: EditableTypeItem) {
+    switch (type) {
+      case 'attr':
+        return <TitleAttr data={data} />
+      case 'event':
+    }
   }
-  return null
 }
 
 export default Title

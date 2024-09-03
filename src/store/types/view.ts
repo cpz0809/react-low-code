@@ -13,4 +13,5 @@ export interface ViewStateType {
   apiVisible: boolean
   variableVisible: boolean
   optionsDevice: OptionDeviceProps[]
+  variableBindingVisible: boolean
 }

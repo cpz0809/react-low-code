@@ -1,16 +1,18 @@
-import { ButtonAttrType } from './type'
-import Style from '../_components/style/Style'
-import { Props } from '../_components/type'
+import {
+  EditableTypeItem,
+  PaneItemType
+} from '@/components/board/drawer-menu/com-lib-pane/Type'
 import ButtonAttr from './ButtonAttr'
+import { ButtonAttrType } from './type'
 
-const Button = ({ type, data }: Props<ButtonAttrType>) => {
-  if (type === 'attr' && data) {
-    return <ButtonAttr data={data} />
-  } else if (type === 'style') {
-    return <Style />
+class Button {
+  static of(data: PaneItemType<ButtonAttrType>, type: EditableTypeItem) {
+    switch (type) {
+      case 'attr':
+        return <ButtonAttr data={data} />
+      case 'event':
+    }
   }
-
-  return null
 }
 
 export default Button

@@ -6,7 +6,7 @@ import { CSSProperties } from 'react'
 import {
   differentiate,
   StyleEnum
-} from '@/components/settings/util/type/styleEnum.ts'
+} from '@/components/settings/_components/type/styleEnum'
 
 /**
  * 组件样式收集

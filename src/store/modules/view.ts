@@ -15,7 +15,9 @@ const initialState: ViewStateType = {
   // 页面变量是否显示
   variableVisible: false,
   // 可选设备大小
-  optionsDevice: []
+  optionsDevice: [],
+  // 变量绑定弹窗
+  variableBindingVisible: false
 }
 
 const viewSplice = createSlice({
@@ -49,6 +51,10 @@ const viewSplice = createSlice({
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
       state.optionsDevice = action.payload
+    },
+    // 变量绑定弹窗
+    setVariableBindingVisible(state) {
+      state.variableBindingVisible = !state.variableBindingVisible
     }
   }
 })
@@ -60,6 +66,7 @@ export const {
   setOutlineTreeVisible,
   setApiVisible,
   setVariableVisible,
-  setOptionsDevice
+  setOptionsDevice,
+  setVariableBindingVisible
 } = viewSplice.actions
 export default viewSplice.reducer
