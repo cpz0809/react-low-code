@@ -7,7 +7,7 @@ import {
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import Modal from './modal/Modal.tsx'
 import Title from './title/Title.tsx'
-import { Props } from './util/type'
+import { Props } from './_components/type/index.ts'
 import Text from './text/Text.tsx'
 import Button from './button/Button.tsx'
 

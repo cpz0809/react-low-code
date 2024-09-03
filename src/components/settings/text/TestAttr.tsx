@@ -1,4 +1,4 @@
-import Row from '../util/row/Row'
+import Row from '../_components/row/Row'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import { Switch, Input } from 'antd'

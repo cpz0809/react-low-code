@@ -3,12 +3,12 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import {
   distanceData,
   modeData
-} from '@/components/settings/util/style/data/layout.ts'
-import Row from '@/components/settings/util/row/Row.tsx'
-import Group from '@/components/settings/util/group/Group.tsx'
+} from '@/components/settings/_components/style/data/layout'
+import Row from '@/components/settings/_components/row/Row'
+import Group from '@/components/settings/_components/group/Group'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
-import InputMergeSelect from '@/components/settings/util/input-merge-select/InputMergeSelect.tsx'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
+import InputMergeSelect from '@/components/settings/_components/input-merge-select/InputMergeSelect'
 
 const Layout = () => {
   const prefixCls = getPrefixCls('edit-style-layout')

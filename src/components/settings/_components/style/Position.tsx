@@ -1,16 +1,16 @@
 import './style/position.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import Row from '@/components/settings/util/row/Row.tsx'
+import Row from '@/components/settings/_components/row/Row'
 import { Select } from 'antd'
 import {
   clearFloat,
   floatPosition,
   selectPosition
-} from '@/components/settings/util/style/data/position.ts'
+} from '@/components/settings/_components/style/data/position'
 import { InputNumber } from 'antd'
-import Group from '@/components/settings/util/group/Group.tsx'
+import Group from '@/components/settings/_components/group/Group'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
 
 const Position = () => {
   const prefixCls = getPrefixCls('edit-style-position')

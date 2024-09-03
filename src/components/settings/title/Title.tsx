@@ -1,5 +1,5 @@
-import { Props } from '../util/type'
-import Style from '../util/style/Style.tsx'
+import { Props } from '../_components/type/index.ts'
+import Style from '../_components/style/Style.tsx'
 import TitleAttr from './TitleAttr.tsx'
 import { TextNodeAttrType } from '../text/type'
 

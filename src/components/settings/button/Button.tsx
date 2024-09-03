@@ -1,6 +1,6 @@
 import { ButtonAttrType } from './type'
-import Style from '../util/style/Style'
-import { Props } from '../util/type'
+import Style from '../_components/style/Style'
+import { Props } from '../_components/type'
 import ButtonAttr from './ButtonAttr'
 
 const Button = ({ type, data }: Props<ButtonAttrType>) => {

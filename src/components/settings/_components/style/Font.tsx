@@ -1,13 +1,16 @@
 import './style/font.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { ColorPicker, InputNumber, Select } from 'antd'
-import { selectFontFamily, selectFontWeight } from './data/font.ts'
-import { alignment } from '@/components/settings/util/style/data/font.ts'
-import Row from '@/components/settings/util/row/Row.tsx'
-import Group from '@/components/settings/util/group/Group.tsx'
-import OpacitySlider from '@/components/settings/util/opacity-slider/OpacitySlider.tsx'
+import {
+  selectFontFamily,
+  selectFontWeight
+} from '../../_components/style/data/font.ts'
+import { alignment } from '@/components/settings/_components/style/data/font.ts'
+import Row from '@/components/settings/_components/row/Row.tsx'
+import Group from '@/components/settings/_components/group/Group.tsx'
+import OpacitySlider from '@/components/settings/_components/opacity-slider/OpacitySlider.tsx'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum.ts'
 
 const Font = () => {
   const prefixCls = getPrefixCls('edit-style-font')

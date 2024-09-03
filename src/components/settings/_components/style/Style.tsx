@@ -2,12 +2,12 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import './style/index.scss'
 import { Collapse } from 'antd'
 import type { CollapseProps } from 'antd'
-import Layout from '@/components/settings/util/style/Layout.tsx'
-import Font from '@/components/settings/util/style/Font.tsx'
-import Background from '@/components/settings/util/style/Background.tsx'
-import Position from '@/components/settings/util/style/Position.tsx'
-import Border from '@/components/settings/util/style/Border.tsx'
-import EditorCode from '@/components/settings/util/monacoEditor/MonacoEditor.tsx'
+import Layout from '@/components/settings/_components/style/Layout'
+import Position from '@/components/settings/_components/style/Position'
+import Border from '@/components/settings/_components/style/Border'
+import EditorCode from '@/components/settings/_components/monacoEditor/MonacoEditor'
+import Font from './Font'
+import Background from './Background'
 
 const Style = () => {
   const prefixCls = getPrefixCls('edit-style-field')

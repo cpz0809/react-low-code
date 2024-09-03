@@ -1,8 +1,8 @@
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { Input, Switch } from 'antd'
-import Row from '../util/row/Row'
-import Group from '../util/group/Group'
+import Row from '../_components/row/Row'
+import Group from '../_components/group/Group'
 import { buttonAttrSize, buttonAttrType } from './attr'
 import { ButtonAttrType } from './type'
 enum ButtonAttrEnum {

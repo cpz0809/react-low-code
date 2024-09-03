@@ -1,4 +1,4 @@
-import { SingleStyleType } from '@/components/settings/util/type'
+import { SingleStyleType } from '@/components/settings/_components/type'
 
 export const selectPosition = [
   {

@@ -1,9 +1,9 @@
 import { Slider, InputNumber } from 'antd'
 import { getPrefixCls } from '@/util/global-config.ts'
 import './index.scss'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { UnitType } from '@/components/settings/util/input-merge-select/InputMergeSelect.tsx'
+import { UnitType } from '@/components/settings/_components/input-merge-select/InputMergeSelect'
 
 const OpacitySlider = ({
   addonAfter,

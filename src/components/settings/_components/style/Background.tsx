@@ -4,20 +4,20 @@ import { ColorPicker } from 'antd'
 import React, { useState } from 'react'
 import { Input } from 'antd'
 import { FileImageOutlined } from '@ant-design/icons'
-import Row from '@/components/settings/util/row/Row.tsx'
-import Group from '@/components/settings/util/group/Group.tsx'
+import Row from '@/components/settings/_components/row/Row.tsx'
+import Group from '@/components/settings/_components/group/Group.tsx'
 import {
   background,
   position,
   repeatShow,
   size
-} from '@/components/settings/util/style/data/background.ts'
-import OpacitySlider from '../opacity-slider/OpacitySlider.tsx'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
+} from '@/components/settings/_components/style/data/background.ts'
+import OpacitySlider from '../../_components/opacity-slider/OpacitySlider.tsx'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum.ts'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
 import InputMergeSelect, {
   UnitType
-} from '@/components/settings/util/input-merge-select/InputMergeSelect.tsx'
+} from '@/components/settings/_components/input-merge-select/InputMergeSelect.tsx'
 
 const Background = () => {
   const prefixCls = getPrefixCls('edit-style-background')
@@ -145,7 +145,11 @@ const Background = () => {
   return (
     <div className={`${prefixCls}`}>
       <Row title="背景">
-        <Group data={background} onclick={(index) => setCurrentGroup(index)} activeIndex={currentGroup} />
+        <Group
+          data={background}
+          onclick={(index) => setCurrentGroup(index)}
+          activeIndex={currentGroup}
+        />
       </Row>
       <div className={`${prefixCls}-content`}>
         {currentGroup === 0 && ColorFill()}

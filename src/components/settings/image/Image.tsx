@@ -1,5 +1,5 @@
-import { Props } from '../util/type'
-import Style from '../util/style/Style.tsx'
+import { Props } from '../_components/type/index.ts'
+import Style from '../_components/style/Style.tsx'
 import ImageAttr from '@/components/settings/image/ImageAttr.tsx'
 
 const Image = ({ type, data }: Props) => {

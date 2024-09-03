@@ -1,6 +1,6 @@
 import TextAttr from './TestAttr'
-import Style from '../util/style/Style'
-import { Props } from '../util/type'
+import Style from '../_components/style/Style'
+import { Props } from '../_components/type'
 import { TextNodeAttrType } from './type'
 const Text = ({ type, data }: Props<TextNodeAttrType>) => {
   if (type === 'attr' && data) {

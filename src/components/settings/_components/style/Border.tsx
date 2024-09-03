@@ -1,18 +1,18 @@
 import { getPrefixCls } from '@/util/global-config.ts'
 import './style/border.scss'
-import Row from '@/components/settings/util/row/Row.tsx'
-import Group from '@/components/settings/util/group/Group.tsx'
+import Row from '@/components/settings/_components/row/Row'
+import Group from '@/components/settings/_components/group/Group'
 import {
   borderGroup,
   borderPosition,
   borderPositionMapping,
   borderShadow,
   borderStyle
-} from '@/components/settings/util/style/data/border.ts'
-import OpacitySlider from '@/components/settings/util/opacity-slider/OpacitySlider.tsx'
+} from '@/components/settings/_components/style/data/border'
+import OpacitySlider from '@/components/settings/_components/opacity-slider/OpacitySlider'
 import { ColorPicker, InputNumber, Select, Space } from 'antd'
 import { useState } from 'react'
-import { StyleEnum } from '@/components/settings/util/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
 
 const Border = () => {
