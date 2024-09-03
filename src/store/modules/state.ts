@@ -1,18 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AddStateType, StateType } from '../types/state'
+import { EditStateProps, StateSingleProps, StateType } from '../types/state'
+import { v4 as uuid } from 'uuid'
 
-const initialState: StateType = {}
+const initialState: StateType = {
+  stateData: []
+}
 
 const stateSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {
-    addState(state, action: PayloadAction<AddStateType>) {
-      const { key, value } = action.payload
-      state[key] = value
+    addOrEditState(state, action: PayloadAction<StateSingleProps>) {
+      const data = action.payload
+      if (!data.code) {
+        state.stateData.push({ ...data, code: uuid() })
+      } else {
+        const index = state.stateData.findIndex(
+          (item) => item.code === action.payload.code
+        )
+        if (index === -1) return
+        state.stateData[index] = data
+      }
+    },
+    deleteState(state, action: PayloadAction<string | null>) {
+      const index = state.stateData.findIndex(
+        (item) => item.code === action.payload
+      )
+      if (index !== -1) {
+        state.stateData.splice(index, 1)
+      }
     }
   }
 })
 
-export const { addState } = stateSlice.actions
+export const { addOrEditState, deleteState } = stateSlice.actions
 export default stateSlice.reducer

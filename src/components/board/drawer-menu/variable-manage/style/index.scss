@@ -1,0 +1,49 @@
+$variable-manage-prefix-cls: 'variable-manage';
+
+.#{$variable-manage-prefix-cls} {
+  padding: 0 12px;
+  .#{$variable-manage-prefix-cls}-head {
+    padding-bottom: 10px;
+  }
+  .#{$variable-manage-prefix-cls}-body {
+    .#{$variable-manage-prefix-cls}-card {
+      border: 1px solid rgba(31, 56, 88, 0.1);
+      border-radius: 3px;
+      padding: 8px;
+      margin-bottom: 6px;
+      .#{$variable-manage-prefix-cls}-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+
+        .#{$variable-manage-prefix-cls}-card-head-left {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 12px;
+          font-weight: 700;
+          color: rgba(0, 0, 0, 0.6);
+        }
+        .#{$variable-manage-prefix-cls}-card-head-right {
+          color: #8f9bb3 !important;
+
+          .ant-space-item {
+            cursor: pointer;
+          }
+        }
+      }
+      .#{$variable-manage-prefix-cls}-card-body {
+        display: flex;
+        align-items: flex-end;
+        .#{$variable-manage-prefix-cls}-card-text {
+          font-size: 14px;
+          padding-left: 6px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
