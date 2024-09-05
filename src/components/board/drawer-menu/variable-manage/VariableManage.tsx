@@ -73,6 +73,28 @@ const VariableManage = () => {
     })
   }
 
+  const setDefaultFormValue = (type: any, key: FormKey) => {
+    let value
+    switch (type) {
+      case 'string':
+        value = ''
+        break
+      case 'number':
+        value = null
+        break
+      case 'boolean':
+        value = false
+        break
+      case 'array':
+        value = '[]'
+        break
+      case 'object':
+        value = '{}'
+        break
+    }
+    setForm({ ...form, value, [key]: type })
+  }
+
   const renderDefault = () =>
     form.type === 'string' ? (
       <Input
@@ -114,7 +136,7 @@ const VariableManage = () => {
           </div>
           <div className={`${prefix}-body`}>
             {stateData.map((item) => (
-              <div className={`${prefix}-card`} key={item.name}>
+              <div className={`${prefix}-card`} key={item.code}>
                 <div className={`${prefix}-card-head`}>
                   <div className={`${prefix}-card-head-left`}>{item.name}</div>
                   <div className={`${prefix}-card-head-right`}>
@@ -180,7 +202,7 @@ const VariableManage = () => {
               buttonStyle="solid"
               value={form.type}
               onChange={(e: RadioChangeEvent) =>
-                changeForm('type', e.target.value)
+                setDefaultFormValue(e.target.value, 'type')
               }
             >
               <Radio.Button value="string">字符串</Radio.Button>
@@ -193,7 +215,6 @@ const VariableManage = () => {
           <Form.Item<StateSingleProps>
             label="变量默认值"
             name="value"
-            rules={[{ required: true, message: '请输入变量默认值' }]}
             initialValue={form.value}
           >
             {renderDefault()}
