@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { setCurrentClick, updateParams } from '@/store/modules/drag'
 import { PaneItemEditKey } from '@/components/board/drawer-menu/com-lib-pane/Type'
+import Loop from './Loop'
 
 const Senior = () => {
   const dispatch = useDispatch()
@@ -29,19 +30,22 @@ const Senior = () => {
     callback()
   }
   return (
-    <div className={`${prefixCls}`}>
-      <EditCollapse title="是否渲染" paramsKey="hidden">
-        <Switch
-          value={isHidden}
-          onChange={(e) =>
-            changeParams('hidden', e, () => {
-              setIsHidden(e)
-              dispatch(setCurrentClick(null))
-            })
-          }
-        />
-      </EditCollapse>
-    </div>
+    <>
+      <div className={`${prefixCls}`}>
+        <EditCollapse title="是否渲染" paramsKey="hidden">
+          <Switch
+            value={isHidden}
+            onChange={(e) =>
+              changeParams('hidden', e, () => {
+                setIsHidden(e)
+                dispatch(setCurrentClick(null))
+              })
+            }
+          />
+        </EditCollapse>
+        <Loop />
+      </div>
+    </>
   )
 }
 

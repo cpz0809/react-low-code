@@ -27,7 +27,13 @@ export interface GroupPaneType {
 
 export type EditableTypeItem = 'attr' | 'style' | 'event' | 'senior'
 
-export type PaneItemEditKey = 'name' | 'style' | 'attr' | 'hidden' | 'children'
+export type PaneItemEditKey =
+  | 'name'
+  | 'style'
+  | 'attr'
+  | 'hidden'
+  | 'children'
+  | 'loop'
 
 // 单个元素类型
 export type PaneItemType<T = { [key: string]: any }> = {
@@ -41,7 +47,9 @@ export type PaneItemType<T = { [key: string]: any }> = {
           ? boolean
           : key extends 'children'
             ? any
-            : any
+            : key extends 'loop'
+              ? any
+              : any
 } & {
   // id
   uuid: string
@@ -67,4 +75,6 @@ export type PaneItemType<T = { [key: string]: any }> = {
   hidden: boolean
   // 元素类型
   categoryType: CategoryEnum
+  // 循环数据
+  loop: any
 }

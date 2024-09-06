@@ -3,5 +3,5 @@ export interface EditCollapseProps {
   isCollapse?: boolean
   isConfig?: boolean
   children: React.ReactNode
-  paramsKey: string
+  paramsKey?: string
 }

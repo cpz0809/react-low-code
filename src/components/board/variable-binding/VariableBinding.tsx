@@ -4,7 +4,7 @@ import { Modal } from 'antd'
 import { useState } from 'react'
 import { VariableBindingProps } from './type'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
-import { StateSingleProps } from '@/store/_types/variable'
+import { StateSingleProps } from '@/store/_types/context'
 
 const VariableBinding = ({
   visible,

@@ -15,7 +15,8 @@ const defaultAttr = {
   operate: null,
   attr: {},
   hidden: false,
-  categoryType: CategoryEnum.default
+  categoryType: CategoryEnum.default,
+  loop: null
 }
 
 // 布局容器类

@@ -14,7 +14,8 @@ const defaultAttr = {
   operate: null,
   attr: {},
   hidden: false,
-  categoryType: CategoryEnum.default
+  categoryType: CategoryEnum.default,
+  loop: null
 }
 
 // 基础元素组件
