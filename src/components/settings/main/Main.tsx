@@ -1,7 +1,8 @@
-import { Props } from '@/components/settings/_components/type'
-import Style from '../_components/style/Style'
+import MainAttr from './MainAttr'
 
-const Main = ({ type }: Props) => {
-  return type === 'style' && <Style />
+class Main {
+  static of() {
+    return <MainAttr />
+  }
 }
 export default Main

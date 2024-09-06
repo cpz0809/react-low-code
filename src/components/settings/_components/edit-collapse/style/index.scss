@@ -1,0 +1,23 @@
+$edit-collapse-prefix-cls: 'edit-collapse';
+
+.#{$edit-collapse-prefix-cls} {
+  .#{$edit-collapse-prefix-cls}-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    background-color: rgba(31, 56, 88, 0.06);
+
+    .#{$edit-collapse-prefix-cls}-title {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .#{$edit-collapse-prefix-cls}-right {
+      display: flex;
+    }
+  }
+  .#{$edit-collapse-prefix-cls}-body {
+    padding: 12px;
+  }
+}

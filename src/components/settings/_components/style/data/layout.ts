@@ -1,4 +1,4 @@
-import { SingleStyleType } from '@/components/settings/_components/type'
+import { SingleStyleType } from '@/components/settings/_components/_types'
 
 export const modeData: SingleStyleType[] = [
   {

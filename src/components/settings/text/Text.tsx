@@ -1,4 +1,4 @@
-import TextAttr from './TestAttr'
+import TextAttr from './TextAttr'
 import { TextNodeAttrType } from './type'
 import {
   EditableTypeItem,

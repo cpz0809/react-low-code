@@ -1,0 +1,47 @@
+$variable-binding-prefix-cls: 'variable-binding';
+
+.#{$variable-binding-prefix-cls} {
+  border: 1px solid rgba(31, 56, 88, 0.3);
+  border-radius: 4px;
+  display: flex;
+  .#{$variable-binding-prefix-cls}-tabs {
+    .#{$variable-binding-prefix-cls}-tabs-body {
+      width: 110px;
+      border-right: 1px solid rgba(31, 56, 88, 0.3);
+      .#{$variable-binding-prefix-cls}-tabs-key {
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        padding: 0 12px;
+        cursor: pointer;
+      }
+      .#{$variable-binding-prefix-cls}-tabs-active-key {
+        background-color: hsla(0, 0%, 50.2%, 0.15);
+      }
+    }
+  }
+
+  .#{$variable-binding-prefix-cls}-list-ui {
+    padding: 10px 10px 0;
+    .#{$variable-binding-prefix-cls}-list-li {
+      cursor: pointer;
+      display: block;
+      padding: 0 4px;
+      height: 20px;
+      line-height: 20px;
+
+      &:hover {
+        background-color: #f2f3f7;
+      }
+    }
+
+    .#{$variable-binding-prefix-cls}-list-li-active {
+      background-color: #4576f5;
+      color: #fff;
+      border-radius: 4px;
+      &:hover {
+        background-color: #4576f5;
+      }
+    }
+  }
+}

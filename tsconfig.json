@@ -22,7 +22,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/store/types/view.ts"],
+  "include": ["src", "src/store/_types/view.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

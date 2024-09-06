@@ -26,7 +26,10 @@ const exquisite: GroupPaneType = {
       svg: ImageSvg,
       type: PaneItemTypes.Image,
       editableType: ['attr', 'style', 'senior'],
-      ...defaultAttr
+      ...defaultAttr,
+      attr: {
+        src: 'https://img.alicdn.com/tps/TB16TQvOXXXXXbiaFXXXXXXXXXX-120-120.svg'
+      }
     },
     {
       name: '标题',

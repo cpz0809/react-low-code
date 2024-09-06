@@ -3,7 +3,7 @@ import {
   CategoryEnum,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { HistoryEnum } from '@/store/types/history'
+import { HistoryEnum } from '@/store/_types/history'
 
 export const mainCof: PaneItemType = {
   name: '页面',

@@ -20,11 +20,12 @@ import { SelectEquipEnum } from '@/components/header/types'
 import { PaneItemType, PaneItemTypes } from '../drawer-menu/com-lib-pane/Type'
 import { useHistory } from '@/hooks/use-history'
 
-const Operate = forwardRef((_props, ref) => {
+const Operate = forwardRef((_, ref) => {
   const prefix = getPrefixCls('simulator')
   const dispatch = useDispatch()
   const { boardMargins, computedAttr, getCurrentDom, treeRoot } =
     useComponentDrag()
+  const { stateData } = useSelector((state: RootState) => state.contextSlice)
   const { revoke, restore } = useHistory()
   // 初始化画布
   const { initBoardConfig, findWidthByDevice } = useBoardWidth()
@@ -61,7 +62,7 @@ const Operate = forwardRef((_props, ref) => {
     return () => {
       if (observer) observer.disconnect()
     }
-  }, [currentClick])
+  }, [currentClick, stateData])
   useEffect(() => findDropDomThrottleFn(), [currentDrag])
 
   const findMoveDom = () => {
@@ -72,10 +73,15 @@ const Operate = forwardRef((_props, ref) => {
   }
 
   const findClickDom = () => {
+    if (!currentClick) {
+      setCurrentClickAttr(null)
+      return
+    }
+
     const dom = getCurrentDom(currentClick)
     if (dom) {
       observer = new ResizeObserver((entries) => {
-        for (let entry of entries) {
+        for (const entry of entries) {
           setCurrentClickAttr({
             ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
             isSelected: true,
@@ -94,10 +100,12 @@ const Operate = forwardRef((_props, ref) => {
     const { current, target, offset } = currentDrag
     const { attr, original } = computedAttr(current, target, offset)
 
-    setCurrentDrop({
-      target: { ...attr },
-      original: setBaseDefaultAttr(original)
-    })
+    if (original) {
+      setCurrentDrop({
+        target: { ...attr },
+        original: setBaseDefaultAttr(original as DOMRect)
+      })
+    }
     resetMoveAndClick()
   }
   const resetMoveAndClick = () => {

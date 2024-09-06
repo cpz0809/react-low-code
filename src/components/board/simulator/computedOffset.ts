@@ -1,4 +1,4 @@
-import { OffsetProps } from '@/store/types/drag'
+import { OffsetProps } from '@/store/_types/drag'
 import { CurrentBaseAttr, CurrentDropAttr, CurrentDropDirection } from './type'
 
 export const computedOffset = (

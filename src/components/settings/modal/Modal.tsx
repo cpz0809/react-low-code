@@ -1,4 +1,4 @@
-import { Props } from '@/components/settings/_components/type'
+import { Props } from '@/components/settings/_components/_types'
 import Style from '../_components/style/Style'
 
 const Modal = ({ type }: Props) => {

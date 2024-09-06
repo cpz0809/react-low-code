@@ -10,7 +10,7 @@ import {
 import { InputNumber } from 'antd'
 import Group from '@/components/settings/_components/group/Group'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
+import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
 
 const Position = () => {
   const prefixCls = getPrefixCls('edit-style-position')

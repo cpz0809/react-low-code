@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { HistorySingleType, HistoryStateType } from '../types/history'
+import { HistorySingleType, HistoryStateType } from '../_types/history'
 
 const initialState: HistoryStateType = {
   // 记录列表

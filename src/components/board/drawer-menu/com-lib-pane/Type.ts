@@ -1,5 +1,5 @@
 import React from 'react'
-import { HistoryEnum } from '@/store/types/history'
+import { HistoryEnum } from '@/store/_types/history'
 
 // 组件类型枚举
 export enum PaneItemTypes {

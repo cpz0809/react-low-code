@@ -7,7 +7,7 @@ import { setPaneVisible } from '@/store/modules/view.ts'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { generateParams } from '@/util/generate-params.ts'
-import { HistoryEnum } from '@/store/types/history.ts'
+import { HistoryEnum } from '@/store/_types/history.ts'
 import { useEffect } from 'react'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import { setCurrentDrag } from '@/store/modules/drag.ts'
@@ -15,7 +15,6 @@ import { setCurrentDrag } from '@/store/modules/drag.ts'
 const PaneItem = ({ data }: { data: PaneItemType }) => {
   const prefixCls = getPrefixCls('com-lib-pane')
   const dispatch = useDispatch()
-  const { currentStep } = useSelector((state: RootState) => state.historySlice)
   const isComLibPaneLock = useSelector(
     (state: RootState) => state.viewSplice.isComLibPaneLock
   )
@@ -23,8 +22,7 @@ const PaneItem = ({ data }: { data: PaneItemType }) => {
     type: data.type,
     item: {
       ...generateParams(data),
-      operate: HistoryEnum.ADD,
-      index: currentStep
+      operate: HistoryEnum.ADD
     },
     end: () => {
       dispatch(setCurrentDrag(null))

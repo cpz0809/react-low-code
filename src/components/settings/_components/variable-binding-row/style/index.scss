@@ -1,0 +1,27 @@
+$variable-binding-row: 'variable-binding-row';
+
+.#{$variable-binding-row} {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  .label-title {
+    color: #333333;
+    font-size: 12px;
+    padding-right: 10px;
+    width: 70px;
+  }
+
+  .#{$variable-binding-row}-content {
+    flex: 1;
+  }
+
+  .#{$variable-binding-row}-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .ant-input {
+    font-size: 12px;
+  }
+}

@@ -18,12 +18,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { FieldTypeKey } from './type'
 import { isArray } from '@/util/is'
-import { addOrEditApi, deleteApi } from '@/store/modules/api'
-import { ApiSingleProps } from '@/store/types/api'
+import { addOrEditVariable, delVariable } from '@/store/modules/context'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { ApiSingleProps } from '@/store/_types/context'
 
 const defaultForm: ApiSingleProps = {
-  code: null,
+  code: '',
   name: '',
   type: 'get',
   url: '',
@@ -35,7 +35,7 @@ const ApiManage = () => {
   const prefix = getPrefixCls('api-manage')
   const dispatch = useDispatch()
   const { apiVisible } = useSelector((state: RootState) => state.viewSplice)
-  const { apiData } = useSelector((state: RootState) => state.apiSlice)
+  const { apiData } = useSelector((state: RootState) => state.contextSlice)
   const [messageApi, contextHolder] = message.useMessage()
   const paramsFormRef = useRef(null)
 
@@ -90,8 +90,13 @@ const ApiManage = () => {
   }
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
-    dispatch(addOrEditApi(form))
-    messageApi.success('添加成功')
+    dispatch(
+      addOrEditVariable({
+        type: 'api',
+        data: form
+      })
+    )
+    messageApi.success('编辑成功')
     setVisible(false)
     resetForm()
   }
@@ -126,7 +131,11 @@ const ApiManage = () => {
                     <Space>
                       <EditOutlined onClick={() => handleEditForm(item.name)} />
                       <DeleteOutlined
-                        onClick={() => dispatch(deleteApi(item.code))}
+                        onClick={() =>
+                          dispatch(
+                            delVariable({ type: 'api', code: item.code })
+                          )
+                        }
                       />
                     </Space>
                   </div>

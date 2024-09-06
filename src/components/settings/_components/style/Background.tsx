@@ -13,7 +13,7 @@ import {
   size
 } from '@/components/settings/_components/style/data/background.ts'
 import OpacitySlider from '../../_components/opacity-slider/OpacitySlider.tsx'
-import { StyleEnum } from '@/components/settings/_components/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/_types/styleEnum.ts'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
 import InputMergeSelect, {
   UnitType

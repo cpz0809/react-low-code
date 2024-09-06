@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { OptionDeviceProps, ViewStateType } from '../types/view'
+import { OptionDeviceProps, ViewStateType } from '../_types/view'
 
 const initialState: ViewStateType = {
   // 画布大小
@@ -15,9 +15,7 @@ const initialState: ViewStateType = {
   // 页面变量是否显示
   variableVisible: false,
   // 可选设备大小
-  optionsDevice: [],
-  // 变量绑定弹窗
-  variableBindingVisible: false
+  optionsDevice: []
 }
 
 const viewSplice = createSlice({
@@ -51,10 +49,6 @@ const viewSplice = createSlice({
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
       state.optionsDevice = action.payload
-    },
-    // 变量绑定弹窗
-    setVariableBindingVisible(state) {
-      state.variableBindingVisible = !state.variableBindingVisible
     }
   }
 })
@@ -66,7 +60,6 @@ export const {
   setOutlineTreeVisible,
   setApiVisible,
   setVariableVisible,
-  setOptionsDevice,
-  setVariableBindingVisible
+  setOptionsDevice
 } = viewSplice.actions
 export default viewSplice.reducer

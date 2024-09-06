@@ -1,7 +1,7 @@
 import { Slider, InputNumber } from 'antd'
 import { getPrefixCls } from '@/util/global-config.ts'
 import './index.scss'
-import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
+import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
 import { UnitType } from '@/components/settings/_components/input-merge-select/InputMergeSelect'
 

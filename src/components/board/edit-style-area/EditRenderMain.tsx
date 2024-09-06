@@ -5,6 +5,7 @@ import {
   EditableTypeItem,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { useAttrCollect } from '@/hooks/use-attr-collect'
 
 interface EditRenderMainProps {
   paneItem: PaneItemType
@@ -14,8 +15,15 @@ interface EditRenderMainProps {
 const EditRenderMain = ({ paneItem, type }: EditRenderMainProps) => {
   const prefixCls = getPrefixCls('edit-render-main')
 
+  const { mapValue } = useAttrCollect()
+
   return (
-    <div className={`${prefixCls}`}>{EditViewProvider.of(paneItem, type)}</div>
+    <div className={`${prefixCls}`}>
+      {EditViewProvider.of(
+        { ...paneItem, attr: mapValue(paneItem.attr) },
+        type
+      )}
+    </div>
   )
 }
 export default EditRenderMain

@@ -3,6 +3,7 @@ import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import { Switch, Input } from 'antd'
 import { TextNodeAttrType } from './type'
+import VariableBindingRow from '../_components/variable-binding-row/VariableBindingRow'
 
 const { TextArea } = Input
 
@@ -20,13 +21,13 @@ const TitleAttr = ({ data }: { data: PaneItemType<TextNodeAttrType> }) => {
   const { collect } = useAttrCollect()
   return (
     <div className="edit-custom-attr-content">
-      <Row title="文本内容">
+      <VariableBindingRow title="文本内容" paramsKey={TextAttrEnum.Children}>
         <TextArea
           value={children}
           onChange={(e) => collect(TextAttrEnum.Children, e.target.value)}
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
-      </Row>
+      </VariableBindingRow>
       <Row title="标记">
         <Switch
           onChange={(e) => collect(TextAttrEnum.IsMark, e)}

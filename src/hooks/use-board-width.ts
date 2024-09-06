@@ -24,6 +24,7 @@ export const useBoardWidth = () => {
 
   useEffect(() => {
     initBoardConfig()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isComLibPaneLock,
     paneVisible,

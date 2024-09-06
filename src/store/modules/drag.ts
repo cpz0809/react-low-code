@@ -10,7 +10,7 @@ import {
   UpdateParams,
   UpdatePositionProps,
   ViewStateType
-} from '../types/drag'
+} from '../_types/drag'
 //
 const initialState: ViewStateType = {
   // 存放组件列表

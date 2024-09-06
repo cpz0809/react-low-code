@@ -1,0 +1,55 @@
+$drawer-prefix-cls: 'drawer';
+
+.#{$drawer-prefix-cls}-fix {
+  position: relative;
+  margin-left: 1px;
+}
+
+.#{$drawer-prefix-cls}-float {
+  position: absolute;
+  top: 0;
+  left: calc($left-area-width + 1px);
+  z-index: 2;
+}
+
+.#{$drawer-prefix-cls}-container {
+  width: $dock-pane-width;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 4px 6px 6px 0 rgba(31, 56, 88, 0.06);
+  z-index: 10000;
+
+  .#{$drawer-prefix-cls}-content {
+    width: 100%;
+    height: 100%;
+
+    .#{$drawer-prefix-cls}-title {
+      padding: 0 15px;
+      height: 48px;
+      line-height: 48px;
+      font-weight: +600;
+      color: #0f1726;
+    }
+
+    .#{$drawer-prefix-cls}-body {
+    }
+
+    .#{$drawer-prefix-cls}-btn {
+      position: absolute;
+      top: 8px;
+      background-color: transparent;
+      border: 0;
+      font-size: 15px;
+      color: $color-text;
+      cursor: pointer;
+    }
+
+    .#{$drawer-prefix-cls}-fix {
+      right: 40px;
+    }
+
+    .#{$drawer-prefix-cls}-close {
+      right: 16px;
+    }
+  }
+}

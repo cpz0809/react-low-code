@@ -17,15 +17,17 @@ import {
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { useHistory } from '@/hooks/use-history.ts'
-import { HistoryEnum } from '@/store/types/history'
-import { CurrentDragType, OffsetProps } from '@/store/types/drag'
+import { HistoryEnum } from '@/store/_types/history'
+import { CurrentDragType, OffsetProps } from '@/store/_types/drag'
 import ViewProvider from './ViewProvider'
 import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/type'
+import { useAttrCollect } from '@/hooks/use-attr-collect'
 
 const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   const dispatch = useDispatch()
+  const { mapValue } = useAttrCollect()
   const { record } = useHistory()
   const { computedAttr, getCurrentDom } = useComponentDrag()
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
@@ -196,7 +198,9 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
     return cloneElement(
       children,
       { ...props },
-      ...item.children.map((com: any) => ViewProvider(com))
+      ...item.children.map((com: any) =>
+        ViewProvider({ ...com, attr: mapValue(com.attr) })
+      )
     )
   }
 

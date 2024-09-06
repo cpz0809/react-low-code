@@ -10,7 +10,7 @@ import Row from '@/components/settings/_components/row/Row.tsx'
 import Group from '@/components/settings/_components/group/Group.tsx'
 import OpacitySlider from '@/components/settings/_components/opacity-slider/OpacitySlider.tsx'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/_components/type/styleEnum.ts'
+import { StyleEnum } from '@/components/settings/_components/_types/styleEnum.ts'
 
 const Font = () => {
   const prefixCls = getPrefixCls('edit-style-font')

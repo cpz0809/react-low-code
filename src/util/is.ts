@@ -23,3 +23,7 @@ const opt = Object.prototype.toString
 export const isArray = (obj: any) => {
   return opt.call(obj) === '[object Array]'
 }
+
+export const isObject = (obj: any) => {
+  return opt.call(obj) === '[object Object]'
+}

@@ -7,7 +7,7 @@ import {
 import Row from '@/components/settings/_components/row/Row'
 import Group from '@/components/settings/_components/group/Group'
 import { useStyleCollect } from '@/hooks/use-style-collect.ts'
-import { StyleEnum } from '@/components/settings/_components/type/styleEnum'
+import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
 import InputMergeSelect from '@/components/settings/_components/input-merge-select/InputMergeSelect'
 
 const Layout = () => {

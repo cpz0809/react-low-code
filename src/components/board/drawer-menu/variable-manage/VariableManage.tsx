@@ -2,7 +2,6 @@ import './style/index.scss'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { RootState } from '@/store'
 import { setVariableVisible } from '@/store/modules/view'
-import { StateSingleProps } from '@/store/types/state'
 import { getPrefixCls } from '@/util/global-config'
 import {
   Button,
@@ -21,10 +20,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormKey } from './type'
 import MonacoEditor from '@monaco-editor/react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { deleteState, addOrEditState } from '@/store/modules/state'
+import { StateSingleProps } from '@/store/_types/context'
+import { addOrEditVariable, delVariable } from '@/store/modules/context'
 
 const defaultParams: StateSingleProps = {
-  code: null,
+  code: '',
   name: '',
   type: 'string',
   value: null,
@@ -36,7 +36,7 @@ const VariableManage = () => {
   const { variableVisible } = useSelector(
     (state: RootState) => state.viewSplice
   )
-  const { stateData } = useSelector((state: RootState) => state.stateSplice)
+  const { stateData } = useSelector((state: RootState) => state.contextSlice)
   const [messageApi, contextHolder] = message.useMessage()
   const paramsFormRef = useRef(null)
   const [visible, setVisible] = useState<boolean>(false)
@@ -54,8 +54,13 @@ const VariableManage = () => {
   }
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
-    dispatch(addOrEditState(form))
-    messageApi.success('添加成功')
+    dispatch(
+      addOrEditVariable({
+        type: 'state',
+        data: form
+      })
+    )
+    messageApi.success('编辑成功')
     setVisible(false)
     resetForm()
   }
@@ -143,7 +148,11 @@ const VariableManage = () => {
                     <Space>
                       <EditOutlined onClick={() => handleEditForm(item.name)} />
                       <DeleteOutlined
-                        onClick={() => dispatch(deleteState(item.name))}
+                        onClick={() =>
+                          dispatch(
+                            delVariable({ type: 'state', code: item.code })
+                          )
+                        }
                       />
                     </Space>
                   </div>

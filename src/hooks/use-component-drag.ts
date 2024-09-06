@@ -8,7 +8,7 @@ import {
   CurrentBaseAttr,
   CurrentDropDirection
 } from '@/components/board/simulator/type'
-import { OffsetProps } from '@/store/types/drag'
+import { OffsetProps } from '@/store/_types/drag'
 
 const defaultBoardAttr: CurrentBaseAttr = {
   width: 0,
