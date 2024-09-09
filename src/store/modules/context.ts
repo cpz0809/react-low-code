@@ -14,16 +14,16 @@ const initialState: ContextStateProps = {
     {
       code: '75693de1-a29c-4696-b782-82904e6cc9f9',
       illustrate: '1',
-      name: 'ddd',
-      type: 'boolean',
-      value: false
+      name: 'imageArray',
+      type: 'array',
+      value: [1, 2, 3, 4]
     },
     {
-      code: '75693de1-a29c-4696-b782-82904e6cc9f2',
-      illustrate: '',
-      name: 'test',
+      code: '75693de1-a29c-4696-b782-82334e6cc9f9',
+      illustrate: '1',
+      name: 'str',
       type: 'string',
-      value: '1231312'
+      value: '1234654654'
     }
   ],
   apiData: [],

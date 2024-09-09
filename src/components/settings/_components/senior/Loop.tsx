@@ -4,13 +4,13 @@ import EditCollapse from '../edit-collapse/EditCollapse'
 import VariableBindingRow from '../variable-binding-row/VariableBindingRow'
 import MonacoEdit from '@monaco-editor/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateParams } from '@/store/modules/drag'
+import { setCurrentClick, updateParams } from '@/store/modules/drag'
 import { RootState } from '@/store'
 const Loop = () => {
   const dispatch = useDispatch()
   const { currentClick } = useSelector((state: RootState) => state.dragSplice)
   const [visible, setVisible] = useState(false)
-  const [editorValue, setEditorValue] = useState(``)
+  const [editorValue, setEditorValue] = useState('')
   const handleOk = () => {
     if (!currentClick) return
     dispatch(
@@ -20,11 +20,13 @@ const Loop = () => {
         params: JSON.parse(editorValue)
       })
     )
+    dispatch(setCurrentClick(null))
     setVisible(false)
   }
   const handleCancel = () => {
     setVisible(false)
   }
+
   const handleEditorChange = (e: string | undefined) => {
     if (!e) return
     setEditorValue(e)
@@ -32,8 +34,22 @@ const Loop = () => {
   return (
     <>
       <EditCollapse title="循环" isCollapse={true} isConfig={false}>
-        <VariableBindingRow isDropdown={true} title="循环数据" paramsKey="loop">
-          <Button size="small" onClick={() => setVisible(true)}>
+        <VariableBindingRow
+          isDropdown={true}
+          title="循环数据"
+          paramsKey="loop"
+          isChangeAttr={false}
+        >
+          <Button
+            size="small"
+            onClick={() => {
+              setVisible(true)
+              setEditorValue(
+                currentClick?.loop ? JSON.stringify(currentClick?.loop) : ''
+              )
+            }}
+            type={currentClick?.loop ? 'primary' : 'default'}
+          >
             绑定数据
           </Button>
         </VariableBindingRow>

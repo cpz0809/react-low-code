@@ -57,12 +57,12 @@ const Operate = forwardRef((_, ref) => {
     // 初始化设置画布大小
     initBoardConfig()
   }, [])
-  let observer: ResizeObserver
+  // let observer: ResizeObserver
   // 处理画布移动选中和点击选中模拟器
   useEffect(() => findMoveDom(), [currentMove])
   useEffect(() => {
     findClickDom()
-    return () => observer && observer.disconnect()
+    // return () => observer && observer.disconnect()
   }, [currentClick, stateData])
   useEffect(() => findDropDomThrottleFn(), [currentDrag])
 
@@ -83,6 +83,7 @@ const Operate = forwardRef((_, ref) => {
       return
     }
     const dom = getCurrentDom(currentClick)
+
     if (dom) {
       if (Array.isArray(dom)) {
         setCurrentClickAttr(

@@ -10,6 +10,7 @@ const VariableBindingRow = ({
   title,
   isDropdown = false,
   paramsKey,
+  isChangeAttr = true,
   children
 }: VariableBindingRowProps) => {
   const prefixCls = getPrefixCls('variable-binding-row')
@@ -52,6 +53,7 @@ const VariableBindingRow = ({
       </div>
 
       <VariableBinding
+        isChangeAttr={isChangeAttr}
         visible={visible}
         paramsKey={paramsKey}
         onClose={() => setVisible(false)}

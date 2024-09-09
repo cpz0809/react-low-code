@@ -9,6 +9,7 @@ import { StateSingleProps } from '@/store/_types/context'
 const VariableBinding = ({
   visible,
   paramsKey,
+  isChangeAttr,
   onClose,
   onSuccess
 }: VariableBindingProps) => {
@@ -22,7 +23,7 @@ const VariableBinding = ({
       (item) => item.code === activeCode
     )
     if (!data) return
-    binding(paramsKey, 'state', (data as StateSingleProps).code)
+    binding(paramsKey, 'state', (data as StateSingleProps).code, isChangeAttr)
     onClose()
     if (onSuccess) onSuccess((data as StateSingleProps).name)
   }

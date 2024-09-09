@@ -195,11 +195,19 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
       style: { ...item.style }
     }
 
+    const mappingValueToBaseValue = (data: PaneItemType) => ({
+      attr: mapValue(data.attr),
+      loop: mapValue(data.loop)
+    })
+
     return cloneElement(
       children,
       { ...props },
       ...item.children.map((com: any) =>
-        ViewProvider({ ...com, attr: mapValue(com.attr) })
+        ViewProvider({
+          ...com,
+          ...mappingValueToBaseValue(com)
+        })
       )
     )
   }

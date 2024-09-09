@@ -1,7 +1,7 @@
 export interface VariableBindingProps {
   visible: boolean
   paramsKey: string
-  isChangeAttr?: boolean
+  isChangeAttr: boolean
   onClose: () => void
   onSuccess?: (name: string) => void
 }

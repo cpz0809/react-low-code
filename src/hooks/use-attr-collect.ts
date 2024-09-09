@@ -3,6 +3,7 @@ import { updateCurrentClickAttr, updateParams } from '@/store/modules/drag.ts'
 import { RootState } from '@/store'
 import { isObject } from '@/util/is'
 import { addOrEditVariable, addVariableMap } from '@/store/modules/context'
+import { PaneItemEditKey } from '@/components/board/drawer-menu/com-lib-pane/Type'
 
 export const useAttrCollect = () => {
   const dispatch = useDispatch()
@@ -25,7 +26,12 @@ export const useAttrCollect = () => {
   ]
 
   // 属性绑定
-  const binding = (paramsKey: string, source: string, uuid: string) => {
+  const binding = (
+    paramsKey: string,
+    source: string,
+    uuid: string,
+    isChangeAttr: boolean
+  ) => {
     const obj = {
       [paramsKey]: {
         source: source,
@@ -40,12 +46,18 @@ export const useAttrCollect = () => {
         attr: paramsKey
       })
     )
-    update(obj)
+
+    !isChangeAttr
+      ? updateOther(paramsKey, {
+          source: source,
+          uuid
+        })
+      : updateAttr(obj)
   }
 
   const collect = (key: string, value: any) => {
     if (!isMapUpdate(key)) {
-      update({ [key]: value })
+      updateAttr({ [key]: value })
       return
     }
     if (!currentClick) return
@@ -77,7 +89,19 @@ export const useAttrCollect = () => {
     return data && (data as any)['uuid'] && (data as any)['source']
   }
 
-  const update = (attr: { [key: string]: any }) => {
+  const updateOther = (key: string, attrMap: { [key: string]: any }) => {
+    if (!currentClick) return
+    dispatch(
+      updateParams({
+        uuid: currentClick.uuid,
+        key: key as PaneItemEditKey,
+        params: attrMap
+      })
+    )
+    dispatch(updateCurrentClickAttr(attrMap))
+  }
+
+  const updateAttr = (attr: { [key: string]: any }) => {
     if (!currentClick) return
     const mergeAttr = {
       ...currentClick.attr,
@@ -95,18 +119,27 @@ export const useAttrCollect = () => {
 
   const mapValue = (attr: any) => {
     // 如果不是Object | Array不需要映射
-    if (typeof attr !== 'object') return attr
-    if (isObject(attr)) {
-      const temp = { ...attr }
-      for (const key in temp) {
-        const value = temp[key]
-        if (!isObject(value)) continue
-        if (value.source === 'state') {
-          const data = stateData.find((item) => item.code === value.uuid)
-          temp[key] = data?.value
-        }
+    if (!isObject(attr)) return attr
+    // 处理如loop hidden等属性映射
+    if (attr.source && attr.uuid) {
+      return toValue(attr)
+    }
+    // 处理 attr:{...{}}
+    const temp = { ...attr } as any
+    for (const key in temp) {
+      const value = temp[key]
+      temp[key] = toValue(value)
+    }
+    return temp
+
+    function toValue(obj: { source: 'state' | 'api'; uuid: string }) {
+      if (!isObject(obj)) return obj
+      const temp = { ...obj } as any
+      if (temp.source === 'state') {
+        const data = stateData.find((item) => item.code === temp.uuid)
+        return data?.value
       }
-      return temp
+      return null
     }
   }
   return { collect, binding, mergeSelect, mapValue }
