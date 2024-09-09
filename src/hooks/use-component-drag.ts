@@ -1,5 +1,5 @@
 import { computedOffset } from '@/components/board/simulator/computedOffset'
-import { filterFromDom } from '@/util/node'
+import { filterFromDom, FilterFromDomRes } from '@/util/node'
 import { RootState } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -61,17 +61,64 @@ export const useComponentDrag = () => {
     const currentDom = getCurrentDom(current)
     const targetDom = getCurrentDom(target)
 
+    // 组件放置
     if (!currentDom && targetDom) {
+      // 如果放置时 放置的是循环元素
+      if (Array.isArray(targetDom)) {
+        return {
+          attr: computedOffset(
+            targetDom.map((item) => item.attr),
+            boardMargins,
+            offset
+          ),
+          original: target.attr
+        }
+      }
+      // 非循环元素
       return {
         attr: computedOffset(targetDom.attr, boardMargins, offset),
         original: target.attr
       }
     }
-
+    // 组件移动
     if (currentDom && targetDom) {
+      // 如果两个都是循环渲染元素
+      if (Array.isArray(targetDom) && Array.isArray(currentDom)) {
+        return {
+          attr: computedOffset(
+            targetDom.map((item) => item.attr),
+            boardMargins,
+            offset
+          ),
+          original: currentDom.map((item) => item.attr)
+        }
+      }
+      // 拖拽元素是循环渲染元素
+      if (!Array.isArray(targetDom) && Array.isArray(currentDom)) {
+        return {
+          attr: computedOffset(targetDom.attr, boardMargins, offset),
+          original: currentDom.map((item) => item.attr)
+        }
+      }
+      // 放置元素是循环渲染元素
+      if (Array.isArray(targetDom) && !Array.isArray(currentDom)) {
+        return {
+          attr: computedOffset(
+            targetDom.map((item) => item.attr),
+            boardMargins,
+            offset
+          ),
+          original: (currentDom as FilterFromDomRes).attr
+        }
+      }
+      // 都不是循环元素
       return {
-        attr: computedOffset(targetDom.attr, boardMargins, offset),
-        original: currentDom.attr
+        attr: computedOffset(
+          (targetDom as FilterFromDomRes).attr,
+          boardMargins,
+          offset
+        ),
+        original: (currentDom as FilterFromDomRes).attr
       }
     }
     return defaultAttr

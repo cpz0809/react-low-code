@@ -16,7 +16,7 @@ import {
 
 const componentMap: Record<
   string,
-  React.ComponentType<{ item: PaneItemType }>
+  React.ComponentType<{ item: PaneItemType<any> }>
 > = {
   [PaneItemTypes.Image]: Image,
   [PaneItemTypes.Title]: Title,

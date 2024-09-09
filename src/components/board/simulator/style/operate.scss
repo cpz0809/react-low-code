@@ -29,6 +29,7 @@ $simulator-prefix-cls: 'simulator';
     }
 
     .#{$simulator-prefix-cls}-current-drop {
+      position: absolute;
       opacity: 0.3;
       background-color: #000000;
     }

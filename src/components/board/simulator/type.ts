@@ -28,7 +28,7 @@ export interface CurrentDropAttr extends CurrentBaseAttr {
 
 export interface CurrentDrop {
   target: CurrentDropAttr
-  original: CurrentBaseAttr
+  original: CurrentBaseAttr | CurrentBaseAttr[]
 }
 
 export interface ActionsProps {

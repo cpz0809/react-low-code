@@ -51,7 +51,7 @@ export const getEventTargetDomUuid = (
   return null
 }
 
-interface FilterFromDomRes {
+export interface FilterFromDomRes {
   attr: DOMRect
   node: HTMLElement
 }
@@ -65,22 +65,34 @@ interface FilterFromDomRes {
 export const filterFromDom = (
   uuid: string,
   nodes: NodeListOf<ChildNode>
-): FilterFromDomRes | null => {
+): FilterFromDomRes | null | FilterFromDomRes[] => {
   if (!nodes || nodes.length === 0) return null
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i] as HTMLElement
-    // 如果是文本节点就跳过
-    if (node.nodeType !== Node.ELEMENT_NODE) continue
-    if (uuid === node.getAttribute('componentid')) {
-      return {
-        attr: node.getBoundingClientRect(),
-        node
+  const arrNodes: FilterFromDomRes[] = []
+
+  function traverse(nodeList: NodeListOf<ChildNode>) {
+    for (let i = 0; i < nodeList.length; i++) {
+      const node = nodeList[i] as HTMLElement
+      // 如果是文本节点就跳过
+      if (node.nodeType !== Node.ELEMENT_NODE) continue
+      if (uuid === node.getAttribute('componentid')) {
+        arrNodes.push({
+          attr: node.getBoundingClientRect(),
+          node
+        })
       }
-    } else {
-      const res = filterFromDom(uuid, node.childNodes)
-      if (res) return res
+      if (node.childNodes.length > 0) {
+        traverse(node.childNodes)
+      }
     }
   }
+
+  traverse(nodes)
+
+  // 处理循环渲染时需要选中多个目标
+  if (arrNodes.length > 1) return arrNodes
+
+  if (arrNodes.length === 1) return arrNodes[0]
+
   return null
 }
 

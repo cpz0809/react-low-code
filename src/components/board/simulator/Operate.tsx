@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './style/operate.scss'
 import { getPrefixCls } from '@/util/global-config'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
@@ -40,11 +41,13 @@ const Operate = forwardRef((_, ref) => {
   )
   const { currentStep } = useSelector((state: RootState) => state.historySlice)
   // 当前移动时选择的画布属性
-  const [currentMoveAttr, setCurrentMoveAttr] =
-    useState<CurrentBaseAttr | null>(null)
+  const [currentMoveAttr, setCurrentMoveAttr] = useState<
+    CurrentBaseAttr | CurrentBaseAttr[] | null
+  >(null)
   // 当前点击时选择的画布属性
-  const [currentClickAttr, setCurrentClickAttr] =
-    useState<CurrentClickAttr | null>(null)
+  const [currentClickAttr, setCurrentClickAttr] = useState<
+    CurrentClickAttr | CurrentClickAttr[] | null
+  >(null)
   // 当前拖拽对象
   const [currentDrop, setCurrentDrop] = useState<CurrentDrop | null>(null)
   // 画布初始化
@@ -59,16 +62,18 @@ const Operate = forwardRef((_, ref) => {
   useEffect(() => findMoveDom(), [currentMove])
   useEffect(() => {
     findClickDom()
-    return () => {
-      if (observer) observer.disconnect()
-    }
+    return () => observer && observer.disconnect()
   }, [currentClick, stateData])
   useEffect(() => findDropDomThrottleFn(), [currentDrag])
 
   const findMoveDom = () => {
     const dom = getCurrentDom(currentMove)
     if (dom) {
-      setCurrentMoveAttr(setBaseDefaultAttr(dom.attr))
+      if (Array.isArray(dom)) {
+        setCurrentMoveAttr(setBaseDefaultAttr(dom.map((item) => item.attr)))
+      } else {
+        setCurrentMoveAttr(setBaseDefaultAttr(dom.attr))
+      }
     }
   }
 
@@ -77,19 +82,33 @@ const Operate = forwardRef((_, ref) => {
       setCurrentClickAttr(null)
       return
     }
-
     const dom = getCurrentDom(currentClick)
     if (dom) {
-      observer = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          setCurrentClickAttr({
-            ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
+      if (Array.isArray(dom)) {
+        setCurrentClickAttr(
+          dom.map((item) => ({
+            ...setBaseDefaultAttr(item.attr),
             isSelected: true,
-            node: dom.node
-          })
-        }
-      })
-      observer.observe(dom.node)
+            node: item.node
+          })) as CurrentClickAttr[]
+        )
+      } else {
+        setCurrentClickAttr({
+          ...setBaseDefaultAttr(dom.attr),
+          isSelected: true,
+          node: dom.node
+        } as CurrentClickAttr)
+      }
+      // observer = new ResizeObserver((entries) => {
+      //   for (const entry of entries) {
+      //     setCurrentClickAttr({
+      //       ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
+      //       isSelected: true,
+      //       node: dom.node
+      //     })
+      //   }
+      // })
+      // observer.observe(dom.node)
     }
   }
   const findDropDom = () => {
@@ -116,13 +135,18 @@ const Operate = forwardRef((_, ref) => {
   }
 
   // 设置基础属性
-  const setBaseDefaultAttr = (attr: DOMRect) => {
-    return {
-      width: attr.width,
-      height: attr.height,
-      top: boardMargins.width === 0 ? 0 : attr.y - boardMargins.top,
-      left: boardMargins.width === 0 ? 0 : computedOffsetLeft(attr.x)
+  const setBaseDefaultAttr = (attr: DOMRect | DOMRect[]) => {
+    function attrComputed(rect: DOMRect) {
+      return {
+        width: rect.width,
+        height: rect.height,
+        top: boardMargins.width === 0 ? 0 : rect.y - boardMargins.top,
+        left: boardMargins.width === 0 ? 0 : computedOffsetLeft(rect.x)
+      }
     }
+    return Array.isArray(attr)
+      ? attr.map((item) => attrComputed(item))
+      : attrComputed(attr)
   }
   // 计算偏移量
   const computedOffsetLeft = (x: number) => {
@@ -190,38 +214,62 @@ const Operate = forwardRef((_, ref) => {
     treeRoot
   }))
 
+  const renderSimulator = <T,>(
+    currentMove: T | T[],
+    renderFn: (attr: T, key?: any) => JSX.Element
+  ) =>
+    Array.isArray(currentMove)
+      ? currentMove.map((item, index) => renderFn(item, index))
+      : renderFn(currentMove)
+
+  const renderMoveSingle = (attr: CurrentBaseAttr, key?: any) => (
+    <div
+      key={key}
+      className={`${prefix}-current-move`}
+      style={{
+        width: attr.width,
+        height: attr.height,
+        transform: `translate(${attr.left}px, ${attr.top}px)`
+      }}
+    />
+  )
+  const renderClickSingle = (attr: CurrentClickAttr, key?: any) => (
+    <div
+      key={key}
+      className={`${prefix}-current-click`}
+      style={{
+        width: attr.width,
+        height: attr.height,
+        transform: `translate3d(${attr.left}px, ${attr.top}px,0px)`
+      }}
+    >
+      <Actions
+        tree={itemList}
+        current={currentClick}
+        remove={handleDelete}
+        copy={handleCopy}
+      />
+    </div>
+  )
+  const renderDropSingle = (attr: CurrentBaseAttr, key?: any) => (
+    <div
+      key={key}
+      className={`${prefix}-current-drop`}
+      style={{
+        width: attr.width,
+        height: attr.height,
+        transform: `translate3d(${attr.left}px, ${attr.top}px,0px)`
+      }}
+    />
+  )
   return (
     <div className={`${prefix}-operate`}>
       <div className={`${prefix}-tool`}>
         {/*  当前滑动选择元素  */}
-        {currentMoveAttr && (
-          <div
-            className={`${prefix}-current-move`}
-            style={{
-              width: currentMoveAttr.width,
-              height: currentMoveAttr.height,
-              transform: `translate(${currentMoveAttr.left}px, ${currentMoveAttr.top}px)`
-            }}
-          ></div>
-        )}
+        {currentMoveAttr && renderSimulator(currentMoveAttr, renderMoveSingle)}
         {/*  当前点击选择元素  */}
-        {currentClickAttr && (
-          <div
-            className={`${prefix}-current-click`}
-            style={{
-              width: currentClickAttr.width,
-              height: currentClickAttr.height,
-              transform: `translate3d(${currentClickAttr.left}px, ${currentClickAttr.top}px,0px)`
-            }}
-          >
-            <Actions
-              tree={itemList}
-              current={currentClick}
-              remove={handleDelete}
-              copy={handleCopy}
-            />
-          </div>
-        )}
+        {currentClickAttr &&
+          renderSimulator(currentClickAttr, renderClickSingle)}
         {/*  当前拖拽位置指示器  */}
         {currentDrag && currentDrop?.target && (
           <div
@@ -233,16 +281,9 @@ const Operate = forwardRef((_, ref) => {
           ></div>
         )}
         {/*  拖拽原始位置  */}
-        {currentDrag && currentDrop?.original && (
-          <div
-            className={`${prefix}-current-drop`}
-            style={{
-              width: currentDrop?.original?.width,
-              height: currentDrop?.original?.height,
-              transform: `translate3d(${currentDrop?.original?.left}px, ${currentDrop?.original?.top}px,0px)`
-            }}
-          ></div>
-        )}
+        {currentDrag &&
+          currentDrop?.original &&
+          renderSimulator(currentDrop.original, renderDropSingle)}
       </div>
     </div>
   )

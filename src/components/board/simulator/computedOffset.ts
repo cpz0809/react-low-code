@@ -2,7 +2,7 @@ import { OffsetProps } from '@/store/_types/drag'
 import { CurrentBaseAttr, CurrentDropAttr, CurrentDropDirection } from './type'
 
 export const computedOffset = (
-  target: DOMRect,
+  target: DOMRect | DOMRect[],
   boardMargins: CurrentBaseAttr,
   offset: OffsetProps
 ): CurrentDropAttr => {
@@ -15,21 +15,30 @@ export const computedOffset = (
   }
   const { left } = offset
 
-  if (target.left + target.width / 2 > left) {
+  const rewriteAttr = {
+    left: Array.isArray(target) ? target[0].left : target.left,
+    top: Array.isArray(target) ? target[0].top : target.top,
+    width: Array.isArray(target)
+      ? target.reduce((prev, cur) => cur.width + prev, 0)
+      : target.width,
+    height: Array.isArray(target) ? target[0].height : target.height
+  }
+
+  if (rewriteAttr.left + rewriteAttr.width / 2 > left) {
     // 左提示
-    offsetObj.left = target.left - boardMargins.left
+    offsetObj.left = rewriteAttr.left - boardMargins.left
     offsetObj.direction = CurrentDropDirection.LEFT
-  } else if (target.left + target.width / 2 < left) {
+  } else if (rewriteAttr.left + rewriteAttr.width / 2 < left) {
     // 右提示
-    offsetObj.left = target.left - boardMargins.left + target.width
+    offsetObj.left = rewriteAttr.left - boardMargins.left + rewriteAttr.width
     offsetObj.direction = CurrentDropDirection.RIGHT
   } else {
     // 画布提示
-    offsetObj.left = target.left - boardMargins.left
+    offsetObj.left = rewriteAttr.left - boardMargins.left
     offsetObj.direction = CurrentDropDirection.RIGHT
   }
-  offsetObj.top = target.top - boardMargins.top
-  offsetObj.width = target.width
-  offsetObj.height = target.height
+  offsetObj.top = rewriteAttr.top - boardMargins.top
+  offsetObj.width = rewriteAttr.width
+  offsetObj.height = rewriteAttr.height
   return offsetObj
 }
