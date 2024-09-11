@@ -14,6 +14,8 @@ const initialState: ViewStateType = {
   apiVisible: false,
   // 页面变量是否显示
   variableVisible: false,
+  // 源码是否显示
+  programVisible: false,
   // 可选设备大小
   optionsDevice: []
 }
@@ -46,6 +48,10 @@ const viewSplice = createSlice({
     setVariableVisible(state) {
       state.variableVisible = !state.variableVisible
     },
+    // 设置源码面板是否显示
+    setProgramVisible(state) {
+      state.programVisible = !state.programVisible
+    },
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
       state.optionsDevice = action.payload
@@ -60,6 +66,7 @@ export const {
   setOutlineTreeVisible,
   setApiVisible,
   setVariableVisible,
+  setProgramVisible,
   setOptionsDevice
 } = viewSplice.actions
 export default viewSplice.reducer

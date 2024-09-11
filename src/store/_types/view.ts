@@ -12,5 +12,6 @@ export interface ViewStateType {
   outlineTreeVisible: boolean
   apiVisible: boolean
   variableVisible: boolean
+  programVisible: boolean
   optionsDevice: OptionDeviceProps[]
 }

@@ -32,6 +32,8 @@ $drawer-prefix-cls: 'drawer';
     }
 
     .#{$drawer-prefix-cls}-body {
+      width: 100%;
+      height: 100%;
     }
 
     .#{$drawer-prefix-cls}-btn {

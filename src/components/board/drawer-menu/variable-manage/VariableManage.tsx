@@ -46,18 +46,31 @@ const VariableManage = () => {
   const handleClick = () => {
     setVisible(true)
   }
-  const handleEditForm = (name: string) => {
-    const data = stateData.find((item) => item.name === name)
+  const isObject = (value: any) => typeof value === 'object'
+
+  const typeConversion = (value: any) =>
+    !isObject(value) ? value : JSON.stringify(value)
+
+  const handleEditForm = (code: string) => {
+    const data = stateData.find((item) => item.code === code)
     if (!data) return
-    setForm(data)
+    setForm({
+      ...data,
+      value: typeConversion(data.value)
+    })
     setVisible(true)
   }
+
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
+
     dispatch(
       addOrEditVariable({
         type: 'state',
-        data: form
+        data: {
+          ...form,
+          value: form.type !== 'string' ? JSON.parse(form.value) : form.value
+        }
       })
     )
     messageApi.success('编辑成功')
@@ -146,7 +159,7 @@ const VariableManage = () => {
                   <div className={`${prefix}-card-head-left`}>{item.name}</div>
                   <div className={`${prefix}-card-head-right`}>
                     <Space>
-                      <EditOutlined onClick={() => handleEditForm(item.name)} />
+                      <EditOutlined onClick={() => handleEditForm(item.code)} />
                       <DeleteOutlined
                         onClick={() =>
                           dispatch(

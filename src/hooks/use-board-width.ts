@@ -19,18 +19,20 @@ export const useBoardWidth = () => {
     paneVisible,
     outlineTreeVisible,
     apiVisible,
-    variableVisible
+    variableVisible,
+    programVisible
   } = useSelector((state: RootState) => state.viewSplice)
 
   useEffect(() => {
     initBoardConfig()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isComLibPaneLock,
     paneVisible,
     outlineTreeVisible,
     apiVisible,
-    variableVisible
+    variableVisible,
+    programVisible
   ])
   const initBoardConfig = () => {
     initBoardWidth()
@@ -53,7 +55,11 @@ export const useBoardWidth = () => {
     const doc = document.documentElement.getBoundingClientRect()
     if (
       isComLibPaneLock &&
-      (paneVisible || outlineTreeVisible || apiVisible || variableVisible)
+      (paneVisible ||
+        outlineTreeVisible ||
+        apiVisible ||
+        variableVisible ||
+        programVisible)
     )
       return doc.width - LEFTSIDEBARSIZE - RIGHTSIDEBARSIZE - BOAEDPADDING - 350
     return doc.width - LEFTSIDEBARSIZE - RIGHTSIDEBARSIZE - BOAEDPADDING

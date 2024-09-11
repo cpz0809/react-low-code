@@ -1,4 +1,4 @@
-$drag-prefix-cls: "drag";
+$drag-prefix-cls: 'drag';
 
 .#{$drag-prefix-cls}-container {
   width: $workspace-left-area-width;
@@ -14,6 +14,10 @@ $drag-prefix-cls: "drag";
       font-size: 20px;
       color: $color-text;
       height: 46px;
+      cursor: pointer;
+    }
+
+    img {
       cursor: pointer;
     }
   }

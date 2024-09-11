@@ -12,9 +12,10 @@ import {
   setApiVisible,
   setOutlineTreeVisible,
   setPaneVisible,
+  setProgramVisible,
   setVariableVisible
 } from '@/store/modules/view.ts'
-
+import JavascriptIcon from '@/assets/icon/javascript-icon.png'
 const Sidebar = () => {
   const prefix = getPrefixCls('drag')
   const dispatch = useDispatch()
@@ -45,6 +46,19 @@ const Sidebar = () => {
           <div onClick={() => dispatch(setVariableVisible())}>
             <Tooltip title="页面变量" placement="right" align={align}>
               <DatabaseOutlined />
+            </Tooltip>
+          </div>
+          <div
+            onClick={() => dispatch(setProgramVisible())}
+            style={{
+              width: 20,
+              height: 46,
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            <Tooltip title="源码面板" placement="right" align={align}>
+              <img src={JavascriptIcon} alt="源码面板" />
             </Tooltip>
           </div>
         </div>

@@ -27,3 +27,12 @@ export const isArray = (obj: any) => {
 export const isObject = (obj: any) => {
   return opt.call(obj) === '[object Object]'
 }
+
+export const findDataType = (value: any) => {
+  const isBaseType = typeof value
+  if (isBaseType === 'object') {
+    if (isObject(value)) return 'object'
+    if (Array.isArray(value)) return 'array'
+  }
+  return isBaseType
+}

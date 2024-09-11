@@ -32,12 +32,6 @@ export const useAttrCollect = () => {
     uuid: string,
     isChangeAttr: boolean
   ) => {
-    const obj = {
-      [paramsKey]: {
-        source: source,
-        uuid
-      }
-    }
     if (!currentClick) return
     dispatch(
       addVariableMap({
@@ -52,7 +46,12 @@ export const useAttrCollect = () => {
           source: source,
           uuid
         })
-      : updateAttr(obj)
+      : updateAttr({
+          [paramsKey]: {
+            source: source,
+            uuid
+          }
+        })
   }
 
   const collect = (key: string, value: any) => {

@@ -2,9 +2,19 @@ export interface ContextStateProps {
   stateData: StateSingleProps[]
   apiData: ApiSingleProps[]
   variableMap: VariableMapProps
+  method: { [key: string]: string }
 }
 
-export type StateTypeKeys = 'string' | 'number' | 'boolean' | 'array' | 'object'
+export type StateTypeKeys =
+  | 'string'
+  | 'number'
+  | 'bigint'
+  | 'boolean'
+  | 'symbol'
+  | 'undefined'
+  | 'object'
+  | 'function'
+  | 'array'
 
 export interface StateSingleProps {
   code: string
