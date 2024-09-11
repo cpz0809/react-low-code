@@ -5,7 +5,7 @@ import PaneItem from './PaneItem.tsx'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer.tsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
-import { setPaneVisible } from '@/store/modules/view.ts'
+import { setMenuVisible } from '@/store/modules/view.ts'
 import { Collapse as AntCollapse, Tabs } from 'antd'
 import { GroupPaneType } from './Type.ts'
 
@@ -49,7 +49,7 @@ const ComLibPane = () => {
     <Drawer
       show={paneVisible}
       title="组件库"
-      onclose={() => dispatch(setPaneVisible())}
+      onclose={() => dispatch(setMenuVisible('paneVisible'))}
     >
       <div className={`${prefixCls}-tabs`}>
         <Tabs defaultActiveKey="1" items={renderCollapse()} />

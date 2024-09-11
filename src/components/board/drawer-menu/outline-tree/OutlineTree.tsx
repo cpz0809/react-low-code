@@ -1,7 +1,7 @@
 import './style/index.scss'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { useDispatch, useSelector } from 'react-redux'
-import { setOutlineTreeVisible } from '@/store/modules/view.ts'
+import { setMenuVisible } from '@/store/modules/view.ts'
 import { RootState } from '@/store'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { arrayToTree } from '@/util/node.ts'
@@ -23,7 +23,7 @@ const OutlineTree = () => {
     <Drawer
       show={outlineTreeVisible}
       title="大纲树"
-      onclose={() => dispatch(setOutlineTreeVisible())}
+      onclose={() => dispatch(setMenuVisible('outlineTreeVisible'))}
     >
       <div className={`${prefix}`}>
         <div className={`${prefix}-body`} ref={treeBodyRef}>

@@ -3,7 +3,7 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import { PaneItemType } from './Type.ts'
 import { useDrag } from 'react-dnd'
 import { useDispatch } from 'react-redux'
-import { setPaneVisible } from '@/store/modules/view.ts'
+import { setMenuVisible } from '@/store/modules/view.ts'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { generateParams } from '@/util/generate-params.ts'
@@ -31,7 +31,7 @@ const PaneItem = ({ data }: { data: PaneItemType }) => {
 
   const handleDrag = () => {
     if (!isComLibPaneLock) {
-      dispatch(setPaneVisible())
+      dispatch(setMenuVisible('paneVisible'))
     }
   }
 

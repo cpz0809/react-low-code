@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import './style/index.scss'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { RootState } from '@/store'
-import { setApiVisible } from '@/store/modules/view'
+import { setMenuVisible } from '@/store/modules/view'
 import { getPrefixCls } from '@/util/global-config'
 import {
   Button,
@@ -114,7 +114,7 @@ const ApiManage = () => {
       <Drawer
         show={apiVisible}
         title="页面接口"
-        onclose={() => dispatch(setApiVisible())}
+        onclose={() => dispatch(setMenuVisible('apiVisible'))}
       >
         <div className={`${prefix}`}>
           <div className={`${prefix}-head`}>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { OptionDeviceProps, ViewStateType } from '../_types/view'
+import { OptionDeviceProps, ViewStateType, VisibleKeys } from '../_types/view'
 
 const initialState: ViewStateType = {
   // 画布大小
@@ -32,25 +32,21 @@ const viewSplice = createSlice({
     setComLibPaneLockStatus: (state) => {
       state.isComLibPaneLock = !state.isComLibPaneLock
     },
-    // 设置网格是否显示
-    setPaneVisible: (state) => {
-      state.paneVisible = !state.paneVisible
-    },
-    // 设置大纲树是否显示
-    setOutlineTreeVisible(state) {
-      state.outlineTreeVisible = !state.outlineTreeVisible
-    },
-    // 设置页面接口是否显示
-    setApiVisible(state) {
-      state.apiVisible = !state.apiVisible
-    },
-    // 设置页面变量是否显示
-    setVariableVisible(state) {
-      state.variableVisible = !state.variableVisible
-    },
-    // 设置源码面板是否显示
-    setProgramVisible(state) {
-      state.programVisible = !state.programVisible
+    setMenuVisible(state, action: PayloadAction<VisibleKeys | null>) {
+      const visibilityStates = {
+        paneVisible: state.paneVisible,
+        outlineTreeVisible: state.outlineTreeVisible,
+        apiVisible: state.apiVisible,
+        variableVisible: state.variableVisible,
+        programVisible: state.programVisible
+      }
+      if (action.payload) {
+        state[action.payload] = !state[action.payload]
+        delete visibilityStates[action.payload]
+      }
+      for (const key in visibilityStates) {
+        ;(state as any)[key] = false
+      }
     },
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
@@ -62,11 +58,7 @@ const viewSplice = createSlice({
 export const {
   setBoardWidth,
   setComLibPaneLockStatus,
-  setPaneVisible,
-  setOutlineTreeVisible,
-  setApiVisible,
-  setVariableVisible,
-  setProgramVisible,
-  setOptionsDevice
+  setOptionsDevice,
+  setMenuVisible
 } = viewSplice.actions
 export default viewSplice.reducer

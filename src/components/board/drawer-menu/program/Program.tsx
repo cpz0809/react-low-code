@@ -3,7 +3,7 @@ import './style/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Drawer from '../_components/drawer/Drawer'
 import { RootState } from '@/store'
-import { setProgramVisible } from '@/store/modules/view'
+import { setMenuVisible } from '@/store/modules/view'
 import { getPrefixCls } from '@/util/global-config'
 import MonacoEditor, { loader, OnMount } from '@monaco-editor/react'
 import * as monaco from 'monaco-editor'
@@ -99,7 +99,7 @@ const Program = () => {
     )
 
   const handleClose = () => {
-    dispatch(setProgramVisible())
+    dispatch(setMenuVisible('programVisible'))
     if (!editorRef.current) return
   }
 

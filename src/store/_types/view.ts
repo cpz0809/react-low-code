@@ -15,3 +15,10 @@ export interface ViewStateType {
   programVisible: boolean
   optionsDevice: OptionDeviceProps[]
 }
+
+export type VisibleKeys =
+  | 'paneVisible'
+  | 'outlineTreeVisible'
+  | 'apiVisible'
+  | 'variableVisible'
+  | 'programVisible'

@@ -24,12 +24,16 @@ import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/type'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
+import { setMenuVisible } from '@/store/modules/view'
 
 const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   const dispatch = useDispatch()
   const { mapValue } = useAttrCollect()
   const { record } = useHistory()
   const { computedAttr, getCurrentDom } = useComponentDrag()
+  const { isComLibPaneLock } = useSelector(
+    (state: RootState) => state.viewSplice
+  )
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
   const ref = useRef(null)
   const changePaneItemObj = useRef<CurrentDragType | null>(null)
@@ -177,6 +181,9 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
       ;(children.props as any).onClick(e)
     }
     dispatch(setCurrentClick(getEventTargetDomUuid(e, itemList)))
+    if (!isComLibPaneLock) {
+      dispatch(setMenuVisible(null))
+    }
     e.stopPropagation()
   }
 

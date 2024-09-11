@@ -1,7 +1,7 @@
 import './style/index.scss'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer'
 import { RootState } from '@/store'
-import { setVariableVisible } from '@/store/modules/view'
+import { setMenuVisible } from '@/store/modules/view'
 import { getPrefixCls } from '@/util/global-config'
 import {
   Button,
@@ -143,8 +143,8 @@ const VariableManage = () => {
     <>
       <Drawer
         show={variableVisible}
-        title="页面接口"
-        onclose={() => dispatch(setVariableVisible())}
+        title="页面变量"
+        onclose={() => dispatch(setMenuVisible('variableVisible'))}
       >
         <div className={`${prefix}`}>
           <div className={`${prefix}-head`}>
