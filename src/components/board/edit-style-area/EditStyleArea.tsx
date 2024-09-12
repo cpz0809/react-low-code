@@ -3,7 +3,7 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import EditAttrTabs from '@/components/board/edit-style-area/EditAttrTabs.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import EditRenderMain from '@/components/board/edit-style-area/EditRenderMain.tsx'
 import { EditableTypeItem } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
@@ -13,6 +13,10 @@ const EditStyleArea = () => {
   const { currentClick } = useSelector((state: RootState) => state.dragSplice)
 
   const [activeKey, setActiveKey] = useState<EditableTypeItem>('attr')
+
+  useEffect(() => {
+    setActiveKey('attr')
+  }, [currentClick])
 
   return (
     <div className={`${prefixCls}-container`}>

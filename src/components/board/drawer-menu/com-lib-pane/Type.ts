@@ -34,6 +34,7 @@ export type PaneItemEditKey =
   | 'hidden'
   | 'children'
   | 'loop'
+  | 'methods'
 
 // 单个元素类型
 export type PaneItemType<T = { [key: string]: any }> = {
@@ -49,7 +50,9 @@ export type PaneItemType<T = { [key: string]: any }> = {
             ? any
             : key extends 'loop'
               ? any
-              : any
+              : key extends 'methods'
+                ? { [key: string]: string }
+                : any
 } & {
   // id
   uuid: string
@@ -77,4 +80,8 @@ export type PaneItemType<T = { [key: string]: any }> = {
   categoryType: CategoryEnum
   // 循环数据
   loop: any
+  // 可绑定事件
+  selectableEvent: string[]
+  // 绑定的事件
+  methods: { [ket: string]: string }
 }

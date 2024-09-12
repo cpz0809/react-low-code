@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { removeNode, swapNodes, updateNode } from '@/util/node.ts'
-import { CSSProperties } from 'react'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { mainCof } from '@/components/compt/main/config.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import {
   CurrentDragType,
   InsertProps,
+  UpdateCurrentClickParams,
   UpdateParams,
   UpdatePositionProps,
   ViewStateType
@@ -77,15 +77,10 @@ export const dragSplice = createSlice({
         (item: PaneItemType) => ((item[key] as any) = params)
       )
     },
-    // 更新当前点击组件样式
-    updateCurrentClickStyle(state, action: PayloadAction<CSSProperties>) {
+    updateCurrentClick(state, action: PayloadAction<UpdateCurrentClickParams>) {
       if (state.currentClick) {
-        state.currentClick.style = action.payload
-      }
-    },
-    updateCurrentClickAttr(state, action: PayloadAction<CSSProperties>) {
-      if (state.currentClick) {
-        state.currentClick.attr = action.payload
+        const { key, params } = action.payload
+        state.currentClick[key] = params as never
       }
     },
     // 清除画布
@@ -103,8 +98,7 @@ export const {
   updatePosition,
   remove,
   updateParams,
-  updateCurrentClickStyle,
-  updateCurrentClickAttr,
+  updateCurrentClick,
   clearDiagCom
 } = dragSplice.actions
 export default dragSplice.reducer

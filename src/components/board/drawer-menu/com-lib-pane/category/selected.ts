@@ -15,7 +15,9 @@ const defaultAttr = {
   attr: {},
   hidden: false,
   categoryType: CategoryEnum.default,
-  loop: null
+  loop: null,
+  selectableEvent: ['onClick'],
+  methods: {}
 }
 
 // 基础元素组件
@@ -23,31 +25,31 @@ const exquisite: GroupPaneType = {
   name: '基础元素',
   components: [
     {
+      ...defaultAttr,
       name: '图片',
       svg: ImageSvg,
       type: PaneItemTypes.Image,
       editableType: ['attr', 'style', 'senior'],
-      ...defaultAttr,
       attr: {
         src: 'https://img.alicdn.com/tps/TB16TQvOXXXXXbiaFXXXXXXXXXX-120-120.svg'
       }
     },
     {
+      ...defaultAttr,
       name: '标题',
       svg: TitleSvg,
       type: PaneItemTypes.Title,
       editableType: ['attr', 'style', 'event', 'senior'],
-      ...defaultAttr,
       attr: {
         children: '这是标题组件'
       }
     },
     {
+      ...defaultAttr,
       name: '正文',
       svg: TextSvg,
       type: PaneItemTypes.Text,
       editableType: ['attr', 'style', 'event', 'senior'],
-      ...defaultAttr,
       attr: {
         children: '这是正文组件'
       }

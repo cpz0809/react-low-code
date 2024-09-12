@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
-import { updateCurrentClickStyle, updateParams } from '@/store/modules/drag.ts'
+import { updateCurrentClick, updateParams } from '@/store/modules/drag.ts'
 import { strToCSSProperties, strToHumpName } from '@/util/strToCSSProperties.ts'
 import { CSSProperties } from 'react'
 import {
@@ -120,7 +120,12 @@ export const useStyleCollect = () => {
         params: mergeStyle
       })
     )
-    dispatch(updateCurrentClickStyle(mergeStyle))
+    dispatch(
+      updateCurrentClick({
+        key: 'style',
+        params: mergeStyle
+      })
+    )
   }
   return {
     collect,

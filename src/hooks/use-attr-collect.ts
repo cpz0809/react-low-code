@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { updateCurrentClickAttr, updateParams } from '@/store/modules/drag.ts'
+import { updateCurrentClick, updateParams } from '@/store/modules/drag.ts'
 import { RootState } from '@/store'
 import { isObject } from '@/util/is'
 import { addOrEditVariable, addVariableMap } from '@/store/modules/context'
@@ -97,7 +97,12 @@ export const useAttrCollect = () => {
         params: attrMap
       })
     )
-    dispatch(updateCurrentClickAttr(attrMap))
+    dispatch(
+      updateCurrentClick({
+        key: 'attr',
+        params: attrMap
+      })
+    )
   }
 
   const updateAttr = (attr: { [key: string]: any }) => {
@@ -113,7 +118,12 @@ export const useAttrCollect = () => {
         params: mergeAttr
       })
     )
-    dispatch(updateCurrentClickAttr(mergeAttr))
+    dispatch(
+      updateCurrentClick({
+        key: 'attr',
+        params: mergeAttr
+      })
+    )
   }
 
   const mapValue = (attr: any) => {

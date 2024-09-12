@@ -11,6 +11,7 @@ import Text from './text/Text.tsx'
 import Button from './button/Button.tsx'
 import Style from './_components/style/Style.tsx'
 import Senior from './_components/senior/Senior.tsx'
+import Event from './_components/event/Event.tsx'
 
 const componentMap: { [key: string]: any } = {
   [PaneItemTypes.Image]: Image,
@@ -26,7 +27,10 @@ export class EditViewProvider {
     item: PaneItemType,
     type: EditableTypeItem
   ): React.ReactElement | null {
-    if (type === 'style') return <Style />
+    if (type === 'style' && item.editableType.includes('style'))
+      return <Style />
+    if (type === 'event' && item.editableType.includes('event'))
+      return <Event data={item} />
     if (type === 'senior') return <Senior />
     const Component = componentMap[item.type]
     return Component.of(item, type)

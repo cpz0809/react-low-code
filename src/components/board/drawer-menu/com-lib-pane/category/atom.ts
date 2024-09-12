@@ -16,7 +16,9 @@ const defaultAttr = {
   attr: {},
   hidden: false,
   categoryType: CategoryEnum.default,
-  loop: null
+  loop: null,
+  selectableEvent: ['onClick'],
+  methods: {}
 }
 
 // 布局容器类

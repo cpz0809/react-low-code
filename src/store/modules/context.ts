@@ -44,7 +44,13 @@ const initialState: ContextStateProps = {
       }
     }
   ],
-  methods: {},
+  methods: {
+    handleClick: `handleClick(){
+      this.setData({
+        visible:true
+      })
+    }`
+  },
   apiData: [],
   variableMap: {}
 }

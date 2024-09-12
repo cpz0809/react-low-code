@@ -1,0 +1,106 @@
+$event-prefix-cls: 'event';
+
+.#{$event-prefix-cls}-container {
+  padding: 12px;
+  .#{$event-prefix-cls}-head {
+    padding-bottom: 20px;
+    .#{$event-prefix-cls}-tips {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.6);
+      padding-bottom: 10px;
+    }
+  }
+  .#{$event-prefix-cls}-body {
+    .#{$event-prefix-cls}-table {
+      .#{$event-prefix-cls}-cell {
+        .#{$event-prefix-cls}-cell-head {
+          display: flex;
+          .#{$event-prefix-cls}-cell-tab {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            line-height: 20px;
+            font-size: 12px;
+            background-color: #2077ff;
+            color: #fff;
+            text-align: center;
+          }
+          .#{$event-prefix-cls}-cell-event-name {
+            padding-left: 4px;
+          }
+        }
+        .#{$event-prefix-cls}-cell-body {
+          padding-left: 20px;
+          .#{$event-prefix-cls}-cell-method-name {
+            margin-left: 4px;
+          }
+        }
+      }
+      .ant-table-cell {
+        padding: 8px;
+      }
+    }
+  }
+}
+
+.#{$event-prefix-cls}-event-binding {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  .#{$event-prefix-cls}-tips {
+    font-size: 12px;
+    padding-bottom: 8px;
+    font-weight: 700;
+  }
+  .#{$event-prefix-cls}-left {
+    width: 135px;
+
+    .#{$event-prefix-cls}-content {
+      border-radius: 4px;
+      border: 1px solid rgba(31, 56, 88, 0.3);
+      height: 392px;
+      .#{$event-prefix-cls}-name {
+        font-size: 14px;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 12px;
+        cursor: pointer;
+      }
+      .#{$event-prefix-cls}-name-active {
+        background-color: rgba(31, 56, 88, 0.06);
+      }
+    }
+  }
+  .#{$event-prefix-cls}-right {
+    flex: 1;
+    padding-left: 20px;
+
+    .#{$event-prefix-cls}-extend {
+      .#{$event-prefix-cls}-extend-switch {
+        height: 30px;
+        margin-top: 10px;
+        .#{$event-prefix-cls}-tips {
+          padding: 0;
+        }
+      }
+
+      .#{$event-prefix-cls}-editor {
+        position: relative;
+        width: 100%;
+        height: 321px;
+        margin-top: 10px;
+        border: 1px solid rgba(31, 56, 88, 0.3);
+
+        .#{$event-prefix-cls}-editor-mask {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+}

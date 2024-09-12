@@ -42,3 +42,8 @@ export type UpdatePositionProps = {
   target: PaneItemType
   direction: CurrentDropDirection
 }
+
+export interface UpdateCurrentClickParams {
+  key: PaneItemEditKey
+  params: any
+}
