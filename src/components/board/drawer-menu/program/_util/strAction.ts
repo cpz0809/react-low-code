@@ -1,8 +1,6 @@
-export function analysisStr(classStr: string) {
-  const stateRegex = /state\s*=\s*\{([\s\S]+?)\}(?=\s*\}\s*$)/
-  const match = classStr.match(stateRegex)
-  if (!match) return null
-  const stateContent = splitByCommaIgnoreInBrackets(match[1])
+export function analysisStr(stateStr: string) {
+  if (!stateStr.replace(/\s/g, '')) return null
+  const stateContent = splitByCommaIgnoreInBrackets(stateStr)
   const res = stateContent.map((item) => {
     const arrStr = splitByColonWithoutSplittingInBrackets(
       item.trim().replace(/\\/g, '')

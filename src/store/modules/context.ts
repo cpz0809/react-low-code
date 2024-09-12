@@ -5,7 +5,8 @@ import {
   DelVariableProps,
   StateSingleProps,
   ContextStateProps,
-  AddVariableProps
+  AddVariableProps,
+  AddMethod
 } from '../_types/context'
 import { v4 as uuid } from 'uuid'
 
@@ -43,7 +44,7 @@ const initialState: ContextStateProps = {
       }
     }
   ],
-  method: {},
+  methods: {},
   apiData: [],
   variableMap: {}
 }
@@ -52,6 +53,7 @@ const variableSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {
+    // 添加或修改
     addOrEditVariable(state, action: PayloadAction<AddOrEditVariableProps>) {
       const { type, data } = action.payload
       if (type === 'state') {
@@ -60,6 +62,7 @@ const variableSlice = createSlice({
         addOrEdit<ApiSingleProps>(data as ApiSingleProps, state.apiData)
       }
     },
+    // 删除
     delVariable(state, action: PayloadAction<DelVariableProps>) {
       const { type, code } = action.payload
       if (type === 'state') {
@@ -68,9 +71,11 @@ const variableSlice = createSlice({
         delData<ApiSingleProps>(code, state.apiData)
       }
     },
+    // 更新变量值
     fullUpdate(state, action: PayloadAction<StateSingleProps[]>) {
       state.stateData = action.payload
     },
+    // 添加变量映射值
     addVariableMap(state, action: PayloadAction<AddVariableProps>) {
       const { stateUuid, uuid, attr } = action.payload
       const data = state.variableMap[stateUuid]
@@ -79,6 +84,10 @@ const variableSlice = createSlice({
       } else {
         state.variableMap[stateUuid] = [{ uuid, attr }]
       }
+    },
+    addOrEditMethod(state, action: PayloadAction<AddMethod>) {
+      const { name, value } = action.payload
+      state.methods[name] = value
     }
   }
 })
@@ -99,6 +108,11 @@ const delData = <T extends { code: string }>(code: string, arr: T[]) => {
   }
 }
 
-export const { addOrEditVariable, delVariable, addVariableMap, fullUpdate } =
-  variableSlice.actions
+export const {
+  addOrEditVariable,
+  delVariable,
+  addVariableMap,
+  fullUpdate,
+  addOrEditMethod
+} = variableSlice.actions
 export default variableSlice.reducer

@@ -2,7 +2,7 @@ export interface ContextStateProps {
   stateData: StateSingleProps[]
   apiData: ApiSingleProps[]
   variableMap: VariableMapProps
-  method: { [key: string]: string }
+  methods: { [key: string]: string }
 }
 
 export type StateTypeKeys =
@@ -65,4 +65,9 @@ export interface AddVariableProps {
   stateUuid: string
   uuid: string
   attr: string
+}
+
+export interface AddMethod {
+  name: string
+  value: string
 }
