@@ -70,7 +70,8 @@ const layoutContainer: GroupPaneType = {
       categoryType: CategoryEnum.container,
       attr: {
         title: '弹窗',
-        open: true
+        open: true,
+        mask: true
       },
       selectableEvent: ['onOk', 'onCancel', 'onClose']
     },

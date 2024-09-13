@@ -1,7 +1,18 @@
-import { Props } from '@/components/settings/_components/_types'
-import Style from '../_components/style/Style'
+import ModalAttr from '@/components/settings/modal/ModalAttr.tsx'
+import {
+  EditableTypeItem,
+  PaneItemType
+} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { ModalAttrType } from './type.ts'
 
-const Modal = ({ type }: Props) => {
-  return <>{type === 'style' && <Style />}</>
+class Modal {
+  static of(data: PaneItemType<ModalAttrType>, type: EditableTypeItem) {
+    switch (type) {
+      case 'attr':
+        return <ModalAttr data={data} />
+      case 'event':
+    }
+  }
 }
+
 export default Modal

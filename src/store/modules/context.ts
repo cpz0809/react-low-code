@@ -44,13 +44,7 @@ const initialState: ContextStateProps = {
       }
     }
   ],
-  methods: {
-    handleClick: `handleClick(){
-this.setState({
-      str:"111"
-    })
-    }`
-  },
+  methods: {},
   apiData: [],
   variableMap: {}
 }
