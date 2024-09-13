@@ -1,7 +1,4 @@
 import './style/edit-attr-tabs.scss'
-import { useSelector } from 'react-redux'
-import React, { useEffect } from 'react'
-import { RootState } from '@/store'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { EditableTypeItem } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 
@@ -24,11 +21,6 @@ const EditAttrTabs = ({
   setActiveKey
 }: EditAttrTabsProps) => {
   const prefixCls = getPrefixCls('edit-attr-tabs')
-  const { currentClick } = useSelector((state: RootState) => state.dragSplice)
-
-  useEffect(() => {
-    setActiveKey('attr')
-  }, [currentClick?.uuid])
 
   return (
     <div className={`${prefixCls}-container`}>

@@ -16,7 +16,7 @@ const defaultAttr = {
   hidden: false,
   categoryType: CategoryEnum.default,
   loop: null,
-  selectableEvent: ['onClick'],
+  selectableEvent: [],
   methods: {}
 }
 
@@ -42,7 +42,8 @@ const exquisite: GroupPaneType = {
       editableType: ['attr', 'style', 'event', 'senior'],
       attr: {
         children: '这是标题组件'
-      }
+      },
+      selectableEvent: ['onClick']
     },
     {
       ...defaultAttr,
@@ -64,13 +65,14 @@ const layoutContainer: GroupPaneType = {
       name: '高级对话框',
       svg: ModalSvg,
       type: PaneItemTypes.Modal,
-      editableType: ['attr', 'style', 'senior', 'event'],
+      editableType: ['attr', 'style', 'event', 'senior'],
       ...defaultAttr,
       categoryType: CategoryEnum.container,
       attr: {
         title: '弹窗',
         open: true
-      }
+      },
+      selectableEvent: ['onOk', 'onCancel', 'onClose']
     },
     {
       name: '高级抽屉',

@@ -7,10 +7,12 @@ import { RootState } from '@/store'
 import { clearDiagCom, setCurrentClick } from '@/store/modules/drag.ts'
 import { useHistory } from '@/hooks/use-history.ts'
 import Size from '@/components/header/Size.tsx'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const prefix = getPrefixCls('header')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   // 历史记录
   const { historyList, currentStep } = useSelector(
     (state: RootState) => state.historySlice
@@ -69,7 +71,11 @@ const Header = () => {
           </Button>
         </div>
         <div className={`${prefix}-action-item`}>
-          <Button type="primary" className={`${prefix}-button`}>
+          <Button
+            type="primary"
+            className={`${prefix}-button`}
+            onClick={() => navigate('/preview')}
+          >
             预览
           </Button>
         </div>

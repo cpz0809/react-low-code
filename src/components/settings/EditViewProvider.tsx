@@ -1,26 +1,12 @@
-import Image from './image/Image.tsx'
-import Main from './main/Main.tsx'
 import {
   EditableTypeItem,
-  PaneItemType,
-  PaneItemTypes
+  PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import Modal from './modal/Modal.tsx'
-import Title from './title/Title.tsx'
-import Text from './text/Text.tsx'
-import Button from './button/Button.tsx'
 import Style from './_components/style/Style.tsx'
 import Senior from './_components/senior/Senior.tsx'
 import Event from './_components/event/Event.tsx'
-
-const componentMap: { [key: string]: any } = {
-  [PaneItemTypes.Image]: Image,
-  [PaneItemTypes.Title]: Title,
-  [PaneItemTypes.Main]: Main,
-  [PaneItemTypes.Modal]: Modal,
-  [PaneItemTypes.Text]: Text,
-  [PaneItemTypes.Button]: Button
-}
+import componentMap from './index.ts'
+import React from 'react'
 
 export class EditViewProvider {
   static of(
@@ -32,7 +18,7 @@ export class EditViewProvider {
     if (type === 'event' && item.editableType.includes('event'))
       return <Event data={item} />
     if (type === 'senior') return <Senior />
-    const Component = componentMap[item.type]
+    const Component = (componentMap as { [key: string]: any })[item.type]
     return Component.of(item, type)
   }
 }

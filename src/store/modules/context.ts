@@ -46,9 +46,9 @@ const initialState: ContextStateProps = {
   ],
   methods: {
     handleClick: `handleClick(){
-      this.setData({
-        visible:true
-      })
+this.setState({
+      str:"111"
+    })
     }`
   },
   apiData: [],

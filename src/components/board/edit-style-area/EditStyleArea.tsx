@@ -16,7 +16,7 @@ const EditStyleArea = () => {
 
   useEffect(() => {
     setActiveKey('attr')
-  }, [currentClick])
+  }, [currentClick?.uuid])
 
   return (
     <div className={`${prefixCls}-container`}>

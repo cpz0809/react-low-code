@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-extra-semi */
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd'
 import React, { cloneElement, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,6 +37,7 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
     (state: RootState) => state.viewSplice
   )
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
+
   const ref = useRef(null)
   const changePaneItemObj = useRef<CurrentDragType | null>(null)
 
@@ -177,6 +180,11 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   }
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    // if (currentClick?.uuid === item.uuid) {
+    //   const funcName = item.methods['onClick']
+    //   const funcStr = `function ${methods[funcName]} ${funcName}()`
+    //   eval(funcStr)
+    // }
     if ('onClick' in children.props) {
       ;(children.props as any).onClick(e)
     }

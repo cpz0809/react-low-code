@@ -156,6 +156,7 @@ const Event = ({ data }: EventProps) => {
           </div>
           <div className={`${prefix}-body`}>
             <Table
+              rowKey="eventName"
               locale={{
                 emptyText: '没有数据'
               }}
