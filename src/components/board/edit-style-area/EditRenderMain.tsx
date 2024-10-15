@@ -16,7 +16,6 @@ const EditRenderMain = ({ paneItem, type }: EditRenderMainProps) => {
   const prefixCls = getPrefixCls('edit-render-main')
 
   const { mapValue } = useAttrCollect()
-
   return (
     <div className={`${prefixCls}`}>
       {EditViewProvider.of(

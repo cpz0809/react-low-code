@@ -5,6 +5,7 @@ import Text from './text/Text.tsx'
 import Button from './button/Button.tsx'
 import Image from './image/Image.tsx'
 import Main from './main/Main.tsx'
+import Box from './box/Box.tsx'
 
 export default {
   [PaneItemTypes.Image]: Image,
@@ -12,5 +13,6 @@ export default {
   [PaneItemTypes.Main]: Main,
   [PaneItemTypes.Modal]: Modal,
   [PaneItemTypes.Text]: Text,
-  [PaneItemTypes.Button]: Button
+  [PaneItemTypes.Button]: Button,
+  [PaneItemTypes.Box]: Box
 }

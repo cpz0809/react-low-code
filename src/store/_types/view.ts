@@ -13,6 +13,8 @@ export interface ViewStateType {
   apiVisible: boolean
   variableVisible: boolean
   programVisible: boolean
+  contextMenuVisible: boolean
+  contentMenuPosition: { x: number; y: number }
   optionsDevice: OptionDeviceProps[]
 }
 

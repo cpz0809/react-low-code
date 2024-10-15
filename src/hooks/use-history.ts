@@ -18,7 +18,7 @@ import {
   HistoryOperateTypeEnum,
   HistorySingleType
 } from '@/store/_types/history'
-import { CurrentDropDirection } from '@/components/board/simulator/type'
+import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 export const useHistory = () => {
   const dispatch = useDispatch()

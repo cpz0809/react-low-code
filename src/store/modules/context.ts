@@ -11,39 +11,7 @@ import {
 import { v4 as uuid } from 'uuid'
 
 const initialState: ContextStateProps = {
-  stateData: [
-    {
-      code: '75693de1-a29c-4696-b782-82904e6cc9f9',
-      illustrate: '1',
-      name: 'imageArray',
-      type: 'array',
-      value: [1, 2, 3, 4]
-    },
-    {
-      code: '75693de1-a29c-4696-b782-82334e6cc9f9',
-      illustrate: '1',
-      name: 'str',
-      type: 'string',
-      value: '1234654654'
-    },
-    {
-      code: '22693de1-a29c-4696-b782-82334e6cc9f9',
-      illustrate: '1',
-      name: 'visible',
-      type: 'boolean',
-      value: false
-    },
-    {
-      code: '22693de3-a29c-4696-b782-82334e6cc9f9',
-      illustrate: '1',
-      name: 'obj',
-      type: 'object',
-      value: {
-        a: {},
-        b: {}
-      }
-    }
-  ],
+  stateData: [],
   methods: {},
   apiData: [],
   variableMap: {}

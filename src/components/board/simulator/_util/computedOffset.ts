@@ -1,5 +1,5 @@
-import { OffsetProps } from '@/store/_types/drag'
-import { CurrentBaseAttr, CurrentDropAttr, CurrentDropDirection } from './type'
+import { OffsetProps } from '@/store/_types/drag.ts'
+import { CurrentBaseAttr, CurrentDropAttr, CurrentDropDirection } from '../_type/type.ts'
 
 export const computedOffset = (
   target: DOMRect | DOMRect[],

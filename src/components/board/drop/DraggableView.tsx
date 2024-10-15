@@ -24,9 +24,9 @@ import { CurrentDragType, OffsetProps } from '@/store/_types/drag'
 import ViewProvider from './ViewProvider'
 import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
-import { CurrentDropDirection } from '../simulator/type'
+import { CurrentDropDirection } from '../simulator/_type/type.ts'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
-import { setMenuVisible } from '@/store/modules/view'
+import { setContextMenuPosition, setContextMenuVisible, setMenuVisible } from '@/store/modules/view'
 
 const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   const dispatch = useDispatch()
@@ -92,7 +92,7 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   // 放置组件
   const placeComponent = (
     data: PaneItemType,
-    monitor: DropTargetMonitor<PaneItemType, unknown>
+    monitor: DropTargetMonitor<PaneItemType>
   ) => {
     const didDrop = monitor.didDrop()
     if (didDrop) return
@@ -141,9 +141,7 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
     }
   }
   // 交换组件位置
-  const changePaneItemPosition = (
-    monitor: DropTargetMonitor<PaneItemType, unknown>
-  ) => {
+  const changePaneItemPosition = (monitor: DropTargetMonitor<PaneItemType>) => {
     if (!changePaneItemObj.current) return
     const { current, target } = changePaneItemObj.current
     if (current.uuid === target.uuid) return
@@ -157,9 +155,7 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
     )
     dispatch(setCurrentDrag(null))
   }
-  const getOffset = (
-    monitor: DropTargetMonitor<PaneItemType, unknown>
-  ): OffsetProps => {
+  const getOffset = (monitor: DropTargetMonitor<PaneItemType>): OffsetProps => {
     const obj = { x: 0, y: 0 }
     const { x: left, y: top } = monitor.getClientOffset() || obj
     return { left, top }
@@ -180,19 +176,25 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   }
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    // if (currentClick?.uuid === item.uuid) {
-    //   const funcName = item.methods['onClick']
-    //   const funcStr = `function ${methods[funcName]} ${funcName}()`
-    //   eval(funcStr)
-    // }
     if ('onClick' in children.props) {
       ;(children.props as any).onClick(e)
     }
     dispatch(setCurrentClick(getEventTargetDomUuid(e, itemList)))
+    dispatch(setContextMenuVisible(false))
     if (!isComLibPaneLock) {
       dispatch(setMenuVisible(null))
     }
     e.stopPropagation()
+  }
+
+  const handleContentMenu = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const targetDom = getEventTargetDomUuid(e, itemList)
+    if (targetDom?.type === PaneItemTypes.Main) return
+    dispatch(setContextMenuPosition({ x: e.clientX, y: e.clientY }))
+    dispatch(setCurrentClick(targetDom))
+    dispatch(setContextMenuVisible(true))
   }
 
   drag(drop(ref))
@@ -207,6 +209,7 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
       onMouseMove: handleMouseMove,
       onMouseOut: handleMouseOut,
       onClick: handleClick,
+      onContextMenu: handleContentMenu,
       style: { ...item.style }
     }
 

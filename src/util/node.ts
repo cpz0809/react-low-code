@@ -4,7 +4,7 @@ import {
   PaneItemType,
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { CurrentDropDirection } from '@/components/board/simulator/type'
+import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 /**
  * 根据当前e.target 找到对应节点上的uuid

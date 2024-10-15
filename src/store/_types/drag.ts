@@ -2,13 +2,14 @@ import {
   PaneItemEditKey,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { CurrentDropDirection } from '@/components/board/simulator/type'
+import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 export interface ViewStateType {
   itemList: PaneItemType[]
   currentMove: null | PaneItemType
   currentClick: null | PaneItemType
   currentDrag: null | CurrentDragType
+  pasteboard: null | PaneItemType
 }
 
 export interface UpdateParams {

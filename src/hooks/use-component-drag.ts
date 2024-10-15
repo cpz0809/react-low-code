@@ -1,4 +1,4 @@
-import { computedOffset } from '@/components/board/simulator/computedOffset'
+import { computedOffset } from '@/components/board/simulator/_util/computedOffset.ts'
 import { filterFromDom, FilterFromDomRes } from '@/util/node'
 import { RootState } from '@/store'
 import { useEffect, useRef, useState } from 'react'
@@ -7,7 +7,7 @@ import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import {
   CurrentBaseAttr,
   CurrentDropDirection
-} from '@/components/board/simulator/type'
+} from '@/components/board/simulator/_type/type.ts'
 import { OffsetProps } from '@/store/_types/drag'
 
 const defaultBoardAttr: CurrentBaseAttr = {

@@ -19,5 +19,8 @@ export const mainCof: PaneItemType = {
   editableType: ['attr', 'style'],
   attr: {},
   hidden: false,
-  categoryType: CategoryEnum.container
+  categoryType: CategoryEnum.container,
+  loop: null,
+  selectableEvent: [],
+  methods: {}
 }

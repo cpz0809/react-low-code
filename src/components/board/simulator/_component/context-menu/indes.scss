@@ -1,0 +1,29 @@
+$simulator-prefix-cls: 'simulator';
+
+.#{$simulator-prefix-cls}-menu {
+  width: 110px;
+  font-size: 12px;
+  padding: 4px 0;
+
+  .ant-menu {
+    min-width: 110px !important;
+
+    .ant-menu-item {
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+  }
+
+  .ant-menu-item, .ant-menu-submenu {
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .ant-menu-submenu-title {
+    height: 28px !important;
+    line-height: 28px !important;
+  }
+}
+
+
+

@@ -40,5 +40,11 @@ $simulator-prefix-cls: 'simulator';
       top: 0;
       left: 0;
     }
+
+    .#{$simulator-prefix-cls}-current-contextmenu {
+      position: absolute;
+      z-index: 1;
+      pointer-events: all;
+    }
   }
 }

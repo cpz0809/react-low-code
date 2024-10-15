@@ -16,6 +16,10 @@ const initialState: ViewStateType = {
   variableVisible: false,
   // 源码是否显示
   programVisible: false,
+  // 右键菜单是否显示
+  contextMenuVisible: false,
+  // 右键菜单显示位置
+  contentMenuPosition: { x: 0, y: 0 },
   // 可选设备大小
   optionsDevice: []
 }
@@ -51,6 +55,17 @@ const viewSplice = createSlice({
     // 设置可选设备列表
     setOptionsDevice(state, action: PayloadAction<OptionDeviceProps[]>) {
       state.optionsDevice = action.payload
+    },
+    // 设置右键菜单是否打开
+    setContextMenuVisible(state, action: PayloadAction<boolean>) {
+      state.contextMenuVisible = action.payload
+    },
+    // 设置右键菜单显示位置
+    setContextMenuPosition(
+      state,
+      action: PayloadAction<{ x: number; y: number }>
+    ) {
+      state.contentMenuPosition = { ...action.payload }
     }
   }
 })
@@ -59,6 +74,8 @@ export const {
   setBoardWidth,
   setComLibPaneLockStatus,
   setOptionsDevice,
-  setMenuVisible
+  setMenuVisible,
+  setContextMenuVisible,
+  setContextMenuPosition
 } = viewSplice.actions
 export default viewSplice.reducer

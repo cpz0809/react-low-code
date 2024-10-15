@@ -20,7 +20,9 @@ const initialState: ViewStateType = {
   // 当前点击选择选中
   currentClick: null,
   // 当前拖动
-  currentDrag: null
+  currentDrag: null,
+  // 粘贴板
+  pasteboard: null
 }
 
 export const dragSplice = createSlice({
@@ -50,10 +52,13 @@ export const dragSplice = createSlice({
         state.currentDrag = null
       }
     },
+    setPasteboard(state, action: PayloadAction<null | PaneItemType>) {
+      state.pasteboard = action.payload
+    },
     // 插入组件
     insert(state, action: PayloadAction<InsertProps>) {
       const { index, component } = action.payload
-      if (typeof index === 'number' && index !== undefined) {
+      if (typeof index === 'number') {
         state.itemList.splice(index, 0, component)
       } else {
         state.itemList.push(component)
@@ -94,6 +99,7 @@ export const {
   setCurrentMove,
   setCurrentClick,
   setCurrentDrag,
+  setPasteboard,
   insert,
   updatePosition,
   remove,

@@ -13,10 +13,11 @@ import {
   PaneItemType,
   PaneItemTypes
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { ComponentType, ReactElement } from 'react'
 
 const componentMap: Record<
   string,
-  React.ComponentType<{ item: PaneItemType<any> }>
+  ComponentType<{ item: PaneItemType<any> }>
 > = {
   [PaneItemTypes.Image]: Image,
   [PaneItemTypes.Title]: Title,
@@ -30,7 +31,7 @@ const componentMap: Record<
 }
 
 export class BaseDraggableViewProvider {
-  static of(item: PaneItemType): React.ReactElement | null {
+  static of(item: PaneItemType): ReactElement | null {
     const Component = componentMap[item.type]
     if (!Component) {
       return <div>Unknown PaneItemType: {item.type}</div>
