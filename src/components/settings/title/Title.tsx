@@ -1,5 +1,5 @@
 import TitleAttr from './TitleAttr.tsx'
-import { TextNodeAttrType } from '../text/type'
+import { TextNodeAttrType } from '../text/type.ts'
 import {
   EditableTypeItem,
   PaneItemType

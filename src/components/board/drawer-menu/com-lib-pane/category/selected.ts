@@ -95,13 +95,14 @@ const layoutContainer: GroupPaneType = {
       ...defaultAttr,
       categoryType: CategoryEnum.container,
       attr: {
-        children: [
-          { label: '标签项1', children: null },
-          { label: '标签项2', children: null }
+        labels: [
+          { name: '标签项1', isClose: false, disable: false },
+          { name: '标签项2', isClose: false, disable: false }
         ],
         activeKey: '0',
         type: 'line',
-        size: 'middle'
+        size: 'middle',
+        items: []
       }
     }
   ]

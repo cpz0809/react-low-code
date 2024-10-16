@@ -45,7 +45,8 @@ export const buttonConfig: PaneItemType = {
   categoryType: CategoryEnum.default,
   attr: {
     type: 'primary',
-    children: '按钮'
+    children: '按钮',
+    size: 'default'
   }
 }
 

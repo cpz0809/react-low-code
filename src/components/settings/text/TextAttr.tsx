@@ -2,19 +2,12 @@ import Row from '../_components/row/Row'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import { Switch, Input } from 'antd'
-import { TextNodeAttrType } from './type'
+import { TextAttrEnum, TextNodeAttrType } from './type.ts'
 import VariableBindingRow from '../_components/variable-binding-row/VariableBindingRow'
 
 const { TextArea } = Input
 
-enum TextAttrEnum {
-  Children = 'children',
-  IsMark = 'isMark',
-  IsCode = 'isCode',
-  IsDel = 'isDel',
-  IsU = 'isU',
-  IsStrong = 'isStrong'
-}
+
 
 const TitleAttr = ({ data }: { data: PaneItemType<TextNodeAttrType> }) => {
   const { children, isMark, isCode, isDel, isU, isStrong } = data.attr

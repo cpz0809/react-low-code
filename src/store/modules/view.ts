@@ -49,7 +49,7 @@ const viewSplice = createSlice({
         delete visibilityStates[action.payload]
       }
       for (const key in visibilityStates) {
-        ;(state as any)[key] = false
+        (state as any)[key] = false
       }
     },
     // 设置可选设备列表

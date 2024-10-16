@@ -1,8 +1,14 @@
 import { PaneItemType } from '../drawer-menu/com-lib-pane/Type'
+import { FunctionComponentElement } from 'react'
 
 export interface DraggableViewProps {
   item: PaneItemType
-  children: React.FunctionComponentElement<{ componentid: string }>
-  // 自定义放置
-  place?: (target: PaneItemType) => any
+  children: FunctionComponentElement<{ componentid: string }>
+  // 自定义放置事件
+  onPlace?: (target: PaneItemType) => any
+  // 自定义渲染事件
+  onRender?: (
+    children: FunctionComponentElement<{ componentid: string }>,
+    props: any
+  ) => FunctionComponentElement<{ componentid: string }>
 }

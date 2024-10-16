@@ -38,6 +38,7 @@ export const useComponentDrag = () => {
     setBoardMargins((treeRoot.current as HTMLElement).getBoundingClientRect())
   }, [boardWidth, treeRoot])
 
+  // 查找当前dom元素
   const getCurrentDom = (current: PaneItemType | null) => {
     if (current) {
       if (treeRoot.current?.childNodes) {

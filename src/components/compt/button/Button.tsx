@@ -1,6 +1,6 @@
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import DraggableView from '@/components/board/drop/DraggableView'
-import { ButtonAttrType } from '@/components/settings/button/type'
+import { ButtonAttrType } from '@/components/settings/button/type.ts'
 import { Button as AntButton } from 'antd'
 
 const Button = ({ item }: { item: PaneItemType<ButtonAttrType> }) => {

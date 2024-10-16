@@ -6,6 +6,7 @@ import VariableBindingIcon from '@/assets/icon/variable-binding.png'
 import { getPrefixCls } from '@/util/global-config'
 import BindingDropdown from '../binding-dropdown/BindingDropdown'
 import { Button, MenuProps } from 'antd'
+
 const VariableBindingRow = ({
   title,
   isDropdown = false,
@@ -28,7 +29,7 @@ const VariableBindingRow = ({
   return (
     <>
       <div className={`${prefixCls}`}>
-        <p className="label-title">{title}</p>
+        {title && <p className="label-title">{title}</p>}
         <div className={`${prefixCls}-content`}>
           {selectedKeys[0] === 'static' || !isDropdown ? (
             children

@@ -34,7 +34,6 @@ export const getEventTargetDomUuid = (
     return null
   }
   const targetNodeUuid = (e.target as HTMLElement).getAttribute('componentid')
-
   if (targetNodeUuid) {
     const findComponent = filterFromComponents(targetNodeUuid, arr)
     if (findComponent) return findComponent
@@ -137,6 +136,7 @@ export const updateNode = (
  * @param tree 树
  * @param oldNode 旧节点
  * @param newNode 新节点
+ * @param direction
  * @returns
  */
 export const swapNodes = (

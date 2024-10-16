@@ -7,8 +7,7 @@ import {
   CategoryEnum,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { useState } from 'react'
-import { insert, setPasteboard, updateParams } from '@/store/modules/drag.ts'
+import { insert, setPasteboard } from '@/store/modules/drag.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import { ContextMenuProps } from '@/components/board/simulator/_component/context-menu/type.ts'
 import { setContextMenuVisible } from '@/store/modules/view.ts'

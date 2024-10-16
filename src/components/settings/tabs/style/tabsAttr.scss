@@ -1,0 +1,24 @@
+$tabs-attr: 'tabs-attr';
+
+.#{$tabs-attr}-label-row {
+  padding: 12px;
+
+  .#{$tabs-attr}-label-items {
+
+    .#{$tabs-attr}-label-item {
+      display: flex;
+      margin-bottom: 10px;
+
+      .tabs-attr-label-icon {
+        cursor: pointer;
+      }
+
+      .tabs-attr-label-input {
+        width: 200px;
+        height: 30px;
+        margin: 0 4px;
+        font-size: 12px;
+      }
+    }
+  }
+}

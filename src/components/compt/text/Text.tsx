@@ -1,7 +1,7 @@
 import DraggableView from '@/components/board/drop/DraggableView'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import { useEffect } from 'react'
-import { TextNodeAttrType } from '@/components/settings/text/type'
+import { TextNodeAttrType } from '@/components/settings/text/type.ts'
 
 const Text = ({ item }: { item: PaneItemType<TextNodeAttrType> }) => {
   useEffect(() => {

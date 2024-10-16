@@ -3,7 +3,7 @@ import Row from '../_components/row/Row'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
 import { Switch } from 'antd'
-import { TextNodeAttrType } from '../text/type'
+import { TextNodeAttrType } from '../text/type.ts'
 
 enum TitleAttrEnum {
   Children = 'children',

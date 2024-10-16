@@ -106,7 +106,6 @@ const Operate = forwardRef((_, ref) => {
       return
     }
     const dom = getCurrentDom(currentClick)
-
     if (dom) {
       if (Array.isArray(dom)) {
         setCurrentClickAttr(

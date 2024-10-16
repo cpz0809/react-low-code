@@ -3,7 +3,7 @@ import {
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
 import BoxAttr from '@/components/settings/box/BoxAttr.tsx'
-import { ButtonAttrType } from '@/components/settings/button/type'
+import { ButtonAttrType } from '@/components/settings/button/type.ts'
 
 class Box {
   static of(data: PaneItemType<ButtonAttrType>, type: EditableTypeItem) {

@@ -1,5 +1,5 @@
 import TextAttr from './TextAttr'
-import { TextNodeAttrType } from './type'
+import { TextNodeAttrType } from './type.ts'
 import {
   EditableTypeItem,
   PaneItemType

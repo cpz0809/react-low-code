@@ -38,7 +38,7 @@ export const useStyleCollect = () => {
       return
     }
     // 如果value为空需或者属性已经存在删除对应的属性
-    if (!value || isActive(value)) {
+    if (!value || isStyleActive(value)) {
       const cloneStyle = { ...currentClick.style }
       if (key) {
         delete (cloneStyle as any)[strToHumpName(key)]
@@ -93,13 +93,18 @@ export const useStyleCollect = () => {
     if (!value) return defaultUnit
     return value.substring(value.search(regex))
   }
-  // 是否选中
-  const isActive = (value: string): boolean => {
+  // 是否样式选中
+  const isStyleActive = (value: string): boolean => {
     if (!currentClick || !value) return false
     const split = value.split(':')
     const key = (currentClick.style as any)[strToHumpName(split[0])]
     if (!key) return false
     return (currentClick.style as any)[strToHumpName(split[0])] === split[1]
+  }
+  // 是否属性选中
+  const isAttrActive = (key: string | null, value: string) => {
+    if (!currentClick || !key || !value) return false
+    return currentClick.attr[key] === value
   }
   // 更新
   const update = (style: CSSProperties, isDelete: boolean = false) => {
@@ -132,6 +137,7 @@ export const useStyleCollect = () => {
     matchingStyle,
     matchingUnit,
     updateUnit,
-    isActive
+    isStyleActive,
+    isAttrActive
   }
 }

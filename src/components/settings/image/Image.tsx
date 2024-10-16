@@ -3,7 +3,7 @@ import {
   EditableTypeItem,
   PaneItemType
 } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { ImageAttrType } from './type'
+import { ImageAttrType } from './type.ts'
 
 class Image {
   static of(data: PaneItemType<ImageAttrType>, type: EditableTypeItem) {

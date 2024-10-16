@@ -26,9 +26,18 @@ import { useComponentDrag } from '@/hooks/use-component-drag'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/_type/type.ts'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
-import { setContextMenuPosition, setContextMenuVisible, setMenuVisible } from '@/store/modules/view'
+import {
+  setContextMenuPosition,
+  setContextMenuVisible,
+  setMenuVisible
+} from '@/store/modules/view'
 
-const DraggableView = ({ item, children, place }: DraggableViewProps) => {
+const DraggableView = ({
+  item,
+  children,
+  onPlace,
+  onRender
+}: DraggableViewProps) => {
   const dispatch = useDispatch()
   const { mapValue } = useAttrCollect()
   const { record } = useHistory()
@@ -96,12 +105,13 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
   ) => {
     const didDrop = monitor.didDrop()
     if (didDrop) return
+    // 组件自定义放置
+    if (onPlace) {
+      onPlace(data)
+      return
+    }
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
-      if (place) {
-        dispatch(insert({ component: place(data) }))
-        return
-      }
       // 如果是容器组件
       if (item.categoryType === CategoryEnum.container) {
         // 如果容器组件不是默认的需要重新赋值
@@ -217,6 +227,8 @@ const DraggableView = ({ item, children, place }: DraggableViewProps) => {
       attr: mapValue(data.attr),
       loop: mapValue(data.loop)
     })
+
+    if (onRender) return onRender(children, props)
 
     return cloneElement(
       children,

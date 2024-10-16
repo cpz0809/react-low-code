@@ -7,18 +7,19 @@ interface GroupPropsType {
   keyName?: string
   onclick?: (index: number) => void
   activeIndex?: number
+  paramsKey?: string | null
 }
 
 const Group = ({
   data,
   keyName = 'name',
   onclick,
-  activeIndex = -1
+  activeIndex = -1,
+  paramsKey = null
 }: GroupPropsType) => {
   const prefixCls = getPrefixCls('group')
 
-  const { collect, isActive } = useStyleCollect()
-
+  const { collect, isStyleActive, isAttrActive } = useStyleCollect()
   const handleCollect = (style: string, index: number) => {
     if (onclick) {
       onclick(index)
@@ -31,7 +32,7 @@ const Group = ({
     <div className={`${prefixCls}-container`}>
       {data.map((item, index) => (
         <div
-          className={`${prefixCls}-item ${isActive(item.style) ? `${prefixCls}-item-active` : ''} ${activeIndex === index ? `${prefixCls}-item-active` : ''}`}
+          className={`${prefixCls}-item ${isStyleActive(item.style) || isAttrActive(paramsKey, item.style) ? `${prefixCls}-item-active` : ''} ${activeIndex === index ? `${prefixCls}-item-active` : ''}`}
           key={item[keyName]}
           onClick={() => handleCollect(item.style, index)}
         >

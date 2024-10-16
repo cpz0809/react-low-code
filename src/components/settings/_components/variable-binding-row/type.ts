@@ -1,6 +1,8 @@
+import React from 'react'
+
 export interface VariableBindingRowProps {
   children: React.ReactNode
-  title: string
+  title?: string
   paramsKey: string
   isChangeAttr?: boolean
   isDropdown?: boolean
