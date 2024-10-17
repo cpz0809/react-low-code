@@ -16,12 +16,7 @@ import { useThrottleFn } from 'ahooks'
 import { useComponentDrag } from '@/hooks/use-component-drag'
 import { useBoardWidth } from '@/hooks/use-board-width'
 import { generateParams } from '@/util/generate-params'
-import {
-  insert,
-  remove,
-  setCurrentClick,
-  setCurrentMove
-} from '@/store/modules/drag'
+import { insert, remove, setCurrentClick } from '@/store/modules/drag'
 import { mainCof } from '@/components/compt/main/config'
 import { SelectEquipEnum } from '@/components/header/types'
 import { PaneItemType, PaneItemTypes } from '../drawer-menu/com-lib-pane/Type'
@@ -74,12 +69,12 @@ const Operate = forwardRef((_, ref) => {
     // 初始化设置画布大小
     initBoardConfig()
   }, [])
-  // let observer: ResizeObserver
+  let observer: ResizeObserver
   // 处理画布移动选中和点击选中模拟器
   useEffect(() => findMoveDom(), [currentMove])
   useEffect(() => {
     findClickDom()
-    // return () => observer && observer.disconnect()
+    return () => observer && observer.disconnect()
   }, [currentClick, stateData])
   useEffect(() => findDropDomThrottleFn(), [currentDrag])
   useEffect(() => {
@@ -92,11 +87,9 @@ const Operate = forwardRef((_, ref) => {
   const findMoveDom = () => {
     const dom = getCurrentDom(currentMove)
     if (dom) {
-      if (Array.isArray(dom)) {
-        setCurrentMoveAttr(setBaseDefaultAttr(dom.map((item) => item.attr)))
-      } else {
-        setCurrentMoveAttr(setBaseDefaultAttr(dom.attr))
-      }
+      Array.isArray(dom)
+        ? setCurrentMoveAttr(setBaseDefaultAttr(dom.map((item) => item.attr)))
+        : setCurrentMoveAttr(setBaseDefaultAttr(dom.attr))
     }
   }
 
@@ -108,30 +101,40 @@ const Operate = forwardRef((_, ref) => {
     const dom = getCurrentDom(currentClick)
     if (dom) {
       if (Array.isArray(dom)) {
-        setCurrentClickAttr(
-          dom.map((item) => ({
-            ...setBaseDefaultAttr(item.attr),
-            isSelected: true,
-            node: item.node
-          })) as CurrentClickAttr[]
-        )
+        // 批量更新元素
+        dom.forEach((item) => {
+          observer = new ResizeObserver((entries) => {
+            handleUpdateElement(entries)
+          })
+          observer.observe(item.node)
+        })
+        const handleUpdateElement = (entries: ResizeObserverEntry[]) => {
+          if (!currentClickAttr || !Array.isArray(currentClickAttr)) return
+          const temp = [...currentClickAttr]
+          for (const entry of entries) {
+            const componentId = entry.target.getAttribute('componentId')
+            if (!componentId) continue
+            const index = temp.findIndex((item) => item.node === entry.target)
+            if (index === -1) continue
+            temp[index] = {
+              ...temp[index],
+              ...setBaseDefaultAttr(entry.target.getBoundingClientRect())
+            }
+          }
+          setCurrentClickAttr(temp)
+        }
       } else {
-        setCurrentClickAttr({
-          ...setBaseDefaultAttr(dom.attr),
-          isSelected: true,
-          node: dom.node
-        } as CurrentClickAttr)
+        observer = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            setCurrentClickAttr({
+              ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
+              isSelected: true,
+              node: dom.node
+            } as CurrentClickAttr)
+          }
+        })
+        observer.observe(dom.node)
       }
-      // observer = new ResizeObserver((entries) => {
-      //   for (const entry of entries) {
-      //     setCurrentClickAttr({
-      //       ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
-      //       isSelected: true,
-      //       node: dom.node
-      //     })
-      //   }
-      // })
-      // observer.observe(dom.node)
     }
   }
   const findDropDom = () => {
@@ -141,21 +144,21 @@ const Operate = forwardRef((_, ref) => {
     }
     const { current, target, offset } = currentDrag
     const { attr, original } = computedAttr(current, target, offset)
-
     if (original) {
       setCurrentDrop({
         target: { ...attr },
         original: setBaseDefaultAttr(original as DOMRect)
       })
     }
-    resetMoveAndClick()
+    // resetMoveAndClick()
   }
-  const resetMoveAndClick = () => {
-    dispatch(setCurrentClick(null))
-    dispatch(setCurrentMove(null))
-    setCurrentMoveAttr(null)
-    setCurrentClickAttr(null)
-  }
+
+  // const resetMoveAndClick = () => {
+  //   dispatch(setCurrentClick(null))
+  //   dispatch(setCurrentMove(null))
+  //   setCurrentMoveAttr(null)
+  //   setCurrentClickAttr(null)
+  // }
 
   // 设置基础属性
   const setBaseDefaultAttr = (attr: DOMRect | DOMRect[]) => {
