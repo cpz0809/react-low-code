@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { setCurrentClick, updateParams } from '@/store/modules/drag'
-import { PaneItemEditKey } from '@/components/board/drawer-menu/com-lib-pane/Type'
+import { PaneItemEditKey } from '@/components/_types/util.ts'
 import Loop from './Loop'
 
 const Senior = () => {

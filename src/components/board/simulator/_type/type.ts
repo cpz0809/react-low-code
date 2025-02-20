@@ -1,4 +1,4 @@
-import { PaneItemType } from '../../drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemType } from '../../../_types/util.ts'
 import React from 'react'
 
 // 基础属性类型

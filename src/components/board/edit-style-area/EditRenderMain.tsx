@@ -4,7 +4,7 @@ import './style/edit-render-main.scss'
 import {
   EditableTypeItem,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 
 interface EditRenderMainProps {

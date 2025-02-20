@@ -1,6 +1,6 @@
 import { getPrefixCls } from '@/util/global-config.ts'
 import DraggableView from '@/components/board/drop/DraggableView'
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemType } from '@/components/_types/util.ts'
 
 const Main = ({ item }: { item: PaneItemType }) => {
   const prefix = getPrefixCls('main')

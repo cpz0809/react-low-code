@@ -8,8 +8,8 @@ import {
   Button,
   Form,
   Input,
-  message,
   Modal,
+  Popconfirm,
   Radio,
   RadioChangeEvent,
   Space,
@@ -18,25 +18,29 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { FieldTypeKey } from './type'
 import { isArray } from '@/util/is'
-import { addOrEditVariable, delVariable } from '@/store/modules/context'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { ApiSingleProps } from '@/store/_types/context'
 
 const defaultForm: ApiSingleProps = {
   code: '',
   name: '',
-  type: 'get',
+  type: 'GET',
   url: '',
   params: null,
-  autoSave: true
+  isAutoRequest: true
 }
 
-const ApiManage = () => {
+const ApiManage = ({
+  onSubmit,
+  onRemove
+}: {
+  onSubmit: (form: ApiSingleProps) => Promise<boolean>
+  onRemove: (codes: string[]) => Promise<boolean>
+}) => {
   const prefix = getPrefixCls('api-manage')
   const dispatch = useDispatch()
   const { apiVisible } = useSelector((state: RootState) => state.viewSplice)
   const { apiData } = useSelector((state: RootState) => state.contextSlice)
-  const [messageApi, contextHolder] = message.useMessage()
   const paramsFormRef = useRef(null)
 
   const [form, setForm] = useState<ApiSingleProps>(defaultForm)
@@ -82,24 +86,35 @@ const ApiManage = () => {
     setVisible(true)
   }
 
-  const handleEditForm = (name: string) => {
-    const data = apiData.find((item) => item.name === name)
-    if (!data) return
-    setForm(data)
+  const handleEditForm = (item: ApiSingleProps) => {
+    if (!item) return
+    setForm(item)
     setVisible(true)
   }
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
-    dispatch(
-      addOrEditVariable({
-        type: 'api',
-        data: form
-      })
-    )
-    messageApi.success('编辑成功')
+    // dispatch(
+    //   addOrEditVariable({
+    //     type: 'api',
+    //     data: {
+    //       ...form,
+    //       type: form.type.toLocaleUpperCase()
+    //     } as ApiSingleProps
+    //   })
+    // )
+    const res = await onSubmit({
+      ...form,
+      type: form.type.toLocaleUpperCase()
+    } as ApiSingleProps)
+    if (!res) return
     setVisible(false)
     resetForm()
   }
+
+  const handleDelete = async (row: ApiSingleProps) => {
+    await onRemove([row.code])
+  }
+
   const handleCancel = () => {
     setVisible(false)
     resetForm()
@@ -124,19 +139,25 @@ const ApiManage = () => {
           </div>
           <div className={`${prefix}-body`}>
             {apiData.map((item) => (
-              <div className={`${prefix}-card`} key={item.name}>
+              <div className={`${prefix}-card`} key={item.code}>
                 <div className={`${prefix}-card-head`}>
-                  <div className={`${prefix}-card-head-left`}>{item.name}</div>
+                  <div className={`${prefix}-card-head-left`}>
+                    {item.name} {item.url}
+                  </div>
                   <div className={`${prefix}-card-head-right`}>
                     <Space>
-                      <EditOutlined onClick={() => handleEditForm(item.name)} />
-                      <DeleteOutlined
-                        onClick={() =>
-                          dispatch(
-                            delVariable({ type: 'api', code: item.code })
-                          )
-                        }
-                      />
+                      <EditOutlined onClick={() => handleEditForm(item)} />
+
+                      <Popconfirm
+                        zIndex={10001}
+                        title="确认删除"
+                        description="是否删除当前Api数据?"
+                        okText="确认"
+                        cancelText="取消"
+                        onConfirm={() => handleDelete(item)}
+                      >
+                        <DeleteOutlined />
+                      </Popconfirm>
                     </Space>
                   </div>
                 </div>
@@ -189,10 +210,10 @@ const ApiManage = () => {
                 changeForm('type', e.target.value)
               }
             >
-              <Radio.Button value="get">GET</Radio.Button>
-              <Radio.Button value="post">POST</Radio.Button>
-              <Radio.Button value="put">PUT</Radio.Button>
-              <Radio.Button value="delete">DELETE</Radio.Button>
+              <Radio.Button value="GET">GET</Radio.Button>
+              <Radio.Button value="POST">POST</Radio.Button>
+              <Radio.Button value="PUT">PUT</Radio.Button>
+              <Radio.Button value="DELETE">DELETE</Radio.Button>
             </Radio.Group>
           </Form.Item>
           <Form.Item<ApiSingleProps>
@@ -227,17 +248,18 @@ const ApiManage = () => {
           </Form.Item>
           <Form.Item<ApiSingleProps>
             label="是否自动请求"
-            name="autoSave"
-            initialValue={form.autoSave}
+            name="isAutoRequest"
+            initialValue={form.isAutoRequest}
           >
             <Switch
-              value={form.autoSave}
-              onChange={(checked: boolean) => changeForm('autoSave', checked)}
+              value={form.isAutoRequest}
+              onChange={(checked: boolean) =>
+                changeForm('isAutoRequest', checked)
+              }
             />
           </Form.Item>
         </Form>
       </Modal>
-      {contextHolder}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemType } from '@/components/_types/util.ts'
 
 export const generateParams = (data: PaneItemType) => ({
   ...data,

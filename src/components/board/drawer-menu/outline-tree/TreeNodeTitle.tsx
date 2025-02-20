@@ -1,7 +1,7 @@
 import {
   PaneItemType,
   PaneItemTypes
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { remove, updateParams } from '@/store/modules/drag.ts'
 import {

@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
+import { PaneItemType } from '@/components/_types/util.ts'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { Input, Switch } from 'antd'
 import Group from '../_components/group/Group'

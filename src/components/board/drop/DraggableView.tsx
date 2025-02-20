@@ -17,7 +17,7 @@ import {
   CategoryEnum,
   PaneItemType,
   PaneItemTypes
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { useHistory } from '@/hooks/use-history.ts'
 import { HistoryEnum } from '@/store/_types/history'
 import { CurrentDragType, OffsetProps } from '@/store/_types/drag'

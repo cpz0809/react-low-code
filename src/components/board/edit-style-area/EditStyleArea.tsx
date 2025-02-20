@@ -5,7 +5,7 @@ import { RootState } from '@/store'
 import EditAttrTabs from '@/components/board/edit-style-area/EditAttrTabs.tsx'
 import { useEffect, useState } from 'react'
 import EditRenderMain from '@/components/board/edit-style-area/EditRenderMain.tsx'
-import { EditableTypeItem } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { EditableTypeItem } from '@/components/_types/util.ts'
 
 const EditStyleArea = () => {
   const prefixCls = getPrefixCls('esa')

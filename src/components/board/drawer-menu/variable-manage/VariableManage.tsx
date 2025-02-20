@@ -8,8 +8,8 @@ import {
   Form,
   Input,
   InputNumber,
-  message,
   Modal,
+  Popconfirm,
   Radio,
   RadioChangeEvent,
   Space,
@@ -20,60 +20,70 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormKey } from './type'
 import MonacoEditor from '@monaco-editor/react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { StateSingleProps } from '@/store/_types/context'
-import { addOrEditVariable, delVariable } from '@/store/modules/context'
+import { VariableSingleProps } from '@/store/_types/context'
+import { isObject } from '@/util/is.ts'
 
-const defaultParams: StateSingleProps = {
+const defaultParams: VariableSingleProps = {
   code: '',
   name: '',
-  type: 'string',
+  type: 'String',
   value: null,
   illustrate: ''
 }
-const VariableManage = () => {
+const VariableManage = ({
+  onSubmit,
+  onRemove
+}: {
+  onSubmit: (form: VariableSingleProps) => Promise<boolean>
+  onRemove: (codes: string[]) => Promise<boolean>
+}) => {
   const prefix = getPrefixCls('variable-manage')
   const dispatch = useDispatch()
   const { variableVisible } = useSelector(
     (state: RootState) => state.viewSplice
   )
   const { stateData } = useSelector((state: RootState) => state.contextSlice)
-  const [messageApi, contextHolder] = message.useMessage()
   const paramsFormRef = useRef(null)
   const [visible, setVisible] = useState<boolean>(false)
 
-  const [form, setForm] = useState<StateSingleProps>(defaultParams)
+  const [form, setForm] = useState<VariableSingleProps>(defaultParams)
 
   const handleClick = () => {
     setVisible(true)
   }
-  const isObject = (value: any) => typeof value === 'object'
 
-  const typeConversion = (value: any) =>
-    !isObject(value) ? value : JSON.stringify(value)
+  const typeConversion = (value: any) => {
+    if (isObject(value || Array.isArray(value))) JSON.stringify(value)
+    if (typeof value === 'string' && !value) return ''
+    return value
+  }
 
-  const handleEditForm = (code: string) => {
-    const data = stateData.find((item) => item.code === code)
-    if (!data) return
+  const handleEditForm = (item: VariableSingleProps) => {
+    if (!stateData) return
     setForm({
-      ...data,
-      value: typeConversion(data.value)
+      ...item,
+      value: typeConversion(item.value)
     })
     setVisible(true)
   }
 
   const handleOk = async () => {
     await (paramsFormRef.current as any)?.validateFields()
-
-    dispatch(
-      addOrEditVariable({
-        type: 'state',
-        data: {
-          ...form,
-          value: form.type !== 'string' ? JSON.parse(form.value) : form.value
-        }
-      })
-    )
-    messageApi.success('编辑成功')
+    const res = onSubmit({
+      ...form,
+      value:
+        typeof form.value === 'object' ? JSON.parse(form.value) : form.value
+    })
+    if (!res) return
+    // dispatch(
+    //   addOrEditVariable({
+    //     type: 'state',
+    //     data: {
+    //       ...form,
+    //       value: form.type !== 'string' ? JSON.parse(form.value) : form.value
+    //     }
+    //   })
+    // )
     setVisible(false)
     resetForm()
   }
@@ -114,19 +124,19 @@ const VariableManage = () => {
   }
 
   const renderDefault = () =>
-    form.type === 'string' ? (
+    form.type === 'String' ? (
       <Input
         placeholder="请输入变量默认值"
         value={form.value}
         onChange={(e) => changeForm('value', e.target.value)}
       />
-    ) : form.type === 'number' ? (
+    ) : form.type === 'Number' ? (
       <InputNumber
         style={{ width: '100%' }}
         placeholder="请输入变量默认值"
         onChange={(e) => changeForm('value', e)}
       />
-    ) : form.type === 'boolean' ? (
+    ) : form.type === 'Boolean' ? (
       <Switch onChange={(e) => changeForm('value', e)} />
     ) : (
       <div style={{ height: 100 }}>
@@ -159,14 +169,17 @@ const VariableManage = () => {
                   <div className={`${prefix}-card-head-left`}>{item.name}</div>
                   <div className={`${prefix}-card-head-right`}>
                     <Space>
-                      <EditOutlined onClick={() => handleEditForm(item.code)} />
-                      <DeleteOutlined
-                        onClick={() =>
-                          dispatch(
-                            delVariable({ type: 'state', code: item.code })
-                          )
-                        }
-                      />
+                      <EditOutlined onClick={() => handleEditForm(item)} />
+                      <Popconfirm
+                        zIndex={10001}
+                        title="确认删除"
+                        description="是否删除当前变量?"
+                        okText="确认"
+                        cancelText="取消"
+                        onConfirm={() => onRemove([item.code])}
+                      >
+                        <DeleteOutlined />
+                      </Popconfirm>
                     </Space>
                   </div>
                 </div>
@@ -176,7 +189,7 @@ const VariableManage = () => {
                     type="primary"
                     style={{ backgroundColor: '#ebecf0', color: '#666' }}
                   >
-                    {item.type.toUpperCase()}
+                    {item.type}
                   </Button>
                   <p className={`${prefix}-card-text`}>{item.illustrate}</p>
                 </div>
@@ -196,7 +209,7 @@ const VariableManage = () => {
         destroyOnClose={true}
       >
         <Form ref={paramsFormRef}>
-          <Form.Item<StateSingleProps>
+          <Form.Item<VariableSingleProps>
             label="变量名称"
             name="name"
             rules={[
@@ -214,7 +227,7 @@ const VariableManage = () => {
               onChange={(e) => changeForm('name', e.target.value)}
             />
           </Form.Item>
-          <Form.Item<StateSingleProps>
+          <Form.Item<VariableSingleProps>
             label="变量类型"
             name="type"
             initialValue={form.type}
@@ -227,21 +240,21 @@ const VariableManage = () => {
                 setDefaultFormValue(e.target.value, 'type')
               }
             >
-              <Radio.Button value="string">字符串</Radio.Button>
-              <Radio.Button value="number">数字</Radio.Button>
-              <Radio.Button value="boolean">布尔</Radio.Button>
-              <Radio.Button value="array">数组</Radio.Button>
-              <Radio.Button value="object">对象</Radio.Button>
+              <Radio.Button value="String">字符串</Radio.Button>
+              <Radio.Button value="Number">数字</Radio.Button>
+              <Radio.Button value="Boolean">布尔</Radio.Button>
+              <Radio.Button value="Array">数组</Radio.Button>
+              <Radio.Button value="Object">对象</Radio.Button>
             </Radio.Group>
           </Form.Item>
-          <Form.Item<StateSingleProps>
+          <Form.Item<VariableSingleProps>
             label="变量默认值"
             name="value"
             initialValue={form.value}
           >
             {renderDefault()}
           </Form.Item>
-          <Form.Item<StateSingleProps>
+          <Form.Item<VariableSingleProps>
             label="变量说明"
             name="illustrate"
             initialValue={form.illustrate}
@@ -254,7 +267,6 @@ const VariableManage = () => {
           </Form.Item>
         </Form>
       </Modal>
-      {contextHolder}
     </>
   )
 }

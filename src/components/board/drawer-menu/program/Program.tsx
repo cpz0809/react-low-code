@@ -9,13 +9,13 @@ import MonacoEditor, { loader, OnMount } from '@monaco-editor/react'
 import * as monaco from 'monaco-editor'
 import { useEffect, useRef, useState } from 'react'
 import { analysisStr } from './_util/strAction'
-import { StateSingleProps } from '@/store/_types/context'
+import { VariableSingleProps } from '@/store/_types/context'
 import {
   addOrEditMethod,
   addOrEditVariable,
   fullUpdate
 } from '@/store/modules/context'
-import { findDataType } from '@/util/is'
+import { isObject } from '@/util/is'
 import * as babelParser from '@babel/parser'
 
 loader.config({ monaco })
@@ -87,7 +87,7 @@ const Program = () => {
       // 不是新增
       if (!isAdd) {
         const index = newStateData.findIndex(
-          (el: StateSingleProps) => el.name === item.key
+          (el: VariableSingleProps) => el.name === item.key
         )
         newStateData[index].value = item.value
       } else {
@@ -106,6 +106,15 @@ const Program = () => {
       }
     }
     dispatch(fullUpdate(newStateData))
+  }
+
+  const findDataType = (value: any) => {
+    const isBaseType = typeof value
+    if (isBaseType === 'object') {
+      if (isObject(value)) return 'Object'
+      if (Array.isArray(value)) return 'Array'
+    }
+    return isBaseType
   }
 
   const diffMethod = (name: string, content: string) => {

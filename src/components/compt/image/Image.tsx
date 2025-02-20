@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemType } from '@/components/_types/util.ts'
 import DraggableView from '@/components/board/drop/DraggableView'
 
 const Image = ({ item }: { item: PaneItemType }) => {

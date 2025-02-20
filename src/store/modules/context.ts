@@ -3,7 +3,7 @@ import {
   AddOrEditVariableProps,
   ApiSingleProps,
   DelVariableProps,
-  StateSingleProps,
+  VariableSingleProps,
   ContextStateProps,
   AddVariableProps,
   AddMethod
@@ -21,11 +21,22 @@ const variableSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {
+    // 设置api数据
+    setApiData(state, action: PayloadAction<ApiSingleProps[]>) {
+      state.apiData = action.payload
+    },
+    // 设置variable数据
+    setVariableData(state, action: PayloadAction<VariableSingleProps[]>) {
+      state.stateData = action.payload
+    },
     // 添加或修改
     addOrEditVariable(state, action: PayloadAction<AddOrEditVariableProps>) {
       const { type, data } = action.payload
       if (type === 'state') {
-        addOrEdit<StateSingleProps>(data as StateSingleProps, state.stateData)
+        addOrEdit<VariableSingleProps>(
+          data as VariableSingleProps,
+          state.stateData
+        )
       } else if (type === 'api') {
         addOrEdit<ApiSingleProps>(data as ApiSingleProps, state.apiData)
       }
@@ -34,13 +45,13 @@ const variableSlice = createSlice({
     delVariable(state, action: PayloadAction<DelVariableProps>) {
       const { type, code } = action.payload
       if (type === 'state') {
-        delData<StateSingleProps>(code, state.stateData)
+        delData<VariableSingleProps>(code, state.stateData)
       } else if (type === 'api') {
         delData<ApiSingleProps>(code, state.apiData)
       }
     },
     // 更新变量值
-    fullUpdate(state, action: PayloadAction<StateSingleProps[]>) {
+    fullUpdate(state, action: PayloadAction<VariableSingleProps[]>) {
       state.stateData = action.payload
     },
     // 添加变量映射值
@@ -81,6 +92,8 @@ export const {
   delVariable,
   addVariableMap,
   fullUpdate,
-  addOrEditMethod
+  addOrEditMethod,
+  setApiData,
+  setVariableData
 } = variableSlice.actions
 export default variableSlice.reducer

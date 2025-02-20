@@ -9,7 +9,7 @@ import { useHistory } from '@/hooks/use-history.ts'
 import Size from '@/components/header/Size.tsx'
 import { useNavigate } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ onSave }: { onSave: () => void }) => {
   const prefix = getPrefixCls('header')
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -72,11 +72,19 @@ const Header = () => {
         </div>
         <div className={`${prefix}-action-item`}>
           <Button
-            type="primary"
             className={`${prefix}-button`}
             onClick={() => navigate('/preview')}
           >
             预览
+          </Button>
+        </div>
+        <div className={`${prefix}-action-item`}>
+          <Button
+            type="primary"
+            className={`${prefix}-button`}
+            onClick={() => onSave()}
+          >
+            保存
           </Button>
         </div>
       </div>

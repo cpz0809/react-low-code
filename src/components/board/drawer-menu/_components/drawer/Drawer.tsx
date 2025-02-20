@@ -9,11 +9,17 @@ import { setBoardWidth, setComLibPaneLockStatus } from '@/store/modules/view.ts'
 import { MOBILEDEFAULTSIZE } from '@/hooks/use-board-width.ts'
 
 interface DrawerProps {
+  // 是否显示
   show: boolean
+  // 宽度
   width?: number
+  // 名称
   title: string
+  // 类名
   drawerClassName?: string
+  // 子节点
   children: React.FunctionComponentElement<{ componentid: string }>
+  // 关闭事件
   onclose: () => void
 }
 

@@ -1,1 +1,1 @@
-export type FieldTypeKey = 'name' | 'type' | 'url' | 'params' | 'autoSave'
+export type FieldTypeKey = 'name' | 'type' | 'url' | 'params' | 'isAutoRequest'

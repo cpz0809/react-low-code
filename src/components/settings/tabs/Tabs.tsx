@@ -1,7 +1,7 @@
 import {
   EditableTypeItem,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import TabsAttr from '@/components/settings/tabs/TabsAttr.tsx'
 import { TabsAttrType } from '@/components/settings/tabs/type.ts'
 

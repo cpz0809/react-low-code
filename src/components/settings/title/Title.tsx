@@ -3,7 +3,7 @@ import { TextNodeAttrType } from '../text/type.ts'
 import {
   EditableTypeItem,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 
 class Title {
   static of(data: PaneItemType<TextNodeAttrType>, type: EditableTypeItem) {

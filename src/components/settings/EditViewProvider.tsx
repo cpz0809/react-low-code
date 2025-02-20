@@ -1,7 +1,7 @@
 import {
   EditableTypeItem,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import Style from './_components/style/Style.tsx'
 import Senior from './_components/senior/Senior.tsx'
 import Event from './_components/event/Event.tsx'

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { removeNode, swapNodes, updateNode } from '@/util/node.ts'
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
-import { mainCof } from '@/components/compt/main/config.ts'
+import { PaneItemType } from '@/components/_types/util.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import {
   CurrentDragType,
@@ -11,6 +10,7 @@ import {
   UpdatePositionProps,
   ViewStateType
 } from '../_types/drag'
+import { MainConfig } from '@/config/library/component'
 //
 const initialState: ViewStateType = {
   // 存放组件列表
@@ -29,6 +29,10 @@ export const dragSplice = createSlice({
   name: 'drag',
   initialState,
   reducers: {
+    // 设置组件列表
+    setItemList(state, action: PayloadAction<PaneItemType[]>) {
+      state.itemList = action.payload
+    },
     // 设置移动组件
     setCurrentMove(state, action: PayloadAction<null | PaneItemType>) {
       state.currentMove = action.payload
@@ -91,7 +95,7 @@ export const dragSplice = createSlice({
     // 清除画布
     clearDiagCom(state) {
       state.itemList = []
-      state.itemList.push(generateParams(mainCof))
+      state.itemList.push(generateParams(MainConfig))
     }
   }
 })
@@ -105,6 +109,7 @@ export const {
   remove,
   updateParams,
   updateCurrentClick,
-  clearDiagCom
+  clearDiagCom,
+  setItemList
 } = dragSplice.actions
 export default dragSplice.reducer

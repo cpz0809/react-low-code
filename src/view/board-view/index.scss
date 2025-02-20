@@ -8,4 +8,12 @@ $board-view-prefix-cls: 'board-view';
   flex-direction: column;
   background-color: $color-background;
   user-select: none;
+
+  .ant-spin-fullscreen {
+    z-index: 10001;
+    .ant-spin-dot-progress {
+      left: 50%;
+      margin-left: -1rem;
+    }
+  }
 }

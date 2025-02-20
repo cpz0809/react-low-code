@@ -1,4 +1,4 @@
-import { PaneItemTypes } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemTypes } from '@/components/_types/util.ts'
 import { Modal } from 'antd'
 
 export default {

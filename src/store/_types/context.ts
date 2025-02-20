@@ -1,22 +1,22 @@
 export interface ContextStateProps {
-  stateData: StateSingleProps[]
+  stateData: VariableSingleProps[]
   apiData: ApiSingleProps[]
   variableMap: VariableMapProps
   methods: { [key: string]: string }
 }
 
 export type StateTypeKeys =
-  | 'string'
-  | 'number'
-  | 'bigint'
-  | 'boolean'
-  | 'symbol'
-  | 'undefined'
-  | 'object'
-  | 'function'
-  | 'array'
+  | 'String'
+  | 'Number'
+  | 'Bigint'
+  | 'Boolean'
+  | 'Symbol'
+  | 'Undefined'
+  | 'Object'
+  | 'Function'
+  | 'Array'
 
-export interface StateSingleProps {
+export interface VariableSingleProps {
   code: string
   name: string
   type: StateTypeKeys
@@ -26,10 +26,10 @@ export interface StateSingleProps {
 
 export interface EditStateProps {
   index: number
-  params: StateSingleProps
+  params: VariableSingleProps
 }
 
-export type ApiRequestType = 'get' | 'post' | 'put' | 'delete'
+export type ApiRequestType = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export interface ApiSingleProps {
   code: string
@@ -37,15 +37,14 @@ export interface ApiSingleProps {
   type: ApiRequestType
   url: string
   params: any
-  autoSave: boolean
+  isAutoRequest: boolean
 }
 
 export type VariableType = 'state' | 'api'
 
-export interface AddOrEditVariableProps {
-  type: VariableType
-  data: StateSingleProps | ApiSingleProps
-}
+export type AddOrEditVariableProps =
+  | { type: 'state'; data: VariableSingleProps }
+  | { type: 'api'; data: ApiSingleProps }
 
 export interface DelVariableProps {
   type: VariableType

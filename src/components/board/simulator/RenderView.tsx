@@ -5,7 +5,7 @@ import { arrayToTree } from '@/util/node'
 import { forwardRef, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import ViewProvider from '../drop/ViewProvider'
-import { PaneItemType } from '../drawer-menu/com-lib-pane/Type'
+import { PaneItemType } from '../../_types/util.ts'
 
 const RenderView = forwardRef((_props, ref) => {
   const prefix = getPrefixCls('simulator')

@@ -2,7 +2,7 @@ import ImageAttr from '@/components/settings/image/ImageAttr.tsx'
 import {
   EditableTypeItem,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { ImageAttrType } from './type.ts'
 
 class Image {

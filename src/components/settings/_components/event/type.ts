@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
+import { PaneItemType } from '@/components/_types/util.ts'
 
 export interface EventProps {
   data: PaneItemType

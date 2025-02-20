@@ -15,7 +15,7 @@ $simulator-prefix-cls: 'simulator';
     bottom: 0;
     right: 0;
     overflow: visible;
-    z-index: 9999;
+    z-index: 99;
 
     .#{$simulator-prefix-cls}-current-move {
       position: absolute;

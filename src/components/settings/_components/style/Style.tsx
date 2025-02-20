@@ -8,6 +8,7 @@ import Border from '@/components/settings/_components/style/Border'
 import EditorCode from '@/components/settings/_components/monacoEditor/MonacoEditor'
 import Font from './Font'
 import Background from './Background'
+import ClassName from '@/components/settings/_components/style/ClassName.tsx'
 
 const Style = () => {
   const prefixCls = getPrefixCls('edit-style-field')
@@ -42,12 +43,17 @@ const Style = () => {
   return (
     <div className={`${prefixCls}`}>
       <div className={`${prefixCls}-header`}>
+        <div className={`${prefixCls}-title`}>组件类名</div>
+      </div>
+      <ClassName />
+      <div className={`${prefixCls}-header`}>
         <div className={`${prefixCls}-title`}>行内样式</div>
       </div>
       <div className={`${prefixCls}-body`}>
         <div className={`${prefixCls}-code-edit-region`}>
-          <EditorCode  />
+          <EditorCode />
         </div>
+
         <div className={`${prefixCls}-collapse`}>
           <Collapse size="small" items={items} />
         </div>

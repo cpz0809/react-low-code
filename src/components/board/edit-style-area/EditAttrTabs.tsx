@@ -1,6 +1,6 @@
 import './style/edit-attr-tabs.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { EditableTypeItem } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { EditableTypeItem } from '@/components/_types/util.ts'
 
 const tabsNameMap = {
   attr: '属性',

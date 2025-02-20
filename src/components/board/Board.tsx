@@ -11,8 +11,21 @@ import OutlineTree from '@/components/board/drawer-menu/outline-tree/OutlineTree
 import ApiManage from './drawer-menu/api-manage/ApiManage.tsx'
 import VariableManage from './drawer-menu/variable-manage/VariableManage.tsx'
 import Program from './drawer-menu/program/Program.tsx'
+import { ApiSingleProps, VariableSingleProps } from '@/store/_types/context.ts'
 
-const Board = () => {
+type BoardProps = {
+  onApiSubmit: (form: ApiSingleProps) => Promise<boolean>
+  onApiRemove: (codes: string[]) => Promise<boolean>
+  onVariableSubmit: (form: VariableSingleProps) => Promise<boolean>
+  onVariableRemove: (codes: string[]) => Promise<boolean>
+}
+
+const Board = ({
+  onApiSubmit,
+  onApiRemove,
+  onVariableSubmit,
+  onVariableRemove
+}: BoardProps) => {
   const prefix = getPrefixCls('board')
   return (
     <div className={`${prefix}-container`}>
@@ -23,9 +36,15 @@ const Board = () => {
         {/* 大纲 */}
         <OutlineTree />
         {/* 页面接口 */}
-        <ApiManage />
+        <ApiManage
+          onSubmit={(form) => onApiSubmit(form)}
+          onRemove={(codes) => onApiRemove(codes)}
+        />
         {/* 页面变量 */}
-        <VariableManage />
+        <VariableManage
+          onSubmit={(form) => onVariableSubmit(form)}
+          onRemove={(codes) => onVariableRemove(codes)}
+        />
         {/* 源码面板 */}
         <Program />
         {/* 模拟器 */}

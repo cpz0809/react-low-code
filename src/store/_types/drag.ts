@@ -1,7 +1,7 @@
 import {
   PaneItemEditKey,
   PaneItemType
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 export interface ViewStateType {

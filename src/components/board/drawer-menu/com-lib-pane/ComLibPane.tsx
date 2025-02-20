@@ -1,13 +1,13 @@
 import './style/com-lib-pane.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { library } from './category/index.ts'
 import PaneItem from './PaneItem.tsx'
 import Drawer from '@/components/board/drawer-menu/_components/drawer/Drawer.tsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { setMenuVisible } from '@/store/modules/view.ts'
 import { Collapse as AntCollapse, Tabs } from 'antd'
-import { GroupPaneType } from './Type.ts'
+import { GroupPaneType } from '../../../_types/util.ts'
+import { library } from '@/config/library/index.ts'
 
 const ComLibPane = () => {
   const prefixCls = getPrefixCls('com-lib-pane')

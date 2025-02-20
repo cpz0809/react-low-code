@@ -4,7 +4,7 @@ import { Modal } from 'antd'
 import { useState } from 'react'
 import { VariableBindingProps } from './type'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
-import { StateSingleProps } from '@/store/_types/context'
+import { VariableSingleProps } from '@/store/_types/context'
 
 const VariableBinding = ({
   visible,
@@ -23,9 +23,14 @@ const VariableBinding = ({
       (item) => item.code === activeCode
     )
     if (!data) return
-    binding(paramsKey, 'state', (data as StateSingleProps).code, isChangeAttr)
+    binding(
+      paramsKey,
+      activeIndex === 0 ? 'api' : 'state',
+      (data as VariableSingleProps).code,
+      isChangeAttr
+    )
     onClose()
-    if (onSuccess) onSuccess((data as StateSingleProps).name)
+    if (onSuccess) onSuccess((data as VariableSingleProps).name)
   }
   const handleCancel = () => {
     onClose()

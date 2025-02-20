@@ -1,0 +1,59 @@
+.setting-container {
+  cursor: default;
+  padding: 0 16px;
+
+  .setting-title {
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .setting-team-edit {
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+
+    .setting-team-edit-icon {
+      padding: 10px;
+      background-color: #DBEAFE;
+      border-radius: 12px;
+    }
+
+    .setting-team-edit-name {
+      font-size: 18px;
+      padding: 0 8px;
+    }
+
+    .setting-team-edit-update {
+      cursor: pointer;
+    }
+  }
+
+  .setting-actions {
+    padding-top: 32px;
+
+    .setting-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      padding-bottom: 17px;
+      border-bottom: 1px solid #E5E7EB;
+      margin-bottom: 24px;
+
+      .setting-action-left {
+        .setting-action-title {
+          font-size: 16px;
+          padding-bottom: 4px;
+        }
+
+        .setting-action-text {
+          font-size: 14px;
+          color: #6B7280;
+        }
+      }
+
+      .setting-action-right {
+      }
+    }
+  }
+}

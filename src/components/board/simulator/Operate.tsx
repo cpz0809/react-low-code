@@ -17,11 +17,12 @@ import { useComponentDrag } from '@/hooks/use-component-drag'
 import { useBoardWidth } from '@/hooks/use-board-width'
 import { generateParams } from '@/util/generate-params'
 import { insert, remove, setCurrentClick } from '@/store/modules/drag'
-import { mainCof } from '@/components/compt/main/config'
 import { SelectEquipEnum } from '@/components/header/types'
-import { PaneItemType, PaneItemTypes } from '../drawer-menu/com-lib-pane/Type'
+import { PaneItemType, PaneItemTypes } from '../../_types/util.ts'
 import { useHistory } from '@/hooks/use-history'
 import ContentMenu from './_component/context-menu/ContentMenu.tsx'
+import { MainConfig } from '@/config/library/component.ts'
+import { FilterFromDomRes } from '@/util/node.ts'
 
 const Operate = forwardRef((_, ref) => {
   const prefix = getPrefixCls('simulator')
@@ -65,7 +66,7 @@ const Operate = forwardRef((_, ref) => {
   // 画布初始化
   useEffect(() => {
     // 添加最外层Main组件
-    dispatch(insert({ component: generateParams(mainCof) }))
+    dispatch(insert({ component: generateParams(MainConfig) }))
     // 初始化设置画布大小
     initBoardConfig()
   }, [])
@@ -99,43 +100,24 @@ const Operate = forwardRef((_, ref) => {
       return
     }
     const dom = getCurrentDom(currentClick)
-    if (dom) {
-      if (Array.isArray(dom)) {
-        // 批量更新元素
-        dom.forEach((item) => {
-          observer = new ResizeObserver((entries) => {
-            handleUpdateElement(entries)
-          })
-          observer.observe(item.node)
-        })
-        const handleUpdateElement = (entries: ResizeObserverEntry[]) => {
-          if (!currentClickAttr || !Array.isArray(currentClickAttr)) return
-          const temp = [...currentClickAttr]
-          for (const entry of entries) {
-            const componentId = entry.target.getAttribute('componentId')
-            if (!componentId) continue
-            const index = temp.findIndex((item) => item.node === entry.target)
-            if (index === -1) continue
-            temp[index] = {
-              ...temp[index],
-              ...setBaseDefaultAttr(entry.target.getBoundingClientRect())
-            }
-          }
-          setCurrentClickAttr(temp)
-        }
-      } else {
-        observer = new ResizeObserver((entries) => {
-          for (const entry of entries) {
-            setCurrentClickAttr({
-              ...setBaseDefaultAttr(entry.target.getBoundingClientRect()),
-              isSelected: true,
-              node: dom.node
-            } as CurrentClickAttr)
-          }
-        })
-        observer.observe(dom.node)
-      }
+    if (!dom) return
+
+    observer = new ResizeObserver(() => handleResizeObserver())
+
+    const handleResizeObserver = () => {
+      const attr = Array.isArray(dom)
+        ? dom.map((item) => domToCurrentClickAttr(item))
+        : domToCurrentClickAttr(dom)
+      setCurrentClickAttr(attr as CurrentClickAttr | CurrentClickAttr[])
     }
+
+    const domToCurrentClickAttr = (dom: FilterFromDomRes) => ({
+      ...setBaseDefaultAttr(dom.attr),
+      isSelected: true,
+      node: dom.node
+    })
+
+    observer.observe(Array.isArray(dom) ? dom[0].node : dom.node)
   }
   const findDropDom = () => {
     if (!currentDrag) {
@@ -226,7 +208,7 @@ const Operate = forwardRef((_, ref) => {
         insert({
           component: generateParams({
             ...pasteboard,
-            parentUuid: currentClick.uuid
+            parentUuid: currentClick.parentUuid
           }) as PaneItemType
         })
       )

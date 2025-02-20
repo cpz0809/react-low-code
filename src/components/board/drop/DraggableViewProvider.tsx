@@ -12,7 +12,7 @@ import Main from '@/components/compt/main/Main.tsx'
 import {
   PaneItemType,
   PaneItemTypes
-} from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+} from '@/components/_types/util.ts'
 import { ComponentType, ReactElement } from 'react'
 
 const componentMap: Record<

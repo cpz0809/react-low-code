@@ -1,9 +1,9 @@
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
-import { ApiSingleProps, StateSingleProps } from '@/store/_types/context'
+import { PaneItemType } from '@/components/_types/util.ts'
+import { ApiSingleProps, VariableSingleProps } from '@/store/_types/context'
 
 export interface PreviewRenderProps {
   contextData: {
-    stateData: StateSingleProps[]
+    stateData: VariableSingleProps[]
     apiData: ApiSingleProps[]
     methods: { [key: string]: string }
   }

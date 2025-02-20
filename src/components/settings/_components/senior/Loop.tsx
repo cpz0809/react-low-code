@@ -6,6 +6,7 @@ import MonacoEdit from '@monaco-editor/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentClick, updateParams } from '@/store/modules/drag'
 import { RootState } from '@/store'
+
 const Loop = () => {
   const dispatch = useDispatch()
   const { currentClick } = useSelector((state: RootState) => state.dragSplice)
@@ -17,7 +18,10 @@ const Loop = () => {
       updateParams({
         uuid: currentClick.uuid,
         key: 'loop',
-        params: JSON.parse(editorValue)
+        params: {
+          type: 0,
+          value: JSON.parse(editorValue)
+        }
       })
     )
     dispatch(setCurrentClick(null))

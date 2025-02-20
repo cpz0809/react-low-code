@@ -1,4 +1,4 @@
-import { PaneItemTypes } from '@/components/board/drawer-menu/com-lib-pane/Type.ts'
+import { PaneItemTypes } from '@/components/_types/util.ts'
 import Modal from './modal/Modal.tsx'
 import Title from './title/Title.tsx'
 import Text from './text/Text.tsx'

@@ -2,6 +2,7 @@ $edit-style-field-prefix-cls: 'edit-style-field';
 
 .#{$edit-style-field-prefix-cls} {
   height: 100%;
+
   .#{$edit-style-field-prefix-cls}-header {
     display: flex;
     justify-content: space-between;
@@ -13,6 +14,17 @@ $edit-style-field-prefix-cls: 'edit-style-field';
     .#{$edit-style-field-prefix-cls}-title {
       font-size: 12px;
       color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  .#{$edit-style-field-prefix-cls}-class-name {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin: 6px 0;
+
+    .#{$edit-style-field-prefix-cls}-class-name-tips {
+      margin-left: 6px;
     }
   }
 

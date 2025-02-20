@@ -1,6 +1,6 @@
 import { Input } from 'antd'
 import { useAttrCollect } from '@/hooks/use-attr-collect.ts'
-import { PaneItemType } from '@/components/board/drawer-menu/com-lib-pane/Type'
+import { PaneItemType } from '@/components/_types/util.ts'
 import { ImageAttrEnum, ImageAttrType } from './type.ts'
 import VariableBindingRow from '../_components/variable-binding-row/VariableBindingRow'
 
