@@ -12,11 +12,16 @@ import InputMergeSelect from '@/components/settings/_components/input-merge-sele
 
 const Layout = () => {
   const prefixCls = getPrefixCls('edit-style-layout')
-  const { matchingStyle } = useStyleCollect()
+  const { collect, matchingStyle } = useStyleCollect()
   const Input = (key: string) => {
     return (
       <div className="input-wrapper">
-        <input type="text" maxLength={3} placeholder={matchingStyle(key)} />
+        <input
+          type="text"
+          maxLength={3}
+          placeholder={matchingStyle(key)}
+          onChange={(e) => collect(Number(e.target.value), key)}
+        />
       </div>
     )
   }
