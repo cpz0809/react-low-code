@@ -6,7 +6,7 @@ import {
 } from '@/components/settings/tabs/type.ts'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Input } from 'antd'
-import { useAttrCollect } from '@/hooks/use-attr-collect.ts'
+import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
 import './style/tabsAttr.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCurrentClick, updateParams } from '@/store/modules/drag.ts'

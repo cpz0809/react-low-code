@@ -12,12 +12,12 @@ import {
   updatePosition
 } from '@/store/modules/drag.ts'
 import { PaneItemType } from '@/components/_types/util.ts'
-import { CurrentDragType } from '@/store/_types/drag'
+import { CurrentDragType } from '@/store/_types/drag.ts'
 import {
   HistoryEnum,
   HistoryOperateTypeEnum,
   HistorySingleType
-} from '@/store/_types/history'
+} from '@/store/_types/history.ts'
 import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 export const useHistory = () => {

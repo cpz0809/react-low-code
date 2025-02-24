@@ -18,14 +18,14 @@ import {
   PaneItemType,
   PaneItemTypes
 } from '@/components/_types/util.ts'
-import { useHistory } from '@/hooks/use-history.ts'
+import { useHistory } from '@/components/_hooks/use-history.ts'
 import { HistoryEnum } from '@/store/_types/history'
 import { CurrentDragType, OffsetProps } from '@/store/_types/drag'
 import ViewProvider from './ViewProvider'
-import { useComponentDrag } from '@/hooks/use-component-drag'
+import { useComponentDrag } from '@/components/_hooks/use-component-drag.ts'
 import { DraggableViewProps } from './type'
 import { CurrentDropDirection } from '../simulator/_type/type.ts'
-import { useAttrCollect } from '@/hooks/use-attr-collect'
+import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
 import {
   setContextMenuPosition,
   setContextMenuVisible,

@@ -1,5 +1,5 @@
 import Row from '../_components/row/Row'
-import { useAttrCollect } from '@/hooks/use-attr-collect'
+import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
 import { PaneItemType } from '@/components/_types/util.ts'
 import { Switch, Input } from 'antd'
 import { TextAttrEnum, TextNodeAttrType } from './type.ts'

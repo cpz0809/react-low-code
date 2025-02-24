@@ -5,7 +5,7 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { clearDiagCom, setCurrentClick } from '@/store/modules/drag.ts'
-import { useHistory } from '@/hooks/use-history.ts'
+import { useHistory } from '@/components/_hooks/use-history.ts'
 import Size from '@/components/header/Size.tsx'
 import { useNavigate } from 'react-router-dom'
 

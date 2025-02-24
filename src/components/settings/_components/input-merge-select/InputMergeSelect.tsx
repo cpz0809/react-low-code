@@ -1,5 +1,5 @@
 import { Select, InputNumber } from 'antd'
-import { useStyleCollect } from '@/hooks/use-style-collect.ts'
+import { useStyleCollect } from '@/components/_hooks/use-style-collect.ts'
 import { useState } from 'react'
 
 export type UnitType = 'px' | '%'

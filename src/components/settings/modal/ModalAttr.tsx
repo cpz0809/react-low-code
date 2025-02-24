@@ -1,7 +1,7 @@
 import VariableBindingRow from '@/components/settings/_components/variable-binding-row/VariableBindingRow.tsx'
 import { ModalAttrEnum, ModalAttrType } from './type.ts'
 import { Input, Switch } from 'antd'
-import { useAttrCollect } from '@/hooks/use-attr-collect.ts'
+import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
 import { PaneItemType } from '@/components/_types/util.ts'
 
 const ModalAttr = ({ data }: { data: PaneItemType<ModalAttrType> }) => {

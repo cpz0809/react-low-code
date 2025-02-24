@@ -13,7 +13,7 @@ import OpacitySlider from '@/components/settings/_components/opacity-slider/Opac
 import { ColorPicker, InputNumber, Select, Space } from 'antd'
 import { useState } from 'react'
 import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
-import { useStyleCollect } from '@/hooks/use-style-collect.ts'
+import { useStyleCollect } from '@/components/_hooks/use-style-collect.ts'
 
 const Border = () => {
   const prefixCls = getPrefixCls('edit-style-border')

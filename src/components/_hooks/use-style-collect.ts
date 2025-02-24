@@ -6,7 +6,7 @@ import { CSSProperties } from 'react'
 import {
   differentiate,
   StyleEnum
-} from '@/components/settings/_components/_types/styleEnum'
+} from '@/components/settings/_components/_types/styleEnum.ts'
 
 /**
  * 组件样式收集
@@ -15,7 +15,12 @@ export const useStyleCollect = () => {
   const dispatch = useDispatch()
   const { currentClick } = useSelector((state: RootState) => state.dragSplice)
 
-  // 收集
+  /**
+   * 设置组件属性
+   * @param value 属性value
+   * @param key 属性值
+   * @param suffix 单位
+   */
   const collect = (
     value: string | number | null,
     key?: string,
@@ -55,7 +60,13 @@ export const useStyleCollect = () => {
       update(strToCSSProperties(value))
     }
   }
-  // 更新单位
+  /**
+   *  更新单位
+   * @param key 需要更新的属性key
+   * @param oldUnit 旧单位
+   * @param newUnit 新单位
+   * @param attrPosition  单位位置
+   */
   const updateUnit = (
     key: string,
     oldUnit: string,

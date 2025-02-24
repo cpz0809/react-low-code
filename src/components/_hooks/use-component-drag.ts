@@ -1,5 +1,5 @@
 import { computedOffset } from '@/components/board/simulator/_util/computedOffset.ts'
-import { filterFromDom, FilterFromDomRes } from '@/util/node'
+import { filterFromDom, FilterFromDomRes } from '@/util/node.ts'
 import { RootState } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import {
   CurrentBaseAttr,
   CurrentDropDirection
 } from '@/components/board/simulator/_type/type.ts'
-import { OffsetProps } from '@/store/_types/drag'
+import { OffsetProps } from '@/store/_types/drag.ts'
 
 const defaultBoardAttr: CurrentBaseAttr = {
   width: 0,

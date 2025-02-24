@@ -5,8 +5,8 @@ import {
   updateParams
 } from '@/store/modules/drag.ts'
 import { RootState } from '@/store'
-import { isObject } from '@/util/is'
-import { addOrEditVariable, addVariableMap } from '@/store/modules/context'
+import { isObject } from '@/util/is.ts'
+import { addOrEditVariable, addVariableMap } from '@/store/modules/context.ts'
 import { PaneItemEditKey } from '@/components/_types/util.ts'
 
 export const useAttrCollect = () => {
