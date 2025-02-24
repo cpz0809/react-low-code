@@ -1,10 +1,12 @@
 import './style/index.scss'
 import { getPrefixCls } from '@/util/global-config'
 import { Modal } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { VariableBindingProps } from './type'
 import { useAttrCollect } from '@/hooks/use-attr-collect'
 import { VariableSingleProps } from '@/store/_types/context'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const VariableBinding = ({
   visible,
@@ -14,9 +16,35 @@ const VariableBinding = ({
   onSuccess
 }: VariableBindingProps) => {
   const { binding, mergeSelect } = useAttrCollect()
+
+  const { apiData, stateData } = useSelector(
+    (state: RootState) => state.contextSlice
+  )
+  const { currentClick } = useSelector((state: RootState) => state.dragSplice)
   const prefixCls = getPrefixCls('variable-binding')
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [activeCode, setActiveCode] = useState<any>(null)
+
+  useEffect(() => {
+    if (!currentClick || !currentClick.loop) return
+    if (Array.isArray(currentClick.loop)) return
+    let data
+    if (currentClick.loop.category === 1) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      data = stateData.find((item) => item.code === currentClick.loop.code)
+      setActiveIndex(1)
+    }
+
+    if (currentClick.loop.category === 2) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      data = apiData.find((item) => item.code === currentClick.loop.code)
+      setActiveIndex(0)
+    }
+    if (!data) return
+    setActiveCode(data.code)
+  }, [])
 
   const handleOk = () => {
     const data = mergeSelect[activeIndex].data.find(
@@ -25,7 +53,7 @@ const VariableBinding = ({
     if (!data) return
     binding(
       paramsKey,
-      activeIndex === 0 ? 'api' : 'state',
+      activeIndex === 0 ? 'api' : 'variable',
       (data as VariableSingleProps).code,
       isChangeAttr
     )

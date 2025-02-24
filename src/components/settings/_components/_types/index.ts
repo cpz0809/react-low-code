@@ -1,7 +1,4 @@
-import {
-  EditableTypeItem,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
 
 export interface Props<T = any> {
   type: EditableTypeItem

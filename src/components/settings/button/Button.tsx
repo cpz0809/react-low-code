@@ -1,7 +1,4 @@
-import {
-  EditableTypeItem,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
 import ButtonAttr from './ButtonAttr'
 import { ButtonAttrType } from './type.ts'
 

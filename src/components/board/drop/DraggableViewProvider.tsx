@@ -9,10 +9,7 @@ import {
   Button
 } from '../../compt/index.ts'
 import Main from '@/components/compt/main/Main.tsx'
-import {
-  PaneItemType,
-  PaneItemTypes
-} from '@/components/_types/util.ts'
+import { PaneItemType, PaneItemTypes } from '@/components/_types/util.ts'
 import { ComponentType, ReactElement } from 'react'
 
 const componentMap: Record<

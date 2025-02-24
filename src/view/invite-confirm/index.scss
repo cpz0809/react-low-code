@@ -1,9 +1,8 @@
-
 .invite-confirm-container {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("../../assets/image/invite-confirm-bg.png");
+  background-image: url('../../assets/image/invite-confirm-bg.png');
   background-size: cover;
   cursor: default;
   text-align: center;
@@ -19,13 +18,11 @@
     .invite-confirm-logo {
       display: block;
       margin: 0 auto 30px;
-
     }
 
     .invite-confirm-logo-team-icon {
       display: block;
       margin: 0 auto 24px;
-
     }
 
     .invite-confirm-team-name {
@@ -36,7 +33,7 @@
 
     .invite-confirm-text {
       font-size: 16px;
-      color: #4B5563;
+      color: #4b5563;
       padding-bottom: 48px;
     }
 
@@ -57,7 +54,7 @@
 
       .invite-confirm-n {
         border-radius: 4px;
-        border: 1px solid #E5E7EB !important;
+        border: 1px solid #e5e7eb !important;
         background-color: white;
       }
     }

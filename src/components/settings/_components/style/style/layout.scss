@@ -1,7 +1,6 @@
-$edit-style-layout-prefix-cls: "edit-style-layout";
+$edit-style-layout-prefix-cls: 'edit-style-layout';
 
 .#{$edit-style-layout-prefix-cls} {
-
   .#{$edit-style-layout-prefix-cls}-distance {
     position: relative;
     width: 100%;
@@ -71,7 +70,7 @@ $edit-style-layout-prefix-cls: "edit-style-layout";
 
       span {
         font-size: 12px;
-        transform: scale(.75);
+        transform: scale(0.75);
         margin-bottom: -20px;
         float: left;
       }
@@ -142,7 +141,7 @@ $edit-style-layout-prefix-cls: "edit-style-layout";
 
       span {
         font-size: 12px;
-        transform: scale(.75);
+        transform: scale(0.75);
         margin-bottom: -20px;
         float: left;
       }

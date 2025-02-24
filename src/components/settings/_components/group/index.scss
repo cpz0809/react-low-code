@@ -1,11 +1,11 @@
-$row-prefix-cls: "group";
+$row-prefix-cls: 'group';
 
 .#{$row-prefix-cls}-container {
   display: flex;
   flex: 1;
 
   .#{$row-prefix-cls}-item {
-    border: 1px solid #C4C6CF;
+    border: 1px solid #c4c6cf;
     cursor: pointer;
     font-size: 12px;
     flex: 1;
@@ -18,7 +18,7 @@ $row-prefix-cls: "group";
     }
 
     &:hover {
-      background-color: #F2F3F7;
+      background-color: #f2f3f7;
     }
 
     &-active {
@@ -31,5 +31,4 @@ $row-prefix-cls: "group";
       }
     }
   }
-
 }

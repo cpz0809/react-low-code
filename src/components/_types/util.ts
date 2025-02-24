@@ -1,5 +1,6 @@
 import React from 'react'
 import { HistoryEnum } from '@/store/_types/history.ts'
+import { VariableSingleProps } from '@/store/_types/context.ts'
 
 // 组件类型枚举
 export enum PaneItemTypes {
@@ -40,8 +41,6 @@ export type PaneItemEditKey =
   | 'methods'
   | 'className'
 
-export type LoopType = { type: number; value: any }
-
 // 单个元素类型
 export type PaneItemType<T = { [key: string]: any }> = {
   // id
@@ -55,7 +54,7 @@ export type PaneItemType<T = { [key: string]: any }> = {
   // 样式
   style: React.CSSProperties
   // 类名
-  className: string
+  className: string | null
   // 子组件
   children: any
   // 父元素id
@@ -71,7 +70,7 @@ export type PaneItemType<T = { [key: string]: any }> = {
   // 元素类型
   categoryType: CategoryEnum
   // 循环数据
-  loop: LoopType | null
+  loop: VariableSingleProps | any[] | null
   // 可绑定事件
   selectableEvent: string[]
   // 绑定的事件

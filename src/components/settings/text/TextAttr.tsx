@@ -7,8 +7,6 @@ import VariableBindingRow from '../_components/variable-binding-row/VariableBind
 
 const { TextArea } = Input
 
-
-
 const TitleAttr = ({ data }: { data: PaneItemType<TextNodeAttrType> }) => {
   const { children, isMark, isCode, isDel, isU, isStrong } = data.attr
   const { collect } = useAttrCollect()

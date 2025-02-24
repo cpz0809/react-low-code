@@ -1,4 +1,4 @@
-$header-prefix-cls: "header";
+$header-prefix-cls: 'header';
 
 .#{$header-prefix-cls}-container {
   display: flex;
@@ -12,7 +12,6 @@ $header-prefix-cls: "header";
     align-items: center;
 
     .#{$header-prefix-cls}-size-select {
-
       span {
         width: 32px;
         height: 32px;
@@ -70,5 +69,4 @@ $header-prefix-cls: "header";
 
 .size-active {
   background-color: $color-background;
-
 }

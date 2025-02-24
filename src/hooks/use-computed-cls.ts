@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
  * @param params 依赖的参数
  */
 export const useComputedCls = (clsArr: any[], params: any[] | any) => {
-
   const [cls, setCls] = useState<string>('')
   const deps = Array.isArray(params) ? params : [params]
 

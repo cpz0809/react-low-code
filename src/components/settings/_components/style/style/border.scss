@@ -1,8 +1,7 @@
-$edit-style-border-prefix-cls: "edit-style-border";
+$edit-style-border-prefix-cls: 'edit-style-border';
 
 .#{$edit-style-border-prefix-cls} {
   .#{$edit-style-border-prefix-cls}-group {
-
     .label-title {
       width: auto;
     }
@@ -16,5 +15,3 @@ $edit-style-border-prefix-cls: "edit-style-border";
     }
   }
 }
-
-

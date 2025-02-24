@@ -21,7 +21,7 @@ const VariableBindingRow = ({
     null
   )
   const handleDropDownClick: MenuProps['onClick'] = ({ key }) => {
-    if (key === 'state') {
+    if (key === 'variable') {
       setVisible(true)
     }
     setSelectedKeys([key])

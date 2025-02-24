@@ -3,10 +3,7 @@ import { Menu } from 'antd'
 import './indes.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import {
-  CategoryEnum,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { CategoryEnum, PaneItemType } from '@/components/_types/util.ts'
 import { insert, setPasteboard } from '@/store/modules/drag.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import { ContextMenuProps } from '@/components/board/simulator/_component/context-menu/type.ts'

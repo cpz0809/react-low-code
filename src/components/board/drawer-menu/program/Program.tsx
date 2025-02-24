@@ -58,7 +58,7 @@ const Program = () => {
   }
   const traverse = (str: string, node: any) => {
     node.body.body.forEach((child: any) => {
-      if (child.type === 'ClassProperty' && child.key.name === 'state') {
+      if (child.type === 'ClassProperty' && child.key.name === 'variable') {
         // 获取state字符串
         const stateStr = str.substring(child.start, child.end)
         // 将前后{}去掉取出内容
@@ -93,7 +93,7 @@ const Program = () => {
       } else {
         dispatch(
           addOrEditVariable({
-            type: 'state',
+            type: 'variable',
             data: {
               code: '',
               name: item.key,

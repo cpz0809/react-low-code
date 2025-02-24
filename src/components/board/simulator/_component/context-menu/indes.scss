@@ -14,7 +14,8 @@ $simulator-prefix-cls: 'simulator';
     }
   }
 
-  .ant-menu-item, .ant-menu-submenu {
+  .ant-menu-item,
+  .ant-menu-submenu {
     height: 28px;
     line-height: 28px;
   }
@@ -24,6 +25,3 @@ $simulator-prefix-cls: 'simulator';
     line-height: 28px !important;
   }
 }
-
-
-

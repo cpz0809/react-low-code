@@ -10,6 +10,6 @@ export interface ProjectItem extends CommonType {
 }
 
 export interface CanvasElement extends ProjectItem {
-  image:  HTMLImageElement
+  image: HTMLImageElement
   isSelected: boolean
 }

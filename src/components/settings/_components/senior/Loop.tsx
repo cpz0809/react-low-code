@@ -6,6 +6,7 @@ import MonacoEdit from '@monaco-editor/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentClick, updateParams } from '@/store/modules/drag'
 import { RootState } from '@/store'
+import { EditFilled } from '@ant-design/icons'
 
 const Loop = () => {
   const dispatch = useDispatch()
@@ -18,10 +19,7 @@ const Loop = () => {
       updateParams({
         uuid: currentClick.uuid,
         key: 'loop',
-        params: {
-          type: 0,
-          value: JSON.parse(editorValue)
-        }
+        params: JSON.parse(editorValue)
       })
     )
     dispatch(setCurrentClick(null))
@@ -35,27 +33,61 @@ const Loop = () => {
     if (!e) return
     setEditorValue(e)
   }
+
+  const renderBinding = () => {
+    if (!currentClick) return <></>
+
+    if (!currentClick.loop) return bindingButton()
+
+    if (Array.isArray(currentClick.loop)) return editBindingButton()
+  }
+
+  const bindingButton = () => (
+    <Button
+      size="small"
+      type="default"
+      onClick={() => {
+        setVisible(true)
+        setEditorValue(
+          currentClick?.loop ? JSON.stringify(currentClick?.loop) : ''
+        )
+      }}
+    >
+      绑定数据
+    </Button>
+  )
+
+  const editBindingButton = () => (
+    <Button
+      icon={<EditFilled />}
+      size="small"
+      type="primary"
+      onClick={() => {
+        setVisible(true)
+        setEditorValue(
+          currentClick?.loop ? JSON.stringify(currentClick?.loop) : ''
+        )
+      }}
+    >
+      修改数据
+    </Button>
+  )
+
   return (
     <>
-      <EditCollapse title="循环" isCollapse={true} isConfig={false}>
+      <EditCollapse
+        title="循环"
+        isCollapse={true}
+        isConfig={false}
+        paramsKey="loop"
+      >
         <VariableBindingRow
           isDropdown={true}
           title="循环数据"
           paramsKey="loop"
           isChangeAttr={false}
         >
-          <Button
-            size="small"
-            onClick={() => {
-              setVisible(true)
-              setEditorValue(
-                currentClick?.loop ? JSON.stringify(currentClick?.loop) : ''
-              )
-            }}
-            type={currentClick?.loop ? 'primary' : 'default'}
-          >
-            绑定数据
-          </Button>
+          {renderBinding()}
         </VariableBindingRow>
       </EditCollapse>
 

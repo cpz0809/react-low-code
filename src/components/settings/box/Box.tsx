@@ -1,7 +1,4 @@
-import {
-  EditableTypeItem,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
 import BoxAttr from '@/components/settings/box/BoxAttr.tsx'
 import { ButtonAttrType } from '@/components/settings/button/type.ts'
 

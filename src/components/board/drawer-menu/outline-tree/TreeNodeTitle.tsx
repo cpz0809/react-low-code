@@ -1,7 +1,4 @@
-import {
-  PaneItemType,
-  PaneItemTypes
-} from '@/components/_types/util.ts'
+import { PaneItemType, PaneItemTypes } from '@/components/_types/util.ts'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { remove, updateParams } from '@/store/modules/drag.ts'
 import {

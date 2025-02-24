@@ -18,7 +18,7 @@ const initialState: ContextStateProps = {
 }
 
 const variableSlice = createSlice({
-  name: 'state',
+  name: 'variable',
   initialState,
   reducers: {
     // 设置api数据
@@ -32,7 +32,7 @@ const variableSlice = createSlice({
     // 添加或修改
     addOrEditVariable(state, action: PayloadAction<AddOrEditVariableProps>) {
       const { type, data } = action.payload
-      if (type === 'state') {
+      if (type === 'variable') {
         addOrEdit<VariableSingleProps>(
           data as VariableSingleProps,
           state.stateData
@@ -44,7 +44,7 @@ const variableSlice = createSlice({
     // 删除
     delVariable(state, action: PayloadAction<DelVariableProps>) {
       const { type, code } = action.payload
-      if (type === 'state') {
+      if (type === 'variable') {
         delData<VariableSingleProps>(code, state.stateData)
       } else if (type === 'api') {
         delData<ApiSingleProps>(code, state.apiData)

@@ -18,6 +18,6 @@ const columns: FormItem[] = [
   {
     label: 'text',
     type: 'Input',
-    typeExtend: "number"
+    typeExtend: 'number'
   }
 ]

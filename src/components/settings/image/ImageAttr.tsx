@@ -4,7 +4,6 @@ import { PaneItemType } from '@/components/_types/util.ts'
 import { ImageAttrEnum, ImageAttrType } from './type.ts'
 import VariableBindingRow from '../_components/variable-binding-row/VariableBindingRow'
 
-
 const ImageAttr = ({ data }: { data: PaneItemType<ImageAttrType> }) => {
   const { collect, mapValue } = useAttrCollect()
   const { src, title, alt } = mapValue(data.attr)

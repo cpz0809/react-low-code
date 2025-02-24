@@ -1,7 +1,6 @@
-$edit-style-font-prefix-cls: "edit-style-background";
+$edit-style-font-prefix-cls: 'edit-style-background';
 
 .#{$edit-style-font-prefix-cls} {
-
   .#{$edit-style-font-prefix-cls}-content {
     .color-picker {
       margin-left: 50px;
@@ -28,18 +27,17 @@ $edit-style-font-prefix-cls: "edit-style-background";
       padding-right: 20px;
 
       .position-item {
-        border: 1px solid #C4C6CF;
+        border: 1px solid #c4c6cf;
         text-align: center;
         cursor: pointer;
 
         &:hover {
-          background-color: #F2F3F7;
+          background-color: #f2f3f7;
         }
       }
     }
 
     .position-size {
-
       .input-item {
         padding-bottom: 10px;
 
@@ -49,7 +47,6 @@ $edit-style-font-prefix-cls: "edit-style-background";
       }
     }
   }
-
 
   .input-item {
     display: flex;

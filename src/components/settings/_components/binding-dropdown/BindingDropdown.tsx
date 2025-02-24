@@ -9,7 +9,7 @@ const BindingDropdown = ({ onClick, selectedKeys }: BindingDropdownProps) => {
       label: '静态变量'
     },
     {
-      key: 'state',
+      key: 'variable',
       label: '动态变量'
     }
   ]

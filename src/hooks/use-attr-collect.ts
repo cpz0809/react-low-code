@@ -18,7 +18,7 @@ export const useAttrCollect = () => {
 
   const mergeSelect = [
     {
-      key: 'state',
+      key: 'variable',
       name: '变量数据',
       data: apiData
     },
@@ -31,29 +31,34 @@ export const useAttrCollect = () => {
 
   /**
    * 属性绑定
+   * @param type 绑定的数据来源 1变量 2接口
    * @param paramsKey 属性key
    * @param source  属性值
-   * @param uuid 组件id
-   * @param isChangeAttr 是否批量绑定
+   * @param code 数据code
+   * @param isChangeAttr 是否修改自定义属性
    */
   const binding = (
     paramsKey: string,
     source: string,
-    uuid: string,
+    code: string,
     isChangeAttr: boolean
   ) => {
     if (!currentClick) return
+
     dispatch(
       addVariableMap({
         uuid: currentClick.uuid,
-        stateUuid: uuid,
+        stateUuid: code,
         attr: paramsKey
       })
     )
-
-    !isChangeAttr
-      ? updateOther(paramsKey, { source, uuid })
-      : updateAttr({ [paramsKey]: { source: source, uuid } })
+    // 处理自定义属性
+    if (isChangeAttr) {
+      updateAttr({ [paramsKey]: { source, code } })
+      return
+    }
+    // 处理自带属性
+    updateOther(paramsKey, { source, code })
   }
 
   /**
@@ -82,7 +87,7 @@ export const useAttrCollect = () => {
           if (!oldData) return
           dispatch(
             addOrEditVariable({
-              type: 'state',
+              type: 'variable',
               data: {
                 ...oldData,
                 value
@@ -153,9 +158,10 @@ export const useAttrCollect = () => {
     // 如果不是Object | Array不需要映射
     if (!isObject(attr)) return attr
     // 处理如loop hidden等属性映射
-    if (attr.source && attr.uuid) {
+    if (attr.source && attr.code) {
       return toValue(attr)
     }
+    if (Array.isArray(attr)) return attr
     // 处理 attr:{...{}}
     const temp = { ...attr } as any
     for (const key in temp) {
@@ -164,11 +170,11 @@ export const useAttrCollect = () => {
     }
     return temp
 
-    function toValue(obj: { source: 'state' | 'api'; uuid: string }) {
+    function toValue(obj: { source: 'variable' | 'api'; code: string }) {
       if (!isObject(obj)) return obj
       const temp = { ...obj } as any
-      if (temp.source === 'state') {
-        const data = stateData.find((item) => item.code === temp.uuid)
+      if (temp.source === 'variable') {
+        const data = stateData.find((item) => item.code === temp.code)
         return data?.value
       }
       return null

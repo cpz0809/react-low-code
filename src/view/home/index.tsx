@@ -266,7 +266,10 @@ const Home = () => {
                         }}
                         onOpenChange={() => setCurrentProject(item.code)}
                       >
-                        <MoreOutlined onClick={(e) => e.stopPropagation()} className="project-page-item-actions" />
+                        <MoreOutlined
+                          onClick={(e) => e.stopPropagation()}
+                          className="project-page-item-actions"
+                        />
                       </Dropdown>
                     </div>
                   </div>

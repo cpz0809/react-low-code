@@ -1,8 +1,5 @@
 import ModalAttr from '@/components/settings/modal/ModalAttr.tsx'
-import {
-  EditableTypeItem,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
 import { ModalAttrType } from './type.ts'
 
 class Modal {

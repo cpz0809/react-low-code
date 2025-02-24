@@ -24,7 +24,7 @@ const Setting = () => {
   const [form, setForm] = useState<TeamItem>({ ...defaultForm })
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await init()
     })()
   }, [])

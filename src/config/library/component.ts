@@ -5,6 +5,7 @@ import {
 } from '@/components/_types/util.ts'
 import { HistoryEnum } from '@/store/_types/history'
 import typeMapConfig from './typeMapConfig'
+
 const defaultAttr = {
   style: {},
   uuid: '',
@@ -17,10 +18,10 @@ const defaultAttr = {
   loop: null,
   selectableEvent: ['onClick'],
   methods: {},
-  className: ''
+  className: null
 }
 
-const MainConfig: PaneItemType = {
+export const MainConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Main,
   name: '页面',
@@ -34,7 +35,7 @@ const MainConfig: PaneItemType = {
   selectableEvent: []
 }
 
-const BoxConfig: PaneItemType = {
+export const BoxConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Box,
   name: 'Box',
@@ -42,7 +43,7 @@ const BoxConfig: PaneItemType = {
   categoryType: CategoryEnum.container
 }
 
-const ButtonConfig: PaneItemType = {
+export const ButtonConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Button,
   name: '按钮',
@@ -55,7 +56,7 @@ const ButtonConfig: PaneItemType = {
   }
 }
 
-const ImageConfig: PaneItemType = {
+export const ImageConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Image,
   name: '图片',
@@ -65,7 +66,7 @@ const ImageConfig: PaneItemType = {
   }
 }
 
-const TitleConfig: PaneItemType = {
+export const TitleConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Title,
   name: '标题',
@@ -76,7 +77,7 @@ const TitleConfig: PaneItemType = {
   selectableEvent: ['onClick']
 }
 
-const TextConfig: PaneItemType = {
+export const TextConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Text,
   name: '正文',
@@ -86,7 +87,7 @@ const TextConfig: PaneItemType = {
   }
 }
 
-const ModalConfig: PaneItemType = {
+export const ModalConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Modal,
   name: '高级对话框',
@@ -100,7 +101,7 @@ const ModalConfig: PaneItemType = {
   selectableEvent: ['onOk', 'onCancel', 'onClose']
 }
 
-const DrawerConfig: PaneItemType = {
+export const DrawerConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Drawer,
   name: '高级抽屉',
@@ -112,7 +113,7 @@ const DrawerConfig: PaneItemType = {
   }
 }
 
-const TabsConfig: PaneItemType = {
+export const TabsConfig: PaneItemType = {
   ...defaultAttr,
   ...typeMapConfig.Tabs,
   name: '选项卡',
@@ -130,7 +131,7 @@ const TabsConfig: PaneItemType = {
   }
 }
 
-export {
+const library = {
   MainConfig,
   BoxConfig,
   ButtonConfig,
@@ -141,3 +142,5 @@ export {
   ModalConfig,
   TabsConfig
 }
+
+export default library

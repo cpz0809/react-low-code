@@ -1,4 +1,4 @@
-$esa-prefix-cls: "esa";
+$esa-prefix-cls: 'esa';
 
 .#{$esa-prefix-cls}-container {
   position: relative;
@@ -7,7 +7,7 @@ $esa-prefix-cls: "esa";
 
   .#{$esa-prefix-cls}-empty {
     padding-top: 50px;
-    color: rgba(0, 0, 0, .6);
+    color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
     text-align: center;
   }

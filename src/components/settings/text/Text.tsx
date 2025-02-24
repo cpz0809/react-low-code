@@ -1,9 +1,6 @@
 import TextAttr from './TextAttr'
 import { TextNodeAttrType } from './type.ts'
-import {
-  EditableTypeItem,
-  PaneItemType
-} from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
 
 class Text {
   static of(data: PaneItemType<TextNodeAttrType>, type: EditableTypeItem) {

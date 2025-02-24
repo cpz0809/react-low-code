@@ -22,6 +22,7 @@ export interface VariableSingleProps {
   type: StateTypeKeys
   value: any
   illustrate: string
+  category?: number
 }
 
 export interface EditStateProps {
@@ -40,10 +41,10 @@ export interface ApiSingleProps {
   isAutoRequest: boolean
 }
 
-export type VariableType = 'state' | 'api'
+export type VariableType = 'variable' | 'api'
 
 export type AddOrEditVariableProps =
-  | { type: 'state'; data: VariableSingleProps }
+  | { type: 'variable'; data: VariableSingleProps }
   | { type: 'api'; data: ApiSingleProps }
 
 export interface DelVariableProps {

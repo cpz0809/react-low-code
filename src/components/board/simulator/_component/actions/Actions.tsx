@@ -10,7 +10,6 @@ import { ActionsProps } from '../../_type/type.ts'
 import './index.scss'
 
 const Actions = ({ current, copy, remove, tree }: ActionsProps) => {
-
   const dispatch = useDispatch()
   const prefix = getPrefixCls('simulator')
 
