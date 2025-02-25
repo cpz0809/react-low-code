@@ -50,9 +50,7 @@ const Style = () => {
         <div className={`${prefixCls}-title`}>行内样式</div>
       </div>
       <div className={`${prefixCls}-body`}>
-        <div className={`${prefixCls}-code-edit-region`}>
-          <EditorCode />
-        </div>
+        <EditorCode />
 
         <div className={`${prefixCls}-collapse`}>
           <Collapse size="small" items={items} />

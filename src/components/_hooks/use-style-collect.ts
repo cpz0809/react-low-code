@@ -30,10 +30,7 @@ export const useStyleCollect = () => {
     if (typeof value === 'number') {
       if (!key) return
       // 处理类似opacity属性不需要单位
-      if (suffix === '') {
-        update(strToCSSProperties(`${key}:${value}`))
-        return
-      }
+      if (suffix === '') return update(strToCSSProperties(`${key}:${value}`))
       // 从组件中获取样式 如果没有说明不存在样式 使用默认单位
       const unit = (currentClick.style as any)[key]
       // 如果没有获取到使用默认单位
@@ -143,11 +140,29 @@ export const useStyleCollect = () => {
       })
     )
   }
+
+  const clearStyle = () => {
+    if (!currentClick) return
+    dispatch(
+      updateParams({
+        uuid: currentClick.uuid,
+        key: 'style',
+        params: {}
+      })
+    )
+    dispatch(
+      updateCurrentClick({
+        key: 'style',
+        params: {}
+      })
+    )
+  }
   return {
     collect,
     matchingStyle,
     matchingUnit,
     updateUnit,
+    clearStyle,
     isStyleActive,
     isAttrActive
   }

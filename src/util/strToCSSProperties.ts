@@ -14,7 +14,7 @@ export const strToCSSProperties = (str: string): CSSProperties => {
       return combinationStr(str)
     // 在之前需要将-前所有都转驼峰 border-top-left-radius background-color ...
     const temp = str.split(':')
-    return combinationStr(`${strToHumpName(temp[0])}:${temp[1]}`)
+    return combinationStr(`${temp[0]}:${temp[1]}`)
   }
   // 未出现 说明是 width || height...
   return combinationStr(str)

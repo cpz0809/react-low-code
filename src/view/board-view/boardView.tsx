@@ -80,7 +80,7 @@ const BoardView = () => {
       ...item,
       ...(typeMapConfig as any)[item.type],
       style: JSON.parse(item.style),
-      attr: JSON.parse(item.attribute),
+      attr: JSON.parse(item.attr),
       loop: queryLoopDataByCode(item.loop),
       children: [],
       categoryType: Object.values(componentLibrary).find(
@@ -126,7 +126,7 @@ const BoardView = () => {
       ...item,
       pageCode,
       style: JSON.stringify(item.style),
-      attribute: JSON.stringify(item.attr),
+      attr: JSON.stringify(item.attr),
       loop: dataTypeChangeNewData(item.loop as any)
     }))
     await saveComponent(map)

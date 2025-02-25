@@ -11,7 +11,7 @@ import {
   ViewStateType
 } from '../_types/drag'
 import { MainConfig } from '@/config/library/component'
-//
+
 const initialState: ViewStateType = {
   // 存放组件列表
   itemList: [],

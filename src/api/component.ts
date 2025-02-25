@@ -7,3 +7,6 @@ export const queryComponentList = <T>(pageCode: string): Promise<T> =>
 // 保存组件
 export const saveComponent = (data: any) =>
   request.post('/component/save', data)
+
+export const updateComponentStyle = (data: any) =>
+  request.post('/component/update/style', data)

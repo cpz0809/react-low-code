@@ -34,13 +34,6 @@ $edit-style-field-prefix-cls: 'edit-style-field';
     flex-direction: column;
     height: calc(100% - 32px);
 
-    .#{$edit-style-field-prefix-cls}-code-edit-region {
-      width: 100%;
-      height: 100px;
-      margin-bottom: 10px;
-      border: 1px solid #000000;
-    }
-
     .#{$edit-style-field-prefix-cls}-collapse {
       overflow-y: auto;
       flex: 1;

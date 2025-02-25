@@ -1,0 +1,19 @@
+$edit-style-field-region-cls: 'edit-style-field-region';
+
+.#{$edit-style-field-region-cls} {
+
+  height: 160px;
+
+  .#{$edit-style-field-region-cls}-tool {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 6px;
+  }
+
+  .#{$edit-style-field-region-cls}-edit {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+  }
+}

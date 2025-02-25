@@ -31,6 +31,7 @@ import {
   setContextMenuVisible,
   setMenuVisible
 } from '@/store/modules/view'
+import { strToHumpName } from '@/util/strToCSSProperties.ts'
 
 const DraggableView = ({
   item,
@@ -212,6 +213,14 @@ const DraggableView = ({
     dragPreview(getEmptyImage(), { captureDraggingState: true })
   }, [])
 
+  const renderStyle = (style: any) => {
+    const temp: any = {}
+    for (const key in style) {
+      temp[strToHumpName(key)] = style[key]
+    }
+    return temp
+  }
+
   const render = () => {
     const props = {
       componentid: item.uuid,
@@ -220,7 +229,7 @@ const DraggableView = ({
       onMouseOut: handleMouseOut,
       onClick: handleClick,
       onContextMenu: handleContentMenu,
-      style: { ...item.style }
+      style: renderStyle(item.style)
     }
 
     const mappingValueToBaseValue = (data: PaneItemType) => ({
