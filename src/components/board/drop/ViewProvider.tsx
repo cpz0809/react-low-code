@@ -5,7 +5,7 @@ import { isObject } from '@/util/is.ts'
 
 const ViewProvider = (item: PaneItemType) => {
   const provider = (uuid: string) =>
-    !item.hidden && (
+    item.hidden === 1 && (
       <Fragment key={uuid}>{BaseDraggableViewProvider.of(item)}</Fragment>
     )
 

@@ -8,5 +8,14 @@ export const queryComponentList = <T>(pageCode: string): Promise<T> =>
 export const saveComponent = (data: any) =>
   request.post('/component/save', data)
 
+// 修改组件样式
 export const updateComponentStyle = (data: any) =>
   request.post('/component/update/style', data)
+
+// 修改组件样式
+export const updateComponentName = (data: any) =>
+  request.post('/component/update/name', data)
+
+// 修改组件样式
+export const updateComponentIsShow = (data: any) =>
+  request.post('/component/update/isShow', data)

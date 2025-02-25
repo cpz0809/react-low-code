@@ -1,6 +1,11 @@
 import { PaneItemType, PaneItemTypes } from '@/components/_types/util.ts'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { remove, updateParams } from '@/store/modules/drag.ts'
+import {
+  remove,
+  setCurrentClick,
+  updateCurrentClick,
+  updateParams
+} from '@/store/modules/drag.ts'
 import {
   DownOutlined,
   EyeInvisibleOutlined,
@@ -10,6 +15,7 @@ import {
 } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import React, { useState, useRef, useEffect } from 'react'
+import { updateComponentIsShow, updateComponentName } from '@/api/component.ts'
 
 const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
   const dispatch = useDispatch()
@@ -39,7 +45,7 @@ const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
     editNameRef.current.focus()
     editNameRef.current.select()
   }
-  const handleEditNameInputBlur = () => {
+  const handleEditNameInputBlur = async () => {
     dispatch(
       updateParams({
         uuid: editNameUuid,
@@ -47,7 +53,31 @@ const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
         params: editNameValue
       })
     )
+    dispatch(
+      updateCurrentClick({
+        key: 'name',
+        params: editNameValue
+      })
+    )
+    await updateComponentName({ uuid: editNameUuid, name: editNameValue })
     setEditNameStatus(false)
+  }
+
+  const handleElementIsShow = async (element: PaneItemType) => {
+    if (element.hidden === 0) {
+      setCurrentClick(null)
+    }
+    dispatch(
+      updateParams({
+        uuid: element.uuid,
+        key: 'hidden',
+        params: Number(!element.hidden)
+      })
+    )
+    await updateComponentIsShow({
+      uuid: element.uuid,
+      isShow: Number(!element.hidden)
+    })
   }
 
   const TreeExpand = (item: PaneItemType) =>
@@ -63,17 +93,9 @@ const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
     <div className={`${prefix}-actions`}>
       <div
         className={`${prefix}-action-btn`}
-        onClick={() =>
-          dispatch(
-            updateParams({
-              uuid: item.uuid,
-              key: 'hidden',
-              params: !item.hidden
-            })
-          )
-        }
+        onClick={() => handleElementIsShow(item)}
       >
-        {item.hidden ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+        {item.hidden === 0 ? <EyeOutlined /> : <EyeInvisibleOutlined />}
       </div>
       <div
         className={`${prefix}-action-btn`}

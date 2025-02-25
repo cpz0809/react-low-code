@@ -1,6 +1,7 @@
 import './style/edit-attr-tabs.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
 import { EditableTypeItem } from '@/components/_types/util.ts'
+import { Dispatch, SetStateAction } from 'react'
 
 const tabsNameMap = {
   attr: '属性',
@@ -12,7 +13,7 @@ const tabsNameMap = {
 interface EditAttrTabsProps {
   types: EditableTypeItem[] | null
   activeKey: string
-  setActiveKey: React.Dispatch<React.SetStateAction<EditableTypeItem>>
+  setActiveKey: Dispatch<SetStateAction<EditableTypeItem>>
 }
 
 const EditAttrTabs = ({

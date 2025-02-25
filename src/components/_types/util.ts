@@ -66,7 +66,7 @@ export type PaneItemType<T = { [key: string]: any }> = {
   // 属性
   attr: T
   // 是否显示
-  hidden: boolean
+  hidden: number
   // 元素类型
   categoryType: CategoryEnum
   // 循环数据

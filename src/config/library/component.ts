@@ -13,7 +13,7 @@ const defaultAttr = {
   parentUuid: null,
   operate: null,
   attr: {},
-  hidden: false,
+  hidden: 1,
   categoryType: CategoryEnum.default,
   loop: null,
   selectableEvent: ['onClick'],
