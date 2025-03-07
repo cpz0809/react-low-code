@@ -5,9 +5,7 @@ import DragTips from '../public/drag-tips/DragTips'
 const Box = ({ item }: { item: PaneItemType }) => {
   return (
     <DraggableView item={item}>
-      <div>
-        <DragTips />
-      </div>
+      <DragTips />
     </DraggableView>
   )
 }

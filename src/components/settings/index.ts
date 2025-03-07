@@ -7,6 +7,7 @@ import Image from './image/Image.tsx'
 import Main from './main/Main.tsx'
 import Box from './box/Box.tsx'
 import Tabs from './tabs/Tabs.tsx'
+import Flex from './flex/Flex.tsx'
 
 export default {
   [PaneItemTypes.Image]: Image,
@@ -16,5 +17,6 @@ export default {
   [PaneItemTypes.Text]: Text,
   [PaneItemTypes.Button]: Button,
   [PaneItemTypes.Box]: Box,
-  [PaneItemTypes.Tabs]: Tabs
+  [PaneItemTypes.Tabs]: Tabs,
+  [PaneItemTypes.Flex]: Flex
 }

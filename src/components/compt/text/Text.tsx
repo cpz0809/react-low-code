@@ -9,7 +9,7 @@ const Text = ({ item }: { item: PaneItemType<TextNodeAttrType> }) => {
       renderChildren()
     }
   }, [])
-
+1
   const renderChildren = () => {
     const { children, isMark, isCode, isDel, isU, isStrong } = item.attr
     let component = <>{children}</>

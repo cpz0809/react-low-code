@@ -131,6 +131,17 @@ export const TabsConfig: PaneItemType = {
   }
 }
 
+export const FlexConfig: PaneItemType = {
+  ...defaultAttr,
+  ...typeMapConfig.Flex,
+  name: '弹性布局',
+  type: PaneItemTypes.Flex,
+  categoryType: CategoryEnum.container,
+  attr: {
+    vertical: false
+  }
+}
+
 const library = {
   MainConfig,
   BoxConfig,
@@ -140,7 +151,8 @@ const library = {
   TextConfig,
   DrawerConfig,
   ModalConfig,
-  TabsConfig
+  TabsConfig,
+  FlexConfig
 }
 
 export default library

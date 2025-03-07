@@ -6,7 +6,8 @@ import {
   Drawer,
   Tabs,
   Box,
-  Button
+  Button,
+  Flex
 } from '../../compt/index.ts'
 import Main from '@/components/compt/main/Main.tsx'
 import { PaneItemType, PaneItemTypes } from '@/components/_types/util.ts'
@@ -24,7 +25,8 @@ const componentMap: Record<
   [PaneItemTypes.Drawer]: Drawer,
   [PaneItemTypes.Tabs]: Tabs,
   [PaneItemTypes.Box]: Box,
-  [PaneItemTypes.Button]: Button
+  [PaneItemTypes.Button]: Button,
+  [PaneItemTypes.Flex]: Flex
 }
 
 export class BaseDraggableViewProvider {

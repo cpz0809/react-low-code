@@ -107,10 +107,7 @@ const DraggableView = ({
     const didDrop = monitor.didDrop()
     if (didDrop) return
     // 组件自定义放置
-    if (onPlace) {
-      onPlace(data)
-      return
-    }
+    if (onPlace) return onPlace(data)
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
       // 如果是容器组件

@@ -12,7 +12,8 @@ export enum PaneItemTypes {
   Drawer = 'Drawer',
   Tabs = 'Tabs',
   Box = 'Box',
-  Button = 'Button'
+  Button = 'Button',
+  Flex = 'Flex'
 }
 
 // 组件分类枚举

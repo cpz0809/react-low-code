@@ -9,7 +9,11 @@ const Modal = ({ item }: { item: PaneItemType }) => {
   )
 
   return (
-    <AntModal {...item.attr} getContainer={containerDom as HTMLDivElement}>
+    <AntModal
+      {...item.attr}
+      zIndex={10}
+      getContainer={containerDom as HTMLDivElement}
+    >
       <DraggableView item={item}>
         <div>
           <DragTips />

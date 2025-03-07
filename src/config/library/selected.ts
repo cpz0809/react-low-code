@@ -1,6 +1,7 @@
 import { GroupPaneType } from '@/components/_types/util.ts'
 import {
   DrawerConfig,
+  FlexConfig,
   ImageConfig,
   ModalConfig,
   TabsConfig,
@@ -16,7 +17,7 @@ const exquisite: GroupPaneType = {
 // 布局容器组件
 const layoutContainer: GroupPaneType = {
   name: '布局容器类',
-  components: [ModalConfig, DrawerConfig, TabsConfig]
+  components: [ModalConfig, DrawerConfig, TabsConfig, FlexConfig]
 }
 
 export default [exquisite, layoutContainer]

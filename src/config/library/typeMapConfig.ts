@@ -7,6 +7,7 @@ import TextIcon from '@/assets/svg/text.svg'
 import modalIcon from '@/assets/svg/modal.svg'
 import tabsIcon from '@/assets/svg/tabs.svg'
 import drawerIcon from '@/assets/svg/drawer.svg'
+import FlexIcon from '@/assets/svg/flex.svg'
 import { EditableTypeItem } from '@/components/_types/util.ts'
 
 type typeMapConfigTypeKey =
@@ -19,6 +20,7 @@ type typeMapConfigTypeKey =
   | 'Modal'
   | 'Drawer'
   | 'Tabs'
+  | 'Flex'
 
 type typeMapConfigType = Record<
   typeMapConfigTypeKey,
@@ -60,6 +62,10 @@ const typeMapConfig: typeMapConfigType = {
   },
   Drawer: {
     svg: drawerIcon,
+    editableType: ['attr', 'style', 'senior']
+  },
+  Flex: {
+    svg: FlexIcon,
     editableType: ['attr', 'style', 'senior']
   }
 }
