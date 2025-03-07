@@ -1,5 +1,5 @@
-import { PaneItemType } from '@/components/_types/util.ts'
-import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
+import { useAttrCollect } from '@/components/board/_hooks/use-attr-collect.ts'
 import { Input, Switch } from 'antd'
 import Group from '../_components/group/Group'
 import { buttonAttrSize, buttonAttrType } from './attr'

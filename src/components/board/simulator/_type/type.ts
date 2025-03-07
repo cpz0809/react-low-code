@@ -1,4 +1,4 @@
-import { PaneItemType } from '../../../_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import React from 'react'
 
 // 基础属性类型

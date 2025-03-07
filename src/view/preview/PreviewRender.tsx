@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { PreviewRenderProps } from './type'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import componentMap from './componentMap.tsx'
 import { arrayToTree } from '@/util/node.ts'
 

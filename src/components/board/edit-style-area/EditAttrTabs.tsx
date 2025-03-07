@@ -1,6 +1,6 @@
 import './style/edit-attr-tabs.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { EditableTypeItem } from '@/components/_types/util.ts'
+import { EditableTypeItem } from '@/components/board/_types/util.ts'
 import { Dispatch, SetStateAction } from 'react'
 
 const tabsNameMap = {

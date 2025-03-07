@@ -1,6 +1,6 @@
 import './style/pane-item.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { PaneItemType } from '../../../_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { useDrag } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import { setMenuVisible } from '@/store/modules/view.ts'

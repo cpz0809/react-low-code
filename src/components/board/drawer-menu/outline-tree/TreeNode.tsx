@@ -1,5 +1,5 @@
 import { getPrefixCls } from '@/util/global-config.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import './style/tree-node.scss'
 import TreeNodeTitle from '@/components/board/drawer-menu/outline-tree/TreeNodeTitle.tsx'
 

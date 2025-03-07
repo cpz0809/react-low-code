@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 export enum HistoryOperateTypeEnum {
   COMPONENT,

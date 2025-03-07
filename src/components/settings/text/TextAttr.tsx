@@ -1,6 +1,6 @@
 import Row from '../_components/row/Row'
-import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { useAttrCollect } from '@/components/board/_hooks/use-attr-collect.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { Switch, Input } from 'antd'
 import { TextAttrEnum, TextNodeAttrType } from './type.ts'
 import VariableBindingRow from '../_components/variable-binding-row/VariableBindingRow'

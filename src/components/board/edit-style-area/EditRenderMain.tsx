@@ -1,8 +1,8 @@
 import { EditViewProvider } from '@/components/settings/EditViewProvider.tsx'
 import { getPrefixCls } from '@/util/global-config.ts'
 import './style/edit-render-main.scss'
-import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
-import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/board/_types/util.ts'
+import { useAttrCollect } from '@/components/board/_hooks/use-attr-collect.ts'
 
 interface EditRenderMainProps {
   paneItem: PaneItemType

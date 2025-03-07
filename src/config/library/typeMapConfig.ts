@@ -8,7 +8,7 @@ import modalIcon from '@/assets/svg/modal.svg'
 import tabsIcon from '@/assets/svg/tabs.svg'
 import drawerIcon from '@/assets/svg/drawer.svg'
 import FlexIcon from '@/assets/svg/flex.svg'
-import { EditableTypeItem } from '@/components/_types/util.ts'
+import { EditableTypeItem } from '@/components/board/_types/util.ts'
 
 type typeMapConfigTypeKey =
   | 'Main'

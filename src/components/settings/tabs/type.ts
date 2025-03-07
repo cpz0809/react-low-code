@@ -1,6 +1,6 @@
 import { TabsType } from 'antd/es/tabs'
 import { SizeType } from 'antd/es/config-provider/SizeContext'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 export interface TabsAttrType {
   activeKey: string

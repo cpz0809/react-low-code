@@ -2,7 +2,7 @@ import {
   CategoryEnum,
   PaneItemType,
   PaneItemTypes
-} from '@/components/_types/util.ts'
+} from '@/components/board/_types/util.ts'
 import { HistoryEnum } from '@/store/_types/history'
 import typeMapConfig from './typeMapConfig'
 

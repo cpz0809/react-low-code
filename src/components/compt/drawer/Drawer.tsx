@@ -1,7 +1,7 @@
 import { Drawer as AntDrawer } from 'antd'
 import DraggableView from '../../board/drop/DraggableView'
 import DragTips from '../public/drag-tips/DragTips'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 const Drawer = ({ item }: { item: PaneItemType }) => {
   const containerDom = document.documentElement.querySelector(

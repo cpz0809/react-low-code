@@ -1,6 +1,6 @@
 import './index.scss'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { useStyleCollect } from '@/components/_hooks/use-style-collect.ts'
+import { useStyleCollect } from '@/components/board/_hooks/use-style-collect.ts'
 
 interface GroupPropsType {
   data: { [key: string]: any }[]

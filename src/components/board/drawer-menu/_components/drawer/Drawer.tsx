@@ -4,9 +4,9 @@ import React, { useRef, useEffect } from 'react'
 import { UnlockOutlined, LockOutlined, CloseOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
-import { useComputedCls } from '@/components/_hooks/use-computed-cls.ts'
+import { useComputedCls } from '@/components/board/_hooks/use-computed-cls.ts'
 import { setBoardWidth, setComLibPaneLockStatus } from '@/store/modules/view.ts'
-import { MOBILEDEFAULTSIZE } from '@/components/_hooks/use-board-width.ts'
+import { MOBILEDEFAULTSIZE } from '@/components/board/_hooks/use-board-width.ts'
 
 interface DrawerProps {
   // 是否显示

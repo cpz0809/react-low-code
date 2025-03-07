@@ -5,7 +5,7 @@ import type { MenuProps } from 'antd'
 import { arrayToTree } from '@/util/node.ts'
 import { useDispatch } from 'react-redux'
 import { setCurrentClick } from '@/store/modules/drag.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { ActionsProps } from '../../_type/type.ts'
 import './index.scss'
 

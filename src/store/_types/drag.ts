@@ -1,4 +1,4 @@
-import { PaneItemEditKey, PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemEditKey, PaneItemType } from '@/components/board/_types/util.ts'
 import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 export interface ViewStateType {

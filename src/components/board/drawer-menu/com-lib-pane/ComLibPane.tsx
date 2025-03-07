@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { setMenuVisible } from '@/store/modules/view.ts'
 import { Collapse as AntCollapse, Tabs } from 'antd'
-import { GroupPaneType } from '../../../_types/util.ts'
+import { GroupPaneType } from '@/components/board/_types/util.ts'
 import { library } from '@/config/library/index.ts'
 
 const ComLibPane = () => {

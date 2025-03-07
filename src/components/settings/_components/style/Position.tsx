@@ -9,7 +9,7 @@ import {
 } from '@/components/settings/_components/style/data/position'
 import { InputNumber } from 'antd'
 import Group from '@/components/settings/_components/group/Group'
-import { useStyleCollect } from '@/components/_hooks/use-style-collect.ts'
+import { useStyleCollect } from '@/components/board/_hooks/use-style-collect.ts'
 import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
 
 const Position = () => {

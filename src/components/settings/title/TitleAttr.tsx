@@ -1,7 +1,7 @@
 import TextArea from 'antd/es/input/TextArea'
 import Row from '../_components/row/Row'
-import { useAttrCollect } from '@/components/_hooks/use-attr-collect.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { useAttrCollect } from '@/components/board/_hooks/use-attr-collect.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { Switch } from 'antd'
 import { TextNodeAttrType } from '../text/type.ts'
 

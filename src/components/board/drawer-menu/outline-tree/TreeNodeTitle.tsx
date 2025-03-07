@@ -1,4 +1,4 @@
-import { PaneItemType, PaneItemTypes } from '@/components/_types/util.ts'
+import { PaneItemType, PaneItemTypes } from '@/components/board/_types/util.ts'
 import { getPrefixCls } from '@/util/global-config.ts'
 import {
   remove,

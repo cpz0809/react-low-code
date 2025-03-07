@@ -1,4 +1,4 @@
-import { GroupPaneType } from '@/components/_types/util.ts'
+import { GroupPaneType } from '@/components/board/_types/util.ts'
 import { BoxConfig, ButtonConfig } from './component'
 
 // 布局容器类

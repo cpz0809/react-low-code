@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import DraggableView from '@/components/board/drop/DraggableView'
 import { ButtonAttrType } from '@/components/settings/button/type.ts'
 import { Button as AntButton } from 'antd'

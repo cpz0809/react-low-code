@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { removeNode, swapNodes, updateNode } from '@/util/node.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { generateParams } from '@/util/generate-params.ts'
 import {
   CurrentDragType,

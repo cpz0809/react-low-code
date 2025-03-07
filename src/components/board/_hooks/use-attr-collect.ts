@@ -7,7 +7,7 @@ import {
 import { RootState } from '@/store'
 import { isObject } from '@/util/is.ts'
 import { addOrEditVariable, addVariableMap } from '@/store/modules/context.ts'
-import { PaneItemEditKey } from '@/components/_types/util.ts'
+import { PaneItemEditKey } from '@/components/board/_types/util.ts'
 
 export const useAttrCollect = () => {
   const dispatch = useDispatch()

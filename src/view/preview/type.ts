@@ -1,4 +1,4 @@
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { ApiSingleProps, VariableSingleProps } from '@/store/_types/context'
 
 export interface PreviewRenderProps {

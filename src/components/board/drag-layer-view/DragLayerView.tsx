@@ -2,7 +2,7 @@ import { useDragLayer } from 'react-dnd'
 import { getPrefixCls } from '@/util/global-config.ts'
 import './index.scss'
 import { XYCoord } from 'react-dnd'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 interface DragLayerType {
   isDragging: boolean

@@ -11,7 +11,7 @@ import {
   setCurrentClick,
   updatePosition
 } from '@/store/modules/drag.ts'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { CurrentDragType } from '@/store/_types/drag.ts'
 import {
   HistoryEnum,

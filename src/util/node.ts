@@ -3,7 +3,7 @@ import {
   CategoryEnum,
   PaneItemType,
   PaneItemTypes
-} from '@/components/_types/util.ts'
+} from '@/components/board/_types/util.ts'
 import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 /**

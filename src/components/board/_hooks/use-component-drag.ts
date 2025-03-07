@@ -3,7 +3,7 @@ import { filterFromDom, FilterFromDomRes } from '@/util/node.ts'
 import { RootState } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import {
   CurrentBaseAttr,
   CurrentDropDirection

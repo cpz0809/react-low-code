@@ -1,4 +1,4 @@
-import { EditableTypeItem, PaneItemType } from '@/components/_types/util.ts'
+import { EditableTypeItem, PaneItemType } from '@/components/board/_types/util.ts'
 import FlexAttr from '@/components/settings/flex/FlexAttr.tsx'
 import { FlexAttrType } from '@/components/settings/flex/type.ts'
 

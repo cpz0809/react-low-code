@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { BaseDraggableViewProvider } from './DraggableViewProvider.tsx'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import { isObject } from '@/util/is.ts'
 
 const ViewProvider = (item: PaneItemType) => {

@@ -1,7 +1,7 @@
 import { TabsProps } from 'antd'
 import { Tabs as AntTabs } from 'antd'
 import DraggableView from '../../board/drop/DraggableView'
-import { PaneItemType } from '@/components/_types/util.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 import DragTips from '@/components/compt/public/drag-tips/DragTips.tsx'
 import { useDispatch } from 'react-redux'
 import {
