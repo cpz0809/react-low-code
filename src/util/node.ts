@@ -97,15 +97,24 @@ export const filterFromDom = (
 
 // 删除节点
 export const removeNode = (uuid: string, arr: PaneItemType[]) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].uuid === uuid) {
-      arr.splice(i, 1)
-      return
-    }
-    if (arr[i].children.length > 0) {
-      removeNode(uuid, arr[i].children)
+  const remove = (uuid: string, arr: PaneItemType[]) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].uuid === uuid) {
+        arr.splice(i, 1)
+        return
+      }
     }
   }
+  const node = arr.find((item) => item.uuid === uuid)
+  if (!node) return null
+  // 如果删除的是父组件 对应的子组件也应该删除
+  const children = arr.filter((children) => children.parentUuid === uuid) as
+    | PaneItemType[]
+    | undefined
+  if (children && children.length > 1) {
+    children.forEach((item) => remove(item.uuid, arr))
+  }
+  remove(node.uuid, arr)
 }
 
 /**
