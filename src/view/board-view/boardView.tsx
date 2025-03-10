@@ -4,9 +4,13 @@ import Header from '@/components/header/Header.tsx'
 import { getPrefixCls } from '@/util/global-config'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, store } from '@/store'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { queryComponentList, saveComponent } from '@/api/component'
+import {
+  queryComponentList,
+  removeComponents,
+  saveComponent
+} from '@/api/component'
 import { message, Spin } from 'antd'
 import { setItemList } from '@/store/modules/drag'
 import typeMapConfig from '@/config/library/typeMapConfig'
@@ -19,21 +23,25 @@ import {
   updateVariable
 } from '@/api/variable.ts'
 import { setApiData, setVariableData } from '@/store/modules/context.ts'
-import { isObject } from '@/util/is.ts'
 import componentLibrary from '@/config/library/component.ts'
+import { saveData } from '@/view/board-view/_util/saveData.ts'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 const BoardView = () => {
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
   const [messageApi, contextHolder] = message.useMessage()
   const component = useSelector((state: RootState) => state.dragSplice.itemList)
+  const prefixCls = getPrefixCls('board-view')
 
+  const copyComponents = useRef<PaneItemType[]>([])
   const [spinTips, setSpinTips] = useState('加载中')
   const [spinning, setSpinning] = useState(false)
 
   const pageCode = searchParams.get('pageCode') as string
 
   useEffect(() => {
+    // eslint-disable-next-line no-extra-semi
     ;(async () => {
       await init()
     })()
@@ -47,16 +55,19 @@ const BoardView = () => {
     await initData()
   }
 
+  // 绑定事件
   const bindingEvent = () => {
     window.addEventListener('keydown', handleSave)
   }
 
+  // 初始化数据
   const initData = async () => {
     await getApiList()
     await getVariableList()
     await getComponentsList()
   }
 
+  // 获取组列表
   const getComponentsList = async () => {
     const data = await queryComponentList<any[]>(
       searchParams.get('pageCode') as string
@@ -87,13 +98,18 @@ const BoardView = () => {
         (component) => component.type === item.type
       )?.categoryType
     }))
+
+    copyComponents.current = map
     dispatch(setItemList(map as any))
   }
+
+  // 获取接口列表
   const getApiList = async () => {
     const res = await queryApiList<ApiSingleProps[]>(pageCode)
     dispatch(setApiData(res))
   }
 
+  // 获取变量列表
   const getVariableList = async () => {
     const res = await queryVariableList<VariableSingleProps[]>(pageCode)
     dispatch(setVariableData(res))
@@ -109,31 +125,20 @@ const BoardView = () => {
     }
   }
 
+  // 保存
   const onSave = async () => {
-    const dataTypeChangeNewData = (
-      loop: any[] | { source: string; code: string } | null
-    ) => {
-      if (!loop) return null
-      if (Array.isArray(loop)) return { type: 0, value: loop }
-      if (isObject(loop))
-        return {
-          type: loop.source === 'variable' ? 1 : 2,
-          value: loop.code
-        }
-      return null
-    }
-    const map = component.map((item) => ({
-      ...item,
-      pageCode,
-      style: JSON.stringify(item.style),
-      attr: JSON.stringify(item.attr),
-      loop: dataTypeChangeNewData(item.loop as any)
-    }))
-    await saveComponent(map)
+    const { update, remove } = saveData(
+      copyComponents.current,
+      component,
+      pageCode
+    )
+    await removeComponents(remove.map((item) => item.uuid))
+    await saveComponent(update)
     setSpinning(false)
     messageApi.success('操作成功')
   }
 
+  // 保存接口数据
   const handleApiSubmit = async (form: ApiSingleProps) => {
     if (form.code) {
       await updateApi({ ...form, pageCode })
@@ -145,6 +150,7 @@ const BoardView = () => {
     return true
   }
 
+  // 删除接口数据
   const handleApiRemove = async (codes: string[]) => {
     await deleteApi(codes)
     await getApiList()
@@ -152,6 +158,7 @@ const BoardView = () => {
     return true
   }
 
+  // 保存变量数据
   const handleVariableSubmit = async (form: any) => {
     if (form.code) {
       await updateVariable({ ...form, pageCode })
@@ -163,14 +170,13 @@ const BoardView = () => {
     return true
   }
 
+  // 删除变量数据
   const handleVariableRemove = async (codes: string[]) => {
     await deleteVariable(codes)
     await getVariableList()
     messageApi.success('操作成功')
     return true
   }
-
-  const prefixCls = getPrefixCls('board-view')
 
   return (
     <div className={`${prefixCls}`}>
