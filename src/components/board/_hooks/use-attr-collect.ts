@@ -166,6 +166,8 @@ export const useAttrCollect = () => {
     const temp = { ...attr } as any
     for (const key in temp) {
       const value = temp[key]
+      // 处理值是嵌套的情况
+      if (isObject(value)) mapValue(value)
       temp[key] = toValue(value)
     }
     return temp
@@ -177,7 +179,7 @@ export const useAttrCollect = () => {
         const data = stateData.find((item) => item.code === temp.code)
         return data?.value
       }
-      return null
+      return obj
     }
   }
   return { collect, binding, mergeSelect, mapValue }
