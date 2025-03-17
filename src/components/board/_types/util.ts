@@ -13,7 +13,8 @@ export enum PaneItemTypes {
   Tabs = 'Tabs',
   Box = 'Box',
   Button = 'Button',
-  Flex = 'Flex'
+  Flex = 'Flex',
+  Dropdown = 'Dropdown'
 }
 
 // 组件分类枚举

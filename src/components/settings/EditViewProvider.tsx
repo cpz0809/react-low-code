@@ -1,4 +1,7 @@
-import { EditableTypeItem, PaneItemType } from '@/components/board/_types/util.ts'
+import {
+  EditableTypeItem,
+  PaneItemType
+} from '@/components/board/_types/util.ts'
 import Style from './_components/style/Style.tsx'
 import Senior from './_components/senior/Senior.tsx'
 import Event from './_components/event/Event.tsx'

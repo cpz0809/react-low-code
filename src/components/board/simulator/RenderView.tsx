@@ -10,7 +10,6 @@ import { PaneItemType } from '@/components/board/_types/util.ts'
 const RenderView = forwardRef((_props, ref) => {
   const prefix = getPrefixCls('simulator')
   const { itemList } = useSelector((state: RootState) => state.dragSplice)
-
   // 渲染子节点
   const renderItem = useCallback((data: PaneItemType) => ViewProvider(data), [])
   return (

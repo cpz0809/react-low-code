@@ -56,6 +56,7 @@ const EditorCode = () => {
 
     setEditorValue(`.element {\n${editorValue}}`)
   }
+
   const handleEditorChange = (e: string | undefined) => {
     if (!e) return
     try {
@@ -108,7 +109,6 @@ const EditorCode = () => {
   const diffStyle = (old: any, newStyle: any) => {
     const diffObj: Record<string, any> = {}
     const oldStyle: Record<string, any> = {}
-
     // 删除
     for (const key in old) {
       const item = splitStyle(old[key])
@@ -146,12 +146,13 @@ const EditorCode = () => {
    */
   const splitStyle = (str: string) => {
     const match = str.match(/^(-?\d+(\.\d+)?)(px|%|em|rem|vh|vw)$/)
-
     if (match)
       return {
         value: Number(match[1]),
         unit: match[3]
       }
+
+    return { value: str, unit: '' }
   }
   return (
     <div className={`${prefixCls}`}>

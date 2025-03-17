@@ -39,6 +39,7 @@ export const useStyleCollect = () => {
       else update(strToCSSProperties(`${key}:${value}${matchingUnit(key)}`))
       return
     }
+
     // 如果value为空需或者属性已经存在删除对应的属性
     if (!value || isStyleActive(value)) {
       const cloneStyle = { ...currentClick.style }

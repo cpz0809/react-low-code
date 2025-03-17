@@ -1,4 +1,6 @@
 export enum StyleEnum {
+  // 布局模式
+  DISPLAY = 'display',
   // 元素宽度
   WIDTH = 'width',
   // 元素高度
@@ -70,5 +72,6 @@ export const differentiate = [
   StyleEnum.BORDERRADIUS,
   StyleEnum.BORDERCOLOR,
   StyleEnum.BORDERSTYLE,
-  StyleEnum.BOXSHADOW
+  StyleEnum.BOXSHADOW,
+  StyleEnum.DISPLAY
 ]

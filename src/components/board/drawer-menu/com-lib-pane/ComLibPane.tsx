@@ -52,7 +52,7 @@ const ComLibPane = () => {
       onclose={() => dispatch(setMenuVisible('paneVisible'))}
     >
       <div className={`${prefixCls}-tabs`}>
-        <Tabs defaultActiveKey="1" items={renderCollapse()} />
+        <Tabs defaultActiveKey="2" items={renderCollapse()} />
       </div>
     </Drawer>
   )

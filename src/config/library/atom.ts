@@ -1,5 +1,5 @@
 import { GroupPaneType } from '@/components/board/_types/util.ts'
-import { BoxConfig, ButtonConfig } from './component'
+import { BoxConfig, ButtonConfig, DropdownConfig } from './component.ts'
 
 // 布局容器类
 const layoutContainer: GroupPaneType = {
@@ -9,7 +9,7 @@ const layoutContainer: GroupPaneType = {
 
 const generalContainer: GroupPaneType = {
   name: '通用',
-  components: [ButtonConfig]
+  components: [ButtonConfig, DropdownConfig]
 }
 
 export default [layoutContainer, generalContainer]

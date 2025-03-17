@@ -142,7 +142,40 @@ export const FlexConfig: PaneItemType = {
   }
 }
 
-const library = {
+export const DropdownConfig: PaneItemType = {
+  ...defaultAttr,
+  ...typeMapConfig.Dropdown,
+  name: '下拉菜单',
+  type: PaneItemTypes.Dropdown,
+  categoryType: CategoryEnum.container,
+  attr: {
+    placement: 'bottomLeft',
+    trigger: ['hover'],
+    menu: {
+      items: [
+        {
+          key: '1',
+          label: '选项1'
+        },
+        {
+          key: '2',
+          label: '选项2'
+        },
+        {
+          key: '3',
+          label: '选项3'
+        },
+        {
+          key: '4',
+          danger: true,
+          label: '选项4'
+        }
+      ]
+    }
+  }
+}
+
+export default {
   MainConfig,
   BoxConfig,
   ButtonConfig,
@@ -152,7 +185,6 @@ const library = {
   DrawerConfig,
   ModalConfig,
   TabsConfig,
-  FlexConfig
+  FlexConfig,
+  DropdownConfig
 }
-
-export default library

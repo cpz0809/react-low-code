@@ -10,7 +10,7 @@ import {
   UpdatePositionProps,
   ViewStateType
 } from '../_types/drag'
-import { MainConfig } from '@/config/library/component'
+import { MainConfig } from '@/config/library/component.ts'
 
 const initialState: ViewStateType = {
   // 存放组件列表

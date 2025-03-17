@@ -4,7 +4,7 @@ export const theme: ThemeConfig = {
   components: {
     Checkbox: {
       colorPrimary: '#3762EC',
-      algorithm: true // 启用算法
+      algorithm: true
     }
   }
 }

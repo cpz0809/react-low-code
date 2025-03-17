@@ -7,7 +7,7 @@ import {
   TabsConfig,
   TextConfig,
   TitleConfig
-} from './component'
+} from './component.ts'
 
 // 基础元素组件
 const exquisite: GroupPaneType = {

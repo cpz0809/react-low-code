@@ -1,48 +1,48 @@
 export const justifyOptions = [
   {
     name: '起始',
-    value: 'flex-start'
+    style: 'flex-start'
   },
   {
     name: '居中',
-    value: 'center'
+    style: 'center'
   },
   {
     name: '尾部',
-    value: 'flex-end'
+    style: 'flex-end'
   },
   {
     name: '两端',
-    value: 'space-between'
+    style: 'space-between'
   },
   {
     name: '两端居中',
-    value: 'space-around'
+    style: 'space-around'
   }
 ]
 
 export const alignOptions = [
   {
     name: '起始',
-    value: 'flex-start'
+    style: 'flex-start'
   },
   {
     name: '居中',
-    value: 'center'
+    style: 'center'
   },
   {
     name: '尾部',
-    value: 'flex-end'
+    style: 'flex-end'
   }
 ]
 
 export const warpOptions = [
-  { name: '换行', value: 'warp' },
-  { name: '反转', value: 'revert' }
+  { name: '换行', style: 'warp' },
+  { name: '反转', style: 'revert' }
 ]
 
 export const gapOptions = [
-  { name: '小', value: 'small' },
-  { name: '中', value: 'middle' },
-  { name: '大', value: 'large' }
+  { name: '小', style: 'small' },
+  { name: '中', style: 'middle' },
+  { name: '大', style: 'large' }
 ]

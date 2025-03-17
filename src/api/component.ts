@@ -19,3 +19,7 @@ export const updateComponentName = (data: any) =>
 // 修改组件样式
 export const updateComponentIsShow = (data: any) =>
   request.post('/component/update/isShow', data)
+
+// 删除组件
+export const removeComponents = (uuids: any) =>
+  request.delete('/component/delete', { data: uuids })

@@ -235,7 +235,6 @@ const DraggableView = ({
     })
 
     if (onRender) return onRender(children, props)
-
     return cloneElement(
       children,
       { ...props },

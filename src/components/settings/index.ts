@@ -8,6 +8,7 @@ import Main from './main/Main.tsx'
 import Box from './box/Box.tsx'
 import Tabs from './tabs/Tabs.tsx'
 import Flex from './flex/Flex.tsx'
+import Dropdown from './dropdown/Dropdown.tsx'
 
 export default {
   [PaneItemTypes.Image]: Image,
@@ -18,5 +19,6 @@ export default {
   [PaneItemTypes.Button]: Button,
   [PaneItemTypes.Box]: Box,
   [PaneItemTypes.Tabs]: Tabs,
-  [PaneItemTypes.Flex]: Flex
+  [PaneItemTypes.Flex]: Flex,
+  [PaneItemTypes.Dropdown]: Dropdown
 }

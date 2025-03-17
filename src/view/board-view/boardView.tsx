@@ -132,7 +132,9 @@ const BoardView = () => {
       component,
       pageCode
     )
-    await removeComponents(remove.map((item) => item.uuid))
+    if (remove.length >= 1) {
+      await removeComponents(remove.map((item) => item.uuid))
+    }
     await saveComponent(update)
     setSpinning(false)
     messageApi.success('操作成功')

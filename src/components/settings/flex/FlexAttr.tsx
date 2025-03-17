@@ -27,7 +27,7 @@ const FlexAttr = ({ data }: { data: PaneItemType<FlexAttrType> }) => {
         <Group
           data={warpOptions}
           onclick={(index) =>
-            collect(FlexAttrEnum.WRAP, warpOptions[index].value)
+            collect(FlexAttrEnum.WRAP, warpOptions[index].style)
           }
         />
       </VariableBindingRow>
@@ -36,7 +36,7 @@ const FlexAttr = ({ data }: { data: PaneItemType<FlexAttrType> }) => {
         <Group
           data={justifyOptions}
           onclick={(index) =>
-            collect(FlexAttrEnum.JUSTIFY, justifyOptions[index].value)
+            collect(FlexAttrEnum.JUSTIFY, justifyOptions[index].style)
           }
         />
       </VariableBindingRow>
@@ -45,7 +45,7 @@ const FlexAttr = ({ data }: { data: PaneItemType<FlexAttrType> }) => {
         <Group
           data={alignOptions}
           onclick={(index) =>
-            collect(FlexAttrEnum.ALIGN, alignOptions[index].value)
+            collect(FlexAttrEnum.ALIGN, alignOptions[index].style)
           }
         />
       </VariableBindingRow>
@@ -54,7 +54,7 @@ const FlexAttr = ({ data }: { data: PaneItemType<FlexAttrType> }) => {
         <Group
           data={gapOptions}
           onclick={(index) =>
-            collect(FlexAttrEnum.GAP, gapOptions[index].value)
+            collect(FlexAttrEnum.GAP, gapOptions[index].style)
           }
         />
       </VariableBindingRow>
