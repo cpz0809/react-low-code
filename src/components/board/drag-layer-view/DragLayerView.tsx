@@ -15,11 +15,12 @@ const DragLayerView = () => {
   const { isDragging, currentOffset, capturedItem }: DragLayerType =
     useDragLayer((monitor) => ({
       isDragging: monitor.isDragging(),
-      currentOffset: monitor.getSourceClientOffset(),
+      currentOffset: monitor.getClientOffset(),
       capturedItem: monitor.getItem()
     }))
-  const left = currentOffset ? currentOffset.x : 0
-  const top = currentOffset ? currentOffset.y : 0
+  const left = currentOffset ? currentOffset.x - 20 : 0
+  const top = currentOffset ? currentOffset.y - 64 + 8 : 0
+
   return (
     isDragging && (
       <div className={`${prefixCls}-container`} style={{ left, top }}>
