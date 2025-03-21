@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { PreviewRenderProps } from './type'
 import { PaneItemType } from '@/components/board/_types/util.ts'
 import componentMap from './componentMap.tsx'
-import { arrayToTree } from '@/util/node.ts'
+import { arrayToTree } from '@/components/board/_util/node.ts'
 
 class PreviewRender extends Component<PreviewRenderProps> {
   constructor(props: PreviewRenderProps) {

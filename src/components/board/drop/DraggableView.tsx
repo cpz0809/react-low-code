@@ -12,7 +12,7 @@ import {
 } from '@/store/modules/drag.ts'
 import { RootState } from '@/store'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import { getEventTargetDomUuid } from '@/util/node.ts'
+import { getEventTargetDomUuid } from '@/components/board/_util/node.ts'
 import {
   CategoryEnum,
   PaneItemType,
@@ -31,7 +31,7 @@ import {
   setContextMenuVisible,
   setMenuVisible
 } from '@/store/modules/view'
-import { strToHumpName } from '@/util/strToCSSProperties.ts'
+import { strToHumpName } from '@/components/board/_util/strToCSSProperties.ts'
 
 const DraggableView = ({
   item,
@@ -99,6 +99,7 @@ const DraggableView = ({
     }),
     [itemList]
   )
+
   // 放置组件
   const placeComponent = (
     data: PaneItemType,

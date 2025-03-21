@@ -15,14 +15,14 @@ import Actions from '@/components/board/simulator/_component/actions/Actions.tsx
 import { useThrottleFn } from 'ahooks'
 import { useComponentDrag } from '@/components/board/_hooks/use-component-drag.ts'
 import { useBoardWidth } from '@/components/board/_hooks/use-board-width.ts'
-import { generateParams } from '@/util/generate-params'
+import { generateParams } from '@/components/board/_util/generate-params.ts'
 import { insert, remove, setCurrentClick } from '@/store/modules/drag'
 import { SelectEquipEnum } from '@/components/header/types'
 import { PaneItemType, PaneItemTypes } from '@/components/board/_types/util.ts'
 import { useHistory } from '@/components/board/_hooks/use-history.ts'
 import ContentMenu from './_component/context-menu/ContentMenu.tsx'
 import { MainConfig } from '@/config/library/component.ts'
-import { FilterFromDomRes } from '@/util/node.ts'
+import { FilterFromDomRes } from '@/components/board/_util/node.ts'
 
 const Operate = forwardRef((_, ref) => {
   const prefix = getPrefixCls('simulator')

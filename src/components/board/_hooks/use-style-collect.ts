@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { updateCurrentClick, updateParams } from '@/store/modules/drag.ts'
-import { strToCSSProperties, strToHumpName } from '@/util/strToCSSProperties.ts'
+import { strToCSSProperties, strToHumpName } from '@/components/board/_util/strToCSSProperties.ts'
 import { CSSProperties } from 'react'
 import {
   differentiate,

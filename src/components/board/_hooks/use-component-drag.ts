@@ -1,5 +1,5 @@
 import { computedOffset } from '@/components/board/simulator/_util/computedOffset.ts'
-import { filterFromDom, FilterFromDomRes } from '@/util/node.ts'
+import { filterFromDom, FilterFromDomRes } from '@/components/board/_util/node.ts'
 import { RootState } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'

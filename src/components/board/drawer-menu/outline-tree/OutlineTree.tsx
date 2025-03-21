@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setMenuVisible } from '@/store/modules/view.ts'
 import { RootState } from '@/store'
 import { getPrefixCls } from '@/util/global-config.ts'
-import { arrayToTree } from '@/util/node.ts'
-import TreeNode from '@/components/board/drawer-menu/outline-tree/TreeNode.tsx'
-import { useRef } from 'react'
+import { arrayToTree } from '@/components/board/_util/node.ts'
+import Tree from './Tree.tsx'
+import { useRef, useState } from 'react'
+import { PaneItemType } from '@/components/board/_types/util.ts'
 
 const OutlineTree = () => {
   const dispatch = useDispatch()
@@ -19,6 +20,19 @@ const OutlineTree = () => {
 
   const treeData = arrayToTree(itemList)
 
+  const [keys, setKeys] = useState<string[]>([])
+
+  const handleCollapse = (item: PaneItemType) => {
+    const index = keys.findIndex((key) => key === item.uuid)
+    const temp = [...keys]
+    if (index === -1) {
+      temp.push(item.uuid)
+    } else {
+      temp.splice(index, 1)
+    }
+    setKeys(temp)
+  }
+
   return (
     <Drawer
       show={outlineTreeVisible}
@@ -27,10 +41,7 @@ const OutlineTree = () => {
     >
       <div className={`${prefix}`}>
         <div className={`${prefix}-body`} ref={treeBodyRef}>
-          <TreeNode
-            data={treeData[0]}
-            maxDragVal={treeBodyRef.current?.getBoundingClientRect().top}
-          />
+          <Tree data={treeData} onCollapse={handleCollapse} activeKeys={keys} />
         </div>
       </div>
     </Drawer>

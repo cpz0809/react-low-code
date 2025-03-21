@@ -1,7 +1,7 @@
 import './style/render-view.scss'
 import { RootState } from '@/store'
 import { getPrefixCls } from '@/util/global-config'
-import { arrayToTree } from '@/util/node'
+import { arrayToTree } from '@/components/board/_util/node.ts'
 import { forwardRef, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import ViewProvider from '../drop/ViewProvider'
