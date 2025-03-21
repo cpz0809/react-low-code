@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  CategoryEnum,
-  PaneItemType,
-  PaneItemTypes
-} from '@/components/board/_types/util.ts'
+import { CategoryEnum, PaneItemType } from '@/components/board/_types/util.ts'
 import { CurrentDropDirection } from '@/components/board/simulator/_type/type.ts'
 
 /**
@@ -200,26 +196,24 @@ export const swapNodes = (
  */
 export const arrayToTree = (array: PaneItemType[]): PaneItemType[] => {
   const tree: PaneItemType[] = []
-  const map: any = {}
+  const map: Record<string, PaneItemType> = {}
 
-  const rootNode = array.find((item) => item.type === PaneItemTypes.Main)
-
-  if (!rootNode) return []
-
-  map[rootNode.uuid] = { ...rootNode, children: [] }
-
+  // 提前将所有节点放入 map，并初始化 children
   array.forEach((item) => {
-    if (!map[item.uuid]) {
-      map[item.uuid] = { ...item, children: [] }
-    }
+    map[item.uuid] = { ...item, children: [] }
+  })
+
+  // 构建树结构
+  array.forEach((item) => {
     const node = map[item.uuid]
-    if (!item.parentUuid) {
-      tree.push(node)
-    } else {
-      if (!map[item.parentUuid]) {
-        map[item.parentUuid] = { uuid: item.parentUuid, children: [] }
+    if (item.parentUuid) {
+      // 如果存在父节点，将当前节点添加到父节点的 children 中
+      if (map[item.parentUuid]) {
+        map[item.parentUuid].children.push(node)
       }
-      map[item.parentUuid].children.push(node)
+    } else {
+      // 如果没有父节点，将当前节点作为根节点
+      tree.push(node)
     }
   })
 
