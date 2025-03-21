@@ -7,7 +7,6 @@ import {
   updateParams
 } from '@/store/modules/drag.ts'
 import {
-  DownOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
   SettingOutlined,
@@ -80,15 +79,6 @@ const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
     })
   }
 
-  const TreeExpand = (item: PaneItemType) =>
-    item.children.length > 0 ? (
-      <div className={`${prefix}-title-expand-btn`}>
-        <DownOutlined />
-      </div>
-    ) : (
-      <i className={`${prefix}-expand-placeholder`} />
-    )
-
   const TreeAction = (item: PaneItemType) => (
     <div className={`${prefix}-actions`}>
       <div
@@ -115,7 +105,6 @@ const TreeNodeTitle = ({ data }: { data: PaneItemType }) => {
   return (
     <div className={`${prefix}-title`}>
       <div className={`${prefix}-title-left`}>
-        {data.type !== PaneItemTypes.Main && TreeExpand(data)}
         <div className={`${prefix}-node-icon`}>
           <img src={data?.svg} alt={data?.name} />
         </div>

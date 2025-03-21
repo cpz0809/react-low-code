@@ -5,6 +5,35 @@ $tree-prefix-cls: 'tree-node';
 }
 
 .#{$tree-prefix-cls} {
+  padding-left: 6px;
+
+  .#{$tree-prefix-cls}-header {
+    display: flex;
+    align-items: center;
+
+    .#{$tree-prefix-cls}-expand-btn {
+      width: 12px;
+      height: 12px;
+      margin-right: 4px;
+      color: rgba(31, 56, 88, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      svg {
+        width: 16px;
+        height: 12px;
+      }
+    }
+
+    .#{$tree-prefix-cls}-expand-placeholder {
+      width: 12px;
+      height: 12px;
+      margin-right: 4px;
+    }
+  }
+
   .#{$tree-prefix-cls}-insert {
     width: 100%;
     height: 30px;
@@ -12,27 +41,16 @@ $tree-prefix-cls: 'tree-node';
   }
 
   .#{$tree-prefix-cls}-title {
+    width: 100%;
+    height: 30px;
     padding: 0 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
 
     .#{$tree-prefix-cls}-title-left {
       display: flex;
       align-items: center;
-
-      .#{$tree-prefix-cls}-title-expand-btn {
-        width: 12px;
-        height: 30px;
-        margin-right: 4px;
-        color: rgba(31, 56, 88, 0.4);
-
-        svg {
-          width: 12px;
-          height: 12px;
-        }
-      }
     }
 
     .#{$tree-prefix-cls}-title-right {
@@ -54,6 +72,8 @@ $tree-prefix-cls: 'tree-node';
     }
 
     &:hover {
+      background-color: #EDEFF3;
+
       .#{$tree-prefix-cls}-title-right {
         .#{$tree-prefix-cls}-actions {
           .#{$tree-prefix-cls}-action-btn {
@@ -66,6 +86,7 @@ $tree-prefix-cls: 'tree-node';
 
   .#{$tree-prefix-cls}-branches {
     padding-left: 12px;
+    display: none;
   }
 
   .#{$tree-prefix-cls}-node-icon {
@@ -80,10 +101,10 @@ $tree-prefix-cls: 'tree-node';
     font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
   }
+}
 
-  .#{$tree-prefix-cls}-expand-placeholder {
-    width: 12px;
-    height: 12px;
-    margin-right: 4px;
+.#{$tree-prefix-cls}-expand {
+  .#{$tree-prefix-cls}-branches-active {
+    display: block !important;
   }
 }
