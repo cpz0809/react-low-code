@@ -11,6 +11,8 @@ $edit-style-field-region-cls: 'edit-style-field-region';
   }
 
   .#{$edit-style-field-region-cls}-edit {
+    position: relative;
+    z-index: 99;
     width: 100%;
     height: 100px;
     margin-bottom: 10px;
