@@ -9,44 +9,26 @@ export const borderGroup = [
 
 export const borderPosition = [
   {
-    name: '上'
+    name: '上',
+    style: 'top'
   },
   {
-    name: '下'
+    name: '下',
+    style: 'bottom'
   },
   {
-    name: '左'
+    name: '左',
+    style: 'left'
   },
   {
-    name: '右'
+    name: '右',
+    style: 'right'
   },
   {
-    name: '全部'
+    name: '全部',
+    style: 'all'
   }
-]
-
-export const borderPositionMapping = [
-  {
-    direction: 'border-top-width',
-    index: 0
-  },
-  {
-    direction: 'border-bottom-width',
-    index: 1
-  },
-  {
-    direction: 'border-left-width',
-    index: 2
-  },
-  {
-    direction: 'border-right-width',
-    index: 3
-  },
-  {
-    direction: '',
-    index: 4
-  }
-]
+] as const
 
 export const borderStyle = [
   {

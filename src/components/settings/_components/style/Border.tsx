@@ -5,7 +5,6 @@ import Group from '@/components/settings/_components/group/Group'
 import {
   borderGroup,
   borderPosition,
-  borderPositionMapping,
   borderShadow,
   borderStyle
 } from '@/components/settings/_components/style/data/border'
@@ -14,6 +13,7 @@ import { ColorPicker, InputNumber, Select, Space } from 'antd'
 import { useState } from 'react'
 import { StyleEnum } from '@/components/settings/_components/_types/styleEnum'
 import { useStyleCollect } from '@/components/board/_hooks/use-style-collect.ts'
+import { capitalize } from '@/util/handleStr.ts'
 
 const Border = () => {
   const prefixCls = getPrefixCls('edit-style-border')
@@ -22,7 +22,7 @@ const Border = () => {
 
   const [currentGroup, setCurrentGroup] = useState(0)
 
-  const [borderDirection, setBorderDirection] = useState<string | null>(null)
+  const [borderActiveIndex, setBorderActiveIndex] = useState<number>(-1)
 
   const [boxShadowGroup, setBoxShadowGroup] = useState<number>(-1)
 
@@ -30,7 +30,7 @@ const Border = () => {
     <Row>
       <OpacitySlider
         addonAfter="px"
-        styleKey={StyleEnum.BORDERRADIUS}
+        styleKey={StyleEnum.BorderRadius}
         unit="px"
         proportion={1}
       />
@@ -38,11 +38,9 @@ const Border = () => {
   )
 
   const handleAddBorder = (position: number) => {
-    if (borderDirection !== null) {
-      collect(null, borderDirection === '' ? 'border-width' : borderDirection)
-    }
-    setBorderDirection(borderPositionMapping[position].direction)
+    setBorderActiveIndex(position)
   }
+
   const BorderRadius = () => (
     <Row>
       <div className={`${prefixCls}-group`}>
@@ -50,14 +48,14 @@ const Border = () => {
           <InputNumber
             size="small"
             addonAfter="px"
-            onChange={(e) => collect(e, StyleEnum.BORDERTOPLEFTRADIUS)}
+            onChange={(e) => collect(e, StyleEnum.BorderTopLeftRadius)}
           />
         </Row>
         <Row title="右上">
           <InputNumber
             size="small"
             addonAfter="px"
-            onChange={(e) => collect(e, StyleEnum.BORDERTOPRIGHTRADIUS)}
+            onChange={(e) => collect(e, StyleEnum.BorderTopRightRadius)}
           />
         </Row>
       </div>
@@ -66,33 +64,34 @@ const Border = () => {
           <InputNumber
             size="small"
             addonAfter="px"
-            onChange={(e) => collect(e, StyleEnum.BORDERBOTTOMLEFTRADIUS)}
+            onChange={(e) => collect(e, StyleEnum.BorderBottomLeftRadius)}
           />
         </Row>
         <Row title="右下">
           <InputNumber
             size="small"
             addonAfter="px"
-            onChange={(e) => collect(e, StyleEnum.BORDERBOTTOMRIGHTRADIUS)}
+            onChange={(e) => collect(e, StyleEnum.BorderBottomRightRadius)}
           />
         </Row>
       </div>
     </Row>
   )
 
-  const mergeBorderDirection = () => {
-    if (borderDirection) return borderDirection
-    return StyleEnum.BORDERWIDTH
+  const mergeBorderDirection = (type: 'width' | 'style' | 'color') => {
+    const borderDirection = borderPosition[borderActiveIndex].style
+    if (borderDirection === 'all') return `border-${type}`
+    return `border-${borderDirection}-${type}`
   }
 
   const handleBoxShadow = (index: number) => {
-    const shadowStyle = matchingStyle(StyleEnum.BOXSHADOW)
+    const shadowStyle = matchingStyle(StyleEnum.BoxShadow)
     // 如果没有设置box-shadow
     if (shadowStyle === 0) {
       const defaultStr = '0 0 0 0 #000'
       collect(
         `${index === 1 ? 'inset' : ''} ${defaultStr}`,
-        StyleEnum.BOXSHADOW
+        StyleEnum.BoxShadow
       )
     } else {
       boxShadowAttr(index, shadowStyle)
@@ -114,7 +113,7 @@ const Border = () => {
       // 不存在关键词 拼接关键词
       shadowStyle = `inset ${shadowStyle}`
     }
-    collect(shadowStyle, StyleEnum.BOXSHADOW)
+    collect(shadowStyle, StyleEnum.BoxShadow)
   }
 
   const handleEditBoxShadow = (
@@ -122,9 +121,9 @@ const Border = () => {
     index: number
   ) => {
     if (!value) return
-    const shadowStyle = matchingStyle(StyleEnum.BOXSHADOW)
+    const shadowStyle = matchingStyle(StyleEnum.BoxShadow)
     if (shadowStyle === 0) {
-      collect('0 0 0 0 #000', StyleEnum.BOXSHADOW)
+      collect('0 0 0 0 #000', StyleEnum.BoxShadow)
     } else {
       const splitStrArr = shadowStyle
         .trimStart()
@@ -132,8 +131,14 @@ const Border = () => {
         .filter((item: string) => item !== '')
       const i = boxShadowGroup === 0 ? index : index + 1
       splitStrArr[i] = `${value}px`
-      collect(splitStrArr.join(' '), StyleEnum.BOXSHADOW)
+      collect(splitStrArr.join(' '), StyleEnum.BoxShadow)
     }
+  }
+
+  const getStyleKey = (type: 'width' | 'style' | 'color') => {
+    if (borderActiveIndex > 3)
+      return `Border${capitalize(type)}` as keyof typeof StyleEnum
+    return `Border${capitalize(borderPosition[borderActiveIndex]?.style)}${capitalize(type)}` as keyof typeof StyleEnum
   }
 
   return (
@@ -147,31 +152,45 @@ const Border = () => {
       </Row>
       {currentGroup === 0 ? Slider() : BorderRadius()}
       <Row title="边框">
-        <Group data={borderPosition} onclick={(e) => handleAddBorder(e)} />
+        <Group
+          data={borderPosition}
+          onclick={(e) => handleAddBorder(e)}
+          activeIndex={borderActiveIndex ?? -1}
+        />
       </Row>
-      {borderDirection !== null && (
-        <Row>
-          <Space>
-            <InputNumber
-              addonAfter="px"
-              size="small"
-              style={{ width: 120 }}
-              placeholder={matchingStyle(StyleEnum.BORDERWIDTH)}
-              onChange={(e) => collect(e, mergeBorderDirection())}
-            />
-            <ColorPicker
-              onChange={(_e, hex) => collect(hex, StyleEnum.BORDERCOLOR)}
-            />
-            <Select
-              options={borderStyle}
-              style={{ width: 120 }}
-              size="small"
-              placeholder={matchingStyle(StyleEnum.BORDERSTYLE)}
-              onChange={(e) => collect(e, StyleEnum.BORDERSTYLE)}
-            />
-          </Space>
-        </Row>
-      )}
+      {borderActiveIndex !== -1 &&
+        new Array(5).fill(0).map(
+          (_, index) =>
+            index === borderActiveIndex && (
+              <Row key={index}>
+                <Space>
+                  <InputNumber
+                    addonAfter="px"
+                    size="small"
+                    style={{ width: 120 }}
+                    placeholder={matchingStyle(StyleEnum[getStyleKey('width')])}
+                    onChange={(e) => collect(e, mergeBorderDirection('width'))}
+                  />
+                  <ColorPicker
+                    onChange={(_e, hex) =>
+                      collect(hex, mergeBorderDirection('color'))
+                    }
+                  />
+                  <Select
+                    options={borderStyle}
+                    style={{ width: 120 }}
+                    size="small"
+                    placeholder={matchingStyle(
+                      StyleEnum[getStyleKey('style')],
+                      '请选择'
+                    )}
+                    onChange={(e) => collect(e, mergeBorderDirection('style'))}
+                  />
+                </Space>
+              </Row>
+            )
+        )}
+      )
       <Row title="阴影">
         <Group
           data={borderShadow}

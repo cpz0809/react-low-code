@@ -1,77 +1,98 @@
 export enum StyleEnum {
   // 布局模式
-  DISPLAY = 'display',
+  Display = 'display',
   // 元素宽度
-  WIDTH = 'width',
+  Width = 'width',
   // 元素高度
-  HEIGHT = 'height',
+  Height = 'height',
   // 字体大小
-  FONTSIZE = 'font-size',
+  FontSize = 'font-size',
   // 行高
-  LINEHEIGHT = 'line-height',
+  LineHeight = 'line-height',
   // 字重
-  FONTWEIGHT = 'font-weight',
+  FontWeight = 'font-weight',
   // 字体
-  FONTFAMILY = 'font-family',
+  FontFamily = 'font-family',
   // 文字颜色
-  COLOR = 'color',
+  Color = 'color',
   // 透明度
-  OPACITY = 'opacity',
+  Opacity = 'opacity',
   // 背景颜色
-  BACKGROUNDCOLOR = 'background-color',
+  BackgroundColor = 'background-color',
   // 背景图片
-  BACKGROUNDIMAGE = 'background-image',
+  BackgroundImage = 'background-image',
   // 背景大小
-  BACKGROUNDSIZE = 'background-size',
+  BackgroundSize = 'background-size',
   // 背景位置
-  BACKGROUNDPOSITION = 'background-position',
+  BackgroundPosition = 'background-position',
   // 背景重复
-  BACKGROUNDREPEAT = 'background-repeat',
+  BackgroundRepeat = 'background-repeat',
   // 定位
-  POSITION = 'position',
+  Position = 'position',
   // 层级
-  ZINDEX = 'z-index',
+  ZIndex = 'z-index',
   // 浮动
-  FLOAT = 'float',
+  Float = 'float',
   // 清除浮动
-  CLEAR = 'clear',
-  // 边框圆角
-  BORDERRADIUS = 'border-radius',
+  Clear = 'clear',
   // 边框宽度
-  BORDERWIDTH = 'border-width',
+  BorderWidth = 'border-width',
+  BorderTopWidth = 'border-top-width',
+  BorderBottomWidth = 'border-bottom-width',
+  BorderLeftWidth = 'border-left-width',
+  BorderRightWidth = 'border-right-width',
   // 边框颜色
-  BORDERCOLOR = 'border-color',
+  BorderColor = 'border-color',
+  BorderLeftColor = 'border-left-color',
+  BorderRightColor = 'border-right-color',
+  BorderTopColor = 'border-top-color',
+  BorderBottomColor = 'border-bottom-color',
   // 边框形状
-  BORDERSTYLE = 'border-style',
-  // 圆角左上
-  BORDERTOPLEFTRADIUS = 'border-top-left-radius',
-  // 圆角右上
-  BORDERTOPRIGHTRADIUS = 'border-top-right-radius',
-  // 圆角左下
-  BORDERBOTTOMLEFTRADIUS = 'border-bottom-left-radius',
-  // 圆角右下
-  BORDERBOTTOMRIGHTRADIUS = 'border-bottom-right-radius',
+  BorderStyle = 'border-style',
+  BorderTopStyle = 'border-top-style',
+  BorderBottomStyle = 'border-bottom-style',
+  BorderLeftStyle = 'border-left-style',
+  BorderRightStyle = 'border-right-style',
+  // 边框圆角
+  BorderRadius = 'border-radius',
+  BorderTopLeftRadius = 'border-top-left-radius',
+  BorderTopRightRadius = 'border-top-right-radius',
+  BorderBottomLeftRadius = 'border-bottom-left-radius',
+  BorderBottomRightRadius = 'border-bottom-right-radius',
   // 阴影
-  BOXSHADOW = 'box-shadow'
+  BoxShadow = 'box-shadow'
 }
 
 export const differentiate = [
-  StyleEnum.FONTWEIGHT,
-  StyleEnum.FONTFAMILY,
-  StyleEnum.COLOR,
-  StyleEnum.OPACITY,
-  StyleEnum.BACKGROUNDCOLOR,
-  StyleEnum.BACKGROUNDIMAGE,
-  StyleEnum.BACKGROUNDSIZE,
-  StyleEnum.BACKGROUNDPOSITION,
-  StyleEnum.BACKGROUNDREPEAT,
-  StyleEnum.POSITION,
-  StyleEnum.ZINDEX,
-  StyleEnum.FLOAT,
-  StyleEnum.CLEAR,
-  StyleEnum.BORDERRADIUS,
-  StyleEnum.BORDERCOLOR,
-  StyleEnum.BORDERSTYLE,
-  StyleEnum.BOXSHADOW,
-  StyleEnum.DISPLAY
+  StyleEnum.FontWeight,
+  StyleEnum.FontFamily,
+  StyleEnum.Color,
+  StyleEnum.Opacity,
+  StyleEnum.BackgroundColor,
+  StyleEnum.BackgroundImage,
+  StyleEnum.BackgroundSize,
+  StyleEnum.BackgroundPosition,
+  StyleEnum.BackgroundRepeat,
+  StyleEnum.Position,
+  StyleEnum.ZIndex,
+  StyleEnum.Float,
+  StyleEnum.Clear,
+  StyleEnum.BorderRadius,
+  StyleEnum.BorderColor,
+  StyleEnum.BorderStyle,
+  StyleEnum.BoxShadow,
+  StyleEnum.Display,
+  StyleEnum.BorderWidth,
+  StyleEnum.BorderTopWidth,
+  StyleEnum.BorderBottomWidth,
+  StyleEnum.BorderLeftWidth,
+  StyleEnum.BorderRightWidth,
+  StyleEnum.BorderLeftColor,
+  StyleEnum.BorderRightColor,
+  StyleEnum.BorderTopColor,
+  StyleEnum.BorderBottomColor,
+  StyleEnum.BorderTopStyle,
+  StyleEnum.BorderBottomStyle,
+  StyleEnum.BorderLeftStyle,
+  StyleEnum.BorderRightStyle
 ]
