@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { removeNode, swapNodes, updateNode } from '@/components/board/_util/node.ts'
+import {
+  removeNode,
+  swapNodes,
+  updateNode
+} from '@/components/board/_util/node.ts'
 import { PaneItemType } from '@/components/board/_types/util.ts'
 import { generateParams } from '@/components/board/_util/generate-params.ts'
 import {
