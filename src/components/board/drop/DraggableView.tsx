@@ -107,7 +107,9 @@ const DraggableView = ({
   ) => {
     const didDrop = monitor.didDrop()
     if (didDrop) return
-    // 组件自定义放置
+    // 禁止将自身放到自身上 防止死循环
+    if (data.uuid === item.uuid) return
+    // 组件自定义放置事件
     if (onPlace) return onPlace(data)
     // 新增组件
     if (data.operate === HistoryEnum.ADD) {
