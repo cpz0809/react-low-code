@@ -27,7 +27,7 @@ const Background = () => {
 
   const Opacity = () => (
     <Row title="透明度">
-      <OpacitySlider addonAfter="%" styleKey={StyleEnum.OPACITY} />
+      <OpacitySlider addonAfter="%" styleKey={StyleEnum.Opacity} />
     </Row>
   )
 
@@ -35,14 +35,14 @@ const Background = () => {
     <>
       <ColorPicker
         className="color-picker"
-        onChange={(_e, hex) => collect(hex, StyleEnum.BACKGROUNDCOLOR, '')}
+        onChange={(_e, hex) => collect(hex, StyleEnum.BackgroundColor, '')}
       />
       {Opacity()}
     </>
   )
   const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    collect(value ? `url(${value})` : null, StyleEnum.BACKGROUNDIMAGE, '')
+    collect(value ? `url(${value})` : null, StyleEnum.BackgroundImage, '')
   }
 
   const handleBackgroundSize = (
@@ -79,7 +79,7 @@ const Background = () => {
           <div className="input-item">
             <p>宽</p>
             <InputMergeSelect
-              styleKey={StyleEnum.BACKGROUNDSIZE}
+              styleKey={StyleEnum.BackgroundSize}
               attrPosition={0}
               onCollectStyle={(value, key, unit) =>
                 handleBackgroundSize(value, key, 0, unit)
@@ -89,7 +89,7 @@ const Background = () => {
           <div className="input-item">
             <p>高</p>
             <InputMergeSelect
-              styleKey={StyleEnum.BACKGROUNDSIZE}
+              styleKey={StyleEnum.BackgroundSize}
               attrPosition={1}
               onCollectStyle={(value, key, unit) =>
                 handleBackgroundSize(value, key, 1, unit)
@@ -116,7 +116,7 @@ const Background = () => {
             <div className="input-item">
               <p>左</p>
               <InputMergeSelect
-                styleKey={StyleEnum.BACKGROUNDPOSITION}
+                styleKey={StyleEnum.BackgroundPosition}
                 attrPosition={0}
                 onCollectStyle={(value, key, unit) =>
                   handleBackgroundSize(value, key, 0, unit)
@@ -126,7 +126,7 @@ const Background = () => {
             <div className="input-item">
               <p>顶</p>
               <InputMergeSelect
-                styleKey={StyleEnum.BACKGROUNDPOSITION}
+                styleKey={StyleEnum.BackgroundPosition}
                 attrPosition={1}
                 onCollectStyle={(value, key, unit) =>
                   handleBackgroundSize(value, key, 1, unit)

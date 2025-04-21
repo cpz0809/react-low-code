@@ -46,10 +46,10 @@ const Layout = () => {
       {/*  大小  */}
       <div className={`${prefixCls}-size`}>
         <Row title="宽度">
-          <InputMergeSelect styleKey={StyleEnum.WIDTH} />
+          <InputMergeSelect styleKey={StyleEnum.Width} />
         </Row>
         <Row title="高度">
-          <InputMergeSelect styleKey={StyleEnum.HEIGHT} />
+          <InputMergeSelect styleKey={StyleEnum.Height} />
         </Row>
       </div>
     </div>

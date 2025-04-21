@@ -3,7 +3,7 @@ import { getPrefixCls } from '@/util/global-config.ts'
 import { useStyleCollect } from '@/components/board/_hooks/use-style-collect.ts'
 
 interface GroupPropsType {
-  data: { [key: string]: any }[]
+  data: readonly { [key: string]: any }[]
   keyName?: string
   onclick?: (index: number) => void
   activeIndex?: number

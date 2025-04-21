@@ -22,25 +22,25 @@ const Font = () => {
           <p>字号</p>
           <InputNumber
             size="small"
-            onChange={(e) => collect(e, StyleEnum.FONTSIZE)}
-            addonAfter={matchingUnit(StyleEnum.FONTSIZE)}
-            placeholder={matchingStyle(StyleEnum.FONTSIZE, 12)}
+            onChange={(e) => collect(e, StyleEnum.FontSize)}
+            addonAfter={matchingUnit(StyleEnum.FontSize)}
+            placeholder={matchingStyle(StyleEnum.FontSize, 12)}
           />
         </div>
         <div className="row-item">
           <p>行高</p>
           <InputNumber
             size="small"
-            onChange={(e) => collect(e, StyleEnum.LINEHEIGHT)}
-            addonAfter={matchingUnit(StyleEnum.LINEHEIGHT)}
-            placeholder={matchingStyle(StyleEnum.LINEHEIGHT, 15)}
+            onChange={(e) => collect(e, StyleEnum.LineHeight)}
+            addonAfter={matchingUnit(StyleEnum.LineHeight)}
+            placeholder={matchingStyle(StyleEnum.LineHeight, 15)}
           />
         </div>
       </div>
       <div className="row-item">
         <p>字重</p>
         <Select
-          onChange={(e) => collect(e, StyleEnum.FONTWEIGHT)}
+          onChange={(e) => collect(e, StyleEnum.FontWeight)}
           placeholder="请选择"
           options={selectFontWeight}
           style={{ width: '100%' }}
@@ -50,7 +50,7 @@ const Font = () => {
       <div className="row-item">
         <p>字体</p>
         <Select
-          onChange={(e) => collect(e, StyleEnum.FONTFAMILY)}
+          onChange={(e) => collect(e, StyleEnum.FontFamily)}
           placeholder="请选择"
           options={selectFontFamily}
           style={{ width: '100%' }}
@@ -61,14 +61,14 @@ const Font = () => {
         <p>文字颜色</p>
         <ColorPicker
           defaultValue="#000000"
-          onChange={(_e, hex) => collect(hex, StyleEnum.COLOR)}
+          onChange={(_e, hex) => collect(hex, StyleEnum.Color)}
         />
       </div>
       <Row title="对齐">
         <Group data={alignment} />
       </Row>
       <Row title="透明度">
-        <OpacitySlider styleKey={StyleEnum.OPACITY} />
+        <OpacitySlider styleKey={StyleEnum.Opacity} />
       </Row>
     </div>
   )

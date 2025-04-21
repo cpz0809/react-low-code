@@ -22,14 +22,14 @@ const Position = () => {
           options={selectPosition}
           style={{ width: '100px' }}
           size="small"
-          onChange={(e) => collect(e, StyleEnum.POSITION)}
+          onChange={(e) => collect(e, StyleEnum.Position)}
         />
       </Row>
       <Row title="zIndex">
         <InputNumber
           size="small"
-          placeholder={matchingStyle(StyleEnum.ZINDEX)}
-          onChange={(e) => collect(e, StyleEnum.ZINDEX, '')}
+          placeholder={matchingStyle(StyleEnum.ZIndex)}
+          onChange={(e) => collect(e, StyleEnum.ZIndex, '')}
         />
       </Row>
       <Row title="浮动方向">
