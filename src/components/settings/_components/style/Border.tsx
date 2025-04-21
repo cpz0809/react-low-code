@@ -86,34 +86,11 @@ const Border = () => {
 
   const handleBoxShadow = (index: number) => {
     const shadowStyle = matchingStyle(StyleEnum.BoxShadow)
-    // 如果没有设置box-shadow
+    // 如果没有设置样式 需要兼容 inset 所以需要给一个默认值 本身css box-shadow默认值 = 0 0 0 0 #000
     if (shadowStyle === 0) {
-      const defaultStr = '0 0 0 0 #000'
-      collect(
-        `${index === 1 ? 'inset' : ''} ${defaultStr}`,
-        StyleEnum.BoxShadow
-      )
-    } else {
-      boxShadowAttr(index, shadowStyle)
+      collect(defaultShadow().join(' '), StyleEnum.BoxShadow)
     }
     setBoxShadowGroup(index)
-  }
-
-  const boxShadowAttr = (index: number, shadowStyle: string) => {
-    // 查找关键词
-    const findStr = shadowStyle.indexOf('inset')
-    if (index === 0) {
-      // 外阴影 并且不存在关键词
-      if (findStr === -1) return
-      // 存在关键词 将关键词删除
-      shadowStyle = shadowStyle.substring(findStr + 5)
-    } else if (index === 1) {
-      // 内阴影 存在关键词
-      if (findStr !== -1) return
-      // 不存在关键词 拼接关键词
-      shadowStyle = `inset ${shadowStyle}`
-    }
-    collect(shadowStyle, StyleEnum.BoxShadow)
   }
 
   const handleEditBoxShadow = (
@@ -121,18 +98,55 @@ const Border = () => {
     index: number
   ) => {
     if (!value) return
+
     const shadowStyle = matchingStyle(StyleEnum.BoxShadow)
-    if (shadowStyle === 0) {
-      collect('0 0 0 0 #000', StyleEnum.BoxShadow)
+
+    // 使用,拆分 如果长度>1说明同时设置了内外阴影
+    const split = shadowStyle.split(',')
+    if (split.length > 1) {
+      const arr = split[boxShadowGroup === 1 ? 0 : 1]
+      const splitStrArr = filterShadow(arr)
+      insertVal(splitStrArr, index)
+      split[boxShadowGroup === 1 ? 0 : 1] = splitStrArr.join(' ')
+      collect(split.join(' ,'), StyleEnum.BoxShadow)
     } else {
-      const splitStrArr = shadowStyle
+      const splitStrArr = filterShadow(shadowStyle)
+      // 根据是否存在inset关键字来判断是否需要追加字符串
+      const shouldUseDefaultShadow =
+        (splitStrArr.includes('inset') && boxShadowGroup === 0) ||
+        (!splitStrArr.includes('inset') && boxShadowGroup === 1)
+      if (shouldUseDefaultShadow) {
+        const targetArray = defaultShadow()
+        insertVal(targetArray, index)
+        collect(
+          `${targetArray.join(' ')} , ${splitStrArr.join(' ')}`,
+          StyleEnum.BoxShadow
+        )
+        return
+      }
+      insertVal(splitStrArr, index)
+      collect(splitStrArr.join(' '), StyleEnum.BoxShadow)
+    }
+
+    function insertVal(arr: string[], index: number) {
+      const i = boxShadowGroup === 0 ? index : index + 1
+      arr[i] = `${value}px`
+    }
+
+    function filterShadow(str: string) {
+      return str
         .trimStart()
         .split(' ')
         .filter((item: string) => item !== '')
-      const i = boxShadowGroup === 0 ? index : index + 1
-      splitStrArr[i] = `${value}px`
-      collect(splitStrArr.join(' '), StyleEnum.BoxShadow)
     }
+  }
+
+  function defaultShadow() {
+    const defaultArr = ['0', '0', '0', '0', '#000']
+    if (boxShadowGroup === 1) {
+      defaultArr.push('inset')
+    }
+    return defaultArr
   }
 
   const getStyleKey = (type: 'width' | 'style' | 'color') => {
@@ -206,40 +220,45 @@ const Border = () => {
           />
         </Row>
       </Row>
-      <Row>
-        <div className={`${prefixCls}-group`}>
-          <Row title="x">
-            <InputNumber
-              size="small"
-              addonAfter="px"
-              onChange={(e) => handleEditBoxShadow(e, 0)}
-            />
-          </Row>
-          <Row title="y">
-            <InputNumber
-              size="small"
-              addonAfter="px"
-              onChange={(e) => handleEditBoxShadow(e, 1)}
-            />
-          </Row>
-        </div>
-        <div className={`${prefixCls}-group`}>
-          <Row title="模糊">
-            <InputNumber
-              size="small"
-              addonAfter="px"
-              onChange={(e) => handleEditBoxShadow(e, 2)}
-            />
-          </Row>
-          <Row title="扩展">
-            <InputNumber
-              size="small"
-              addonAfter="px"
-              onChange={(e) => handleEditBoxShadow(e, 3)}
-            />
-          </Row>
-        </div>
-      </Row>
+      {new Array(2).fill(0).map(
+        (_, index) =>
+          index === boxShadowGroup && (
+            <Row key={index}>
+              <div className={`${prefixCls}-group`}>
+                <Row title="x">
+                  <InputNumber
+                    size="small"
+                    addonAfter="px"
+                    onChange={(e) => handleEditBoxShadow(e, 0)}
+                  />
+                </Row>
+                <Row title="y">
+                  <InputNumber
+                    size="small"
+                    addonAfter="px"
+                    onChange={(e) => handleEditBoxShadow(e, 1)}
+                  />
+                </Row>
+              </div>
+              <div className={`${prefixCls}-group`}>
+                <Row title="模糊">
+                  <InputNumber
+                    size="small"
+                    addonAfter="px"
+                    onChange={(e) => handleEditBoxShadow(e, 2)}
+                  />
+                </Row>
+                <Row title="扩展">
+                  <InputNumber
+                    size="small"
+                    addonAfter="px"
+                    onChange={(e) => handleEditBoxShadow(e, 3)}
+                  />
+                </Row>
+              </div>
+            </Row>
+          )
+      )}
     </div>
   )
 }
