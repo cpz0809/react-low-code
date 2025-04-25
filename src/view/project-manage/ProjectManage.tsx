@@ -12,6 +12,7 @@ import {
   UnlockOutlined
 } from '@ant-design/icons'
 import {
+  Button,
   Divider,
   Dropdown,
   Form,
@@ -31,6 +32,9 @@ import ProjectView from '@/view/project-manage/ProjectView.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { queryPageList } from '@/api/page.ts'
 import { CanvasElement } from '@/view/project-manage/_types.ts'
+
+import { buildSelect } from '@/view/project-manage/build-select.ts'
+import { buildProject } from '@/api/build.ts'
 
 // const EditorScale = 'editorScale'
 // const AngleViewPositionX = 'angleViewPositionX'
@@ -84,6 +88,10 @@ const ProjectManage = () => {
   })
   // 页面列表
   const [pageList, setPageList] = useState<CanvasElement[]>([])
+
+  // 打包弹窗
+  const [buildVisible, setBuildVisible] = useState(false)
+  const [activeBuildSelect, setActiveBuildSelect] = useState('')
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -142,6 +150,32 @@ const ProjectManage = () => {
     setCurrentElement(el)
   }
 
+  const handleBuildProject = () => {
+    setBuildVisible(true)
+  }
+
+  const handleSelectBuildTool = (key: string) => {
+    setActiveBuildSelect(key)
+  }
+  const handleBuildOk = async () => {
+    const projectCode = searchParams.get('projectCode')
+    if (!activeBuildSelect || !projectCode) return
+    const data = await buildProject({
+      type: activeBuildSelect,
+      projectCode
+    })
+    const blob = new Blob([data as any], { type: 'application/zip' }) // 指定格式
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.click()
+    URL.revokeObjectURL(link.href)
+    setBuildVisible(false)
+  }
+
+  const handleBuildCancel = () => {
+    setBuildVisible(false)
+  }
+
   return (
     <div className="project-manage">
       {/*{canvas?.current?.isLoading && (*/}
@@ -150,7 +184,6 @@ const ProjectManage = () => {
       {/*    <p className="project-manage-text">正在加载</p>*/}
       {/*  </div>*/}
       {/*)}*/}
-
       <div className="project-manage-navbar">
         <div className="project-manage-left">
           <div className="project-manage-go-back" onClick={() => navigate(-1)}>
@@ -164,9 +197,12 @@ const ProjectManage = () => {
           </Dropdown>
         </div>
         <div className="project-manage-center"></div>
-        <div className="project-manage-right"></div>
+        <div className="project-manage-right">
+          <Button type="primary" onClick={handleBuildProject}>
+            构建项目
+          </Button>
+        </div>
       </div>
-
       <div className="project-manage-content">
         {/*  侧边栏  */}
         <div className="project-manage-side-bar">
@@ -228,7 +264,6 @@ const ProjectManage = () => {
           setData={setPageList}
         />
       </div>
-
       {/*  右下固定栏  */}
       <div className="project-manage-fixed">
         <Space split={<Divider type="vertical" />}>
@@ -291,7 +326,6 @@ const ProjectManage = () => {
           </div>
         </Space>
       </div>
-
       {/*  修改背景色  */}
       {isOpenChangeColor && (
         <div className="project-manage-change-color">
@@ -311,7 +345,6 @@ const ProjectManage = () => {
           </div>
         </div>
       )}
-
       {/*  重命名弹窗  */}
       <Modal
         title="页面名称"
@@ -337,7 +370,6 @@ const ProjectManage = () => {
           </Form.Item>
         </Form>
       </Modal>
-
       <Modal
         title="页面配置"
         open={isOpenEditPage}
@@ -355,6 +387,13 @@ const ProjectManage = () => {
             <Input placeholder="请输入页面名称" />
           </Form.Item>
           <Form.Item
+            label="页面标题"
+            name="pageTitle"
+            rules={[{ required: true, message: '标题不能为空' }]}
+          >
+            <Input placeholder="请输入页面名称" />
+          </Form.Item>
+          <Form.Item
             label="页面路由"
             name="pagePath"
             rules={[{ required: true, message: '路由不能为空' }]}
@@ -363,16 +402,47 @@ const ProjectManage = () => {
           </Form.Item>
         </Form>
       </Modal>
-
+      {/*  打包选择弹窗  */}
+      <Modal
+        className="project-manage-build"
+        title={<p className="project-manage-build-title">选择打包构建工具</p>}
+        open={buildVisible}
+        onCancel={handleBuildCancel}
+        closable={false}
+        footer={
+          <div className="project-manage-build-footer">
+            <Button
+              type="primary"
+              style={{ padding: '17px 23px' }}
+              onClick={handleBuildOk}
+            >
+              确认
+            </Button>
+          </div>
+        }
+      >
+        <div className="project-manage-build-cards">
+          {buildSelect.map((item) => (
+            <div
+              key={item.key}
+              className={`project-manage-build-card ${item.key === activeBuildSelect ? 'project-manage-build-card-active' : ''}`}
+              onClick={() => handleSelectBuildTool(item.key)}
+            >
+              <img src={item.icon} alt=" icon" width={102} />
+              <p className=" project-manage-build-card-title">{item.name}</p>
+            </div>
+          ))}
+        </div>
+      </Modal>
       {/*  右键菜单  */}
       {isOpenContextMenu && (
         <div
-          className="project-manage-context-menu"
+          className=" project-manage-context-menu"
           style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}
         >
-          <div className="project-manage-context-menu-group">
+          <div className=" project-manage-context-menu-group">
             <p
-              className="project-manage-context-menu-item"
+              className=" project-manage-context-menu-item"
               onClick={() => {
                 if (!currentElement) return
                 setIsRename(true)
@@ -384,14 +454,14 @@ const ProjectManage = () => {
             </p>
           </div>
           <Divider style={{ margin: '6px 0' }} />
-          <div className="project-manage-context-menu-group">
-            <p className="project-manage-context-menu-item">复制</p>
-            <p className="project-manage-context-menu-item">粘贴</p>
+          <div className=" project-manage-context-menu-group">
+            <p className=" project-manage-context-menu-item">复制</p>
+            <p className=" project-manage-context-menu-item">粘贴</p>
           </div>
           <Divider style={{ margin: '6px 0' }} />
-          <div className="project-manage-context-menu-group">
+          <div className=" project-manage-context-menu-group">
             <p
-              className="project-manage-context-menu-item"
+              className=" project-manage-context-menu-item"
               style={{ color: '#ff2f4f' }}
             >
               删除

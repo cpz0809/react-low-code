@@ -62,6 +62,7 @@ const VariableBinding = ({
   }
   const handleCancel = () => {
     onClose()
+    setActiveCode(null)
   }
   return (
     <Modal

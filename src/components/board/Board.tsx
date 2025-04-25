@@ -46,7 +46,7 @@ const Board = ({
           onRemove={(codes) => onVariableRemove(codes)}
         />
         {/* 源码面板 */}
-        <Program />
+        {/*<Program />*/}
         {/* 模拟器 */}
         <Simulator />
         {/* 拖动试图组件 */}

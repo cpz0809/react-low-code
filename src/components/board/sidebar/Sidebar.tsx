@@ -53,13 +53,13 @@ const Sidebar = () => {
             />
           </Tooltip>
         </div>
-        <div onClick={() => dispatch(setMenuVisible('programVisible'))}>
-          <Tooltip title="源码面板" placement="right" align={align}>
-            <JavaScriptOutlined
-              style={{ color: programVisible ? '#1677ff' : '' }}
-            />
-          </Tooltip>
-        </div>
+        {/*<div onClick={() => dispatch(setMenuVisible('programVisible'))}>*/}
+        {/*  <Tooltip title="源码面板" placement="right" align={align}>*/}
+        {/*    <JavaScriptOutlined*/}
+        {/*      style={{ color: programVisible ? '#1677ff' : '' }}*/}
+        {/*    />*/}
+        {/*  </Tooltip>*/}
+        {/*</div>*/}
       </div>
     </div>
   )

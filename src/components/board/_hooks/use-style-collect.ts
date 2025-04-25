@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { updateCurrentClick, updateParams } from '@/store/modules/drag.ts'
-import { strToCSSProperties, strToHumpName } from '@/components/board/_util/strToCSSProperties.ts'
+import {
+  strToCSSProperties,
+  strToHumpName
+} from '@/components/board/_util/strToCSSProperties.ts'
 import { CSSProperties } from 'react'
 import {
   differentiate,
@@ -92,7 +95,8 @@ export const useStyleCollect = () => {
   // 匹配样式
   const matchingStyle = (key: string, defaultValue?: string | number) => {
     if (!currentClick) return
-    return (currentClick.style as any)[strToHumpName(key)] || defaultValue || 0
+    // return (currentClick.style as any)[strToHumpName(key)] || defaultValue || 0
+    return (currentClick.style as any)[key] || defaultValue || 0
   }
   // 匹配单位
   const matchingUnit = (key: string, defaultUnit: string = 'px') => {
